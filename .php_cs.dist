@@ -1,0 +1,26 @@
+<?php
+
+return PhpCsFixer\Config::create()
+    ->setRules([
+        '@Symfony' => true,
+        'array_syntax' => ['syntax' => 'short'],
+        'binary_operator_spaces' => [
+            'default' => null,
+        ],
+        'function_declaration' => ['closure_function_spacing' => 'none'],
+        'increment_style' => null,
+        'no_superfluous_phpdoc_tags' => true,
+        'no_unneeded_final_method' => null,
+        'ordered_imports' => null,
+        'single_import_per_statement' => null,
+        'single_line_throw' => null,
+        'single_quote' => false,
+        'yoda_style' => null,
+        'trailing_comma_in_multiline_array' => true,
+    ])
+    ->setFinder(
+        PhpCsFixer\Finder::create()
+            ->exclude(['var/', 'vendor/', 'src/Shared/Domain/DataStructure/'])
+            ->in(__DIR__)
+    )
+;

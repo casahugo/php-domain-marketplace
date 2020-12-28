@@ -6,16 +6,10 @@ namespace App\Catalog\Domain\Category;
 
 final class Category
 {
-    private Id $id;
-    private ?string $name;
-
     public function __construct(
-        Id $id,
-        ?string $name = null
+        private Id $id,
+        private string $name
     ) {
-
-        $this->id = $id;
-        $this->name = $name;
     }
 
     public function getId(): Id
@@ -23,7 +17,7 @@ final class Category
         return $this->id;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }

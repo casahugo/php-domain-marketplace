@@ -11,11 +11,11 @@ final class ProductNormalizer
     public function normalize(Product $product): array
     {
         return [
-            'reference' => $product->getReference()->getValeur(),
+            'reference' => $product->getReference()->getValue(),
             'name' => $product->getName(),
-            'price' => $product->getPrice(),
+            'price' => $product->getOriginalPrice(),
             'category' => $product->getCategory()->getName(),
-            'stock' => $product->getStock()
+            'stock' => $product->getStock(),
         ];
     }
 }

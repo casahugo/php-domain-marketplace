@@ -4,17 +4,16 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Product;
 
+use App\Shared\Domain\Uuid\UuidInterface;
+
 final class Reference
 {
-    private int $id;
-
-    public function __construct(int $id)
+    public function __construct(private UuidInterface $value)
     {
-        $this->id = $id;
     }
 
-    public function getValeur(): int
+    public function getValue(): UuidInterface
     {
-        return $this->id;
+        return $this->value;
     }
 }

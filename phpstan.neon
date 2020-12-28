@@ -1,0 +1,11 @@
+parameters:
+    level: 8
+    checkMissingIterableValueType: false
+    checkGenericClassInNonGenericObjectType: false
+    paths:
+        - src
+
+services:
+    - class: App\Shared\Infrastructure\PHPStan\EnumMethodsClassReflectionExtension
+      tags:
+          - phpstan.broker.methodsClassReflectionExtension

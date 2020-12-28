@@ -6,5 +6,4 @@ namespace App\Catalog\Domain\Exception;
 
 abstract class DomainException extends \Exception
 {
-
 }

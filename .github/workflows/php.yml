@@ -35,6 +35,12 @@ jobs:
 
     - name: Run linter
       run: make linter
-    
+
     - name: Run test suite
       run: make test
+
+    - name: Run mutant infection
+      run: |
+        sudo mkdir var
+        sudo chmod 777 -R var/
+        make infection

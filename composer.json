@@ -1,5 +1,6 @@
 {
     "name": "hugo/php-domain-design",
+    "description": "Marketplace Domain Driven Design",
     "authors": [
         {
             "name": "Hugo Casabella",

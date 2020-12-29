@@ -2,6 +2,8 @@
 
 Modeling of a marketplace using domain driven design
 
+![CI](https://github.com/casahugo/php-domain-marketplace/workflows/CI/badge.svg)
+
 ----
 
 ## Introduction

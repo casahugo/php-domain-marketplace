@@ -12,6 +12,7 @@
         "symfony/options-resolver": "^5.2"
     },
     "require-dev": {
+        "php": "^8.0",
         "ext-json": "*",
         "phpunit/phpunit": "^9.4",
         "phpstan/phpstan": "^0.12.64",

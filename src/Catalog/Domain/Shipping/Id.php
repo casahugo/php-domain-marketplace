@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Shipping;
 
-final class Id
-{
-    public function __construct(private int $id)
-    {
-    }
+use App\Shared\Domain\DataStructure\IntegerValue;
 
-    public function getValue(): int
-    {
-        return $this->id;
-    }
+final class Id extends IntegerValue
+{
 }

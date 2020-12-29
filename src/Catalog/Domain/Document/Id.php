@@ -4,11 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Document;
 
-use App\Shared\Domain\Uuid\UuidInterface;
+use App\Shared\Domain\DataStructure\UuidValue;
 
-final class Id
+final class Id extends UuidValue
 {
-    public function __construct(private UuidInterface $id)
-    {
-    }
 }

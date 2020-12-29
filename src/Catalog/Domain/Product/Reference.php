@@ -4,16 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Product;
 
-use App\Shared\Domain\Uuid\UuidInterface;
+use App\Shared\Domain\DataStructure\UuidValue;
 
-final class Reference
+final class Reference extends UuidValue
 {
-    public function __construct(private UuidInterface $value)
-    {
-    }
-
-    public function getValue(): UuidInterface
-    {
-        return $this->value;
-    }
 }

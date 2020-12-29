@@ -1,0 +1,36 @@
+{
+    "source": {
+        "directories": [
+            "src/**/Domain"
+        ]
+    },
+    "timeout": 10,
+    "logs": {
+        "text": "var/infection/infection.log",
+        "summary": "var/infection/summary.log",
+        "json": "var/infection/infection-log.json",
+        "perMutator": "var/infection/per-mutator.md",
+        "github": true,
+        "badge": {
+            "branch": "master"
+        }
+    },
+    "mutators": {
+        "global-ignore": [
+            "FooClass::__construct"
+        ],
+        "global-ignoreSourceCodeByRegex": [
+            "Assert::.*"
+        ],
+        "@default": true,
+        "@function_signature": false,
+        "TrueValue": {
+            "ignore": [
+                "NameSpace\\*\\Class::method"
+            ],
+            "ignoreSourceCodeByRegex": [
+                "\\$this->logger.*"
+            ]
+        }
+    }
+}

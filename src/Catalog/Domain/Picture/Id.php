@@ -4,21 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Picture;
 
-use App\Shared\Domain\Uuid\UuidInterface;
+use App\Shared\Domain\DataStructure\UuidValue;
 
-final class Id
+final class Id extends UuidValue
 {
-    public function __construct(private UuidInterface $value)
-    {
-    }
-
-    public function getValue(): UuidInterface
-    {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return (string) $this->value;
-    }
 }

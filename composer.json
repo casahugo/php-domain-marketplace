@@ -14,7 +14,8 @@
         "ext-json": "*",
         "phpunit/phpunit": "^9.4",
         "phpstan/phpstan": "^0.12.64",
-        "friendsofphp/php-cs-fixer": "^2.17"
+        "friendsofphp/php-cs-fixer": "^2.17",
+        "infection/infection": "^0.20.2"
     },
     "autoload": {
         "psr-4": {

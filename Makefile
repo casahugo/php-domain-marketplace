@@ -5,10 +5,10 @@ test:
 	vendor/bin/phpunit
 
 coverage:
-	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --coverage-xml=var/coverage-xml --coverage-clover=coverage.xml --log-junit=var/junit.xml
+	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --coverage-xml=var/coverage-xml/ --coverage-clover=var/coverage.xml --log-junit=var/coverage-xml/junit.xml --coverage-html=var/coverage/
 
 infection:
-	XDEBUG_MODE=coverage vendor/bin/infection --log-verbosity=default
+	XDEBUG_MODE=coverage vendor/bin/infection --log-verbosity=default --coverage=var/coverage-xml/
 
 linter: stan cs
 

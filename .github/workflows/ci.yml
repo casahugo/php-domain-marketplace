@@ -1,4 +1,4 @@
-name: PHP
+name: CI
 
 on:
   push:
@@ -37,10 +37,12 @@ jobs:
       run: make linter
 
     - name: Run test suite
-      run: make test
-
-    - name: Run mutant infection
       run: |
         sudo mkdir var
         sudo chmod 777 -R var/
-        make infection
+        make coverage
+
+    - name: Run mutant infection
+      run: make infection
+      env:
+          STRYKER_DASHBOARD_API_KEY: ${{ secrets.STRYKER_DASHBOARD_API_KEY }}

@@ -2,7 +2,8 @@
 
 Modeling of a marketplace using domain driven design
 
-![CI](https://github.com/casahugo/php-domain-marketplace/workflows/PHP/badge.svg)
+![CI](https://github.com/casahugo/php-domain-marketplace/workflows/CI/badge.svg)
+![Score](https://badge.stryker-mutator.io/github.com/casahugo/php-domain-marketplace/master)
 
 ----
 

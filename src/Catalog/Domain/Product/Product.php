@@ -22,7 +22,7 @@ use App\Catalog\Domain\{
     Shipping\Shipping,
     Shipping\ShippingCollection,
     Tax\Tax,
-    Tax\TaxCollection
+    Tax\TaxCollection,
 };
 
 final class Product extends Aggregate
@@ -140,12 +140,7 @@ final class Product extends Aggregate
 
     public function getPriceWithTax(): ProductPrice
     {
-        $price = $this->price;
-        foreach ($this->taxes as $tax) {
-            // $price = $this->price->multiply($tax);
-        }
-
-        return $price;
+        return $this->priceWithTax($this->price);
     }
 
     public function setPrice(ProductPrice $productPrice): self
@@ -164,6 +159,25 @@ final class Product extends Aggregate
     public function getOriginalPrice(): ?ProductPrice
     {
         return $this->originalPrice;
+    }
+
+    public function getOriginalPriceWithTax(): ?ProductPrice
+    {
+        if (null === $this->originalPrice) {
+            return null;
+        }
+
+        return $this->priceWithTax($this->originalPrice);
+    }
+
+    private function priceWithTax(ProductPrice $price): ProductPrice
+    {
+        /** @var Tax $tax */
+        foreach ($this->taxes as $tax) {
+            $price = $price->addTax($tax);
+        }
+
+        return $price;
     }
 
     public function setOriginalPrice(?ProductPrice $productPrice): self

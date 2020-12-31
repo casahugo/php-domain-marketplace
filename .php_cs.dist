@@ -20,7 +20,7 @@ return PhpCsFixer\Config::create()
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
-            ->exclude(['var/', 'vendor/', 'src/Shared/Domain/DataStructure/'])
+            ->exclude(['var/', 'vendor/', 'src/Shared/Domain/DataStructure/', 'tests/Shared/Domain/DataStructure/'])
             ->in(__DIR__)
     )
 ;

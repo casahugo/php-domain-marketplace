@@ -21,4 +21,9 @@ final class Tax
     {
         return $this->taxValue;
     }
+
+    public function getPercentage(): Decimal
+    {
+        return $this->taxValue->divide(100);
+    }
 }

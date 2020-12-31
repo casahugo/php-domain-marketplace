@@ -8,7 +8,7 @@ coverage:
 	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --coverage-xml=var/coverage-xml --coverage-clover=coverage.xml --log-junit=var/junit.xml
 
 infection:
-	XDEBUG_MODE=coverage vendor/bin/infection --log-verbosity=none
+	XDEBUG_MODE=coverage vendor/bin/infection --log-verbosity=default
 
 linter: stan cs
 

@@ -8,9 +8,9 @@
     "minMsi": 44,
     "minCoveredMsi": 66,
     "logs": {
-        "text": "var/infection/infection.log",
-        "summary": "var/infection/summary.log",
-        "perMutator": "var/infection/per-mutator.md",
+        "text": "var/infection.log",
+        "summary": "var/summary.log",
+        "perMutator": "var/per-mutator.md",
         "github": true,
         "badge": {
             "branch": "master"
@@ -34,6 +34,6 @@
             ]
         }
     },
-    "tmpDir": "var",
+    "tmpDir": "var/",
     "testFrameworkOptions": "-vvv"
 }

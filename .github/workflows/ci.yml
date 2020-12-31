@@ -41,6 +41,9 @@ jobs:
         sudo mkdir var
         sudo chmod 777 -R var/
         make coverage
+        curl -s https://codecov.io/bash | bash -s -- -c -F aFlag -t $CODECOV_TOKEN -n $GITHUB_RUN_ID -f var/coverage.xml
+      env:
+        CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
     - name: Run mutant infection
       run: make infection

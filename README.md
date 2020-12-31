@@ -1,8 +1,9 @@
-# Marketplace Domain Driven Design
+# 🚀 Marketplace Domain Driven Design
 
 Modeling of a marketplace using domain driven design
 
 ![CI](https://github.com/casahugo/php-domain-marketplace/workflows/CI/badge.svg)
+![codecov](https://codecov.io/gh/casahugo/php-domain-marketplace/master/graph/badge.svg)
 ![Score](https://badge.stryker-mutator.io/github.com/casahugo/php-domain-marketplace/master)
 
 ----

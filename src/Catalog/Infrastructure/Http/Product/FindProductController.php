@@ -2,10 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Catalog\Infrastructure\Controller\Product;
+namespace App\Catalog\Infrastructure\Http\Product;
 
-use App\Catalog\Application\Product\Find\FindProduct;
-use App\Catalog\Application\Product\Find\QueryProduct;
+use App\Catalog\Application\{
+    Product\Find\FindProduct,
+    Product\Find\QueryProduct
+};
 use App\Catalog\Domain\Exception\ProductNotFound;
 use App\Catalog\Infrastructure\Normalizer\ProductNormalizer;
 use App\Shared\Domain\Uuid\UuidInterface;

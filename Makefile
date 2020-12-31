@@ -5,10 +5,10 @@ test:
 	vendor/bin/phpunit
 
 coverage:
-	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text
+	XDEBUG_MODE=coverage vendor/bin/phpunit --coverage-text --coverage-xml=var/coverage-xml --coverage-clover=coverage.xml --log-junit=var/junit.xml
 
 infection:
-	XDEBUG_MODE=coverage vendor/bin/infection
+	XDEBUG_MODE=coverage vendor/bin/infection --log-verbosity=none
 
 linter: stan cs
 
@@ -20,4 +20,3 @@ cs: ## Run coding style analysis
 
 cs-fix:
 	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v
-

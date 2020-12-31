@@ -6,8 +6,11 @@ namespace App\Catalog\Application\Product\Create;
 
 use App\Shared\{
     Domain\Bus\Event\EventBus,
+    Domain\Clock\ClockInterface
 };
 use App\Catalog\Domain\{
+    Brand,
+    Brand\BrandRepository,
     Category\CategoryRepository,
     Category,
     Exception\DomainException,
@@ -25,7 +28,9 @@ final class CreateProductHandler
         private EventBus $eventBus,
         private ProductRepository $productRepository,
         private CategoryRepository $categoryRepository,
+        private BrandRepository $brandRepository,
         private SellerRepository $sellerRepository,
+        private ClockInterface $clock,
     ) {
     }
 
@@ -33,6 +38,7 @@ final class CreateProductHandler
     public function __invoke(CreateProductCommand $command): void
     {
         $category = $this->categoryRepository->get(new Category\Id($command->getCategoryId()));
+        $brand = $this->brandRepository->get(new Brand\Id($command->getBrandId()));
         $seller = $this->sellerRepository->get(new Seller\Id($command->getSellerId()));
 
         $product = Product::create(
@@ -41,10 +47,12 @@ final class CreateProductHandler
             $command->getName(),
             $command->getPrice(),
             $command->getStock(),
+            $brand,
             $seller,
             $category,
             new TaxCollection(),
-            Status::WAIT_MODERATION()
+            Status::WAIT_MODERATION(),
+            $this->clock->now(),
         );
 
         $this->productRepository->save($product);

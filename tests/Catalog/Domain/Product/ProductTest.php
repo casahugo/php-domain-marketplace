@@ -10,6 +10,6 @@ final class ProductTest extends TestCase
 {
     public function testCreateProduct(): void
     {
-        static::assertSame(true, true);
+        self::assertSame(true, true);
     }
 }

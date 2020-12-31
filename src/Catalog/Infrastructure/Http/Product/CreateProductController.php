@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Catalog\Infrastructure\Controller\Product;
+namespace App\Catalog\Infrastructure\Http\Product;
 
 use App\Catalog\Application\{
     Product\Create\CreateProductCommand
@@ -29,13 +29,15 @@ final class CreateProductController
     public function __invoke(Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
-            ->setRequired(['code', 'name', 'price', 'stock', 'categoryId', 'sellerId'])
+            ->setRequired(['code', 'name', 'price', 'stock', 'brandId', 'categoryId', 'sellerId', 'shippingId'])
             ->setAllowedTypes('code', 'string')
             ->setAllowedTypes('name', 'string')
             ->setAllowedTypes('price', 'float')
             ->setAllowedTypes('stock', 'int')
+            ->setAllowedTypes('brandId', 'int')
             ->setAllowedTypes('categoryId', 'int')
-            ->setAllowedTypes('sellerId', 'int');
+            ->setAllowedTypes('sellerId', 'int')
+            ->setAllowedTypes('shippingId', 'int');
 
         try {
             $payload = $resolver->resolve($request->request->all());
@@ -49,8 +51,13 @@ final class CreateProductController
             $payload['name'],
             $payload['price'],
             $payload['stock'],
+            $payload['brandId'],
             $payload['categoryId'],
             $payload['sellerId'],
+            $payload['shippingId'],
+            $payload['intro'] ?? null,
+            $payload['description'] ?? null,
+            $payload['originalPrice'] ?? null,
         ));
 
         return new JsonResponse(['reference' => (string) $reference], JsonResponse::HTTP_CREATED);

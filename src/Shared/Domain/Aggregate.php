@@ -6,7 +6,7 @@ namespace App\Shared\Domain;
 
 use App\Shared\Domain\Bus\Event\DomainEvent;
 
-abstract class Entity
+abstract class Aggregate
 {
     private array $domainEvents = [];
 

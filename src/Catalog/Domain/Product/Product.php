@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Catalog\Domain\Product;
 
 use App\Shared\Domain\{
-    Entity,
+    Aggregate,
     Event\Product\ProductPriceHasChanged,
     Event\Product\ProductStockHasChanged,
     Event\Product\ProductWasCreated,
@@ -20,9 +20,12 @@ use App\Catalog\Domain\{
     Picture\PictureCollection,
     Seller\Seller,
     Shipping\Shipping,
-    Tax\TaxCollection};
+    Shipping\ShippingCollection,
+    Tax\Tax,
+    Tax\TaxCollection
+};
 
-final class Product extends Entity
+final class Product extends Aggregate
 {
     private Reference $reference;
     private string $name;
@@ -39,8 +42,7 @@ final class Product extends Entity
     private TaxCollection $taxes;
     private ?string $intro;
     private ?string $description;
-    private ?Shipping $shipping;
-    private ?Picture $picture;
+    private ShippingCollection $shippings;
     private \DateTimeImmutable $createdAt;
     private ?\DateTimeImmutable $updatedAt;
 
@@ -57,8 +59,7 @@ final class Product extends Entity
         Status $status,
         \DateTimeImmutable $createdAt,
         ?\DateTimeImmutable $updatedAt = null,
-        ?Picture $picture = null,
-        ?Shipping $shipping = null,
+        ?ShippingCollection $shippings = null,
         ?string $intro = null,
         ?string $description = null,
         ?ProductPrice $originalPrice = null,
@@ -74,12 +75,11 @@ final class Product extends Entity
         $this->stock = $stock;
         $this->brand = $brand;
         $this->category = $category;
-        $this->picture = $picture;
         $this->intro = $intro;
         $this->description = $description;
         $this->taxes = $taxes;
         $this->status = $status;
-        $this->shipping = $shipping;
+        $this->shippings = $shippings ?? new ShippingCollection();
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
         $this->gallery = $pictures ?? new PictureCollection();
@@ -202,6 +202,11 @@ final class Product extends Entity
         return $this->documents;
     }
 
+    public function getPicture(): ?Picture
+    {
+        return $this->gallery->first();
+    }
+
     public function getGallery(): PictureCollection
     {
         return $this->gallery;
@@ -221,16 +226,6 @@ final class Product extends Entity
         return $this;
     }
 
-    public function getPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
-    public function setPicture(): ?Picture
-    {
-        return $this->picture;
-    }
-
     public function getIntro(): ?string
     {
         return $this->intro;
@@ -246,9 +241,23 @@ final class Product extends Entity
         return $this->taxes;
     }
 
-    public function getShipping(): ?Shipping
+    public function addTaxes(Tax ...$taxes): self
     {
-        return $this->shipping;
+        $this->taxes = $this->taxes->add(...$taxes);
+
+        return $this;
+    }
+
+    public function getShippings(): ?ShippingCollection
+    {
+        return $this->shippings;
+    }
+
+    public function addShipping(Shipping ...$shippings): self
+    {
+        $this->shippings = $this->shippings->add(...$shippings);
+
+        return $this;
     }
 
     public function getSeller(): Seller

@@ -8,7 +8,6 @@ final class Document
 {
     public function __construct(
         private Id $id,
-        private string $host,
         private string $path,
         private string $title
     ) {
@@ -17,11 +16,6 @@ final class Document
     public function getId(): Id
     {
         return $this->id;
-    }
-
-    public function getHost(): string
-    {
-        return $this->host;
     }
 
     public function getPath(): string

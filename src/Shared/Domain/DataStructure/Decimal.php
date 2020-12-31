@@ -6,7 +6,7 @@ namespace App\Shared\Domain\DataStructure;
 
 abstract class Decimal
 {
-    public function __construct(private int|float $value)
+    public function __construct(protected int|float $value)
     {
     }
 

@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Picture;
 
-use App\Catalog\Domain\Document\Id;
-
 final class Picture
 {
     public function __construct(

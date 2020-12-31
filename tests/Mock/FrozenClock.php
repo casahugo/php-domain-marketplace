@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Mock;
+namespace App\Tests\Mock;
 
 use App\Shared\Domain\Clock\ClockInterface;
 

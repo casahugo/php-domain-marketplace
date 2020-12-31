@@ -15,8 +15,13 @@ final class CreateProductCommand implements DomainCommand
         private string $name,
         private float $price,
         private int $stock,
+        private int $brandId,
         private int $categoryId,
         private int $sellerId,
+        private int $shippingId,
+        private ?string $intro = null,
+        private ?string $description = null,
+        private ?float $originalPrice = null,
     ) {
     }
 
@@ -40,6 +45,11 @@ final class CreateProductCommand implements DomainCommand
         return $this->stock;
     }
 
+    public function getBrandId(): int
+    {
+        return $this->brandId;
+    }
+
     public function getCategoryId(): int
     {
         return $this->categoryId;
@@ -53,5 +63,25 @@ final class CreateProductCommand implements DomainCommand
     public function getSellerId(): int
     {
         return $this->sellerId;
+    }
+
+    public function getIntro(): ?string
+    {
+        return $this->intro;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getOriginalPrice(): ?float
+    {
+        return $this->originalPrice;
+    }
+
+    public function getShippingId(): int
+    {
+        return $this->shippingId;
     }
 }

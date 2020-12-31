@@ -29,15 +29,18 @@ domain events must be shared by bounded contexts and consumed asynchronously.
     - ProductPriceHasChanged
     - ProductStockHasChanged
     - ProductWasCreated
-    - ...
 
+----
 
 ## Catalog
 The catalog represents PIM and research.
 
-The PIM stores its data in a relational database.
+The PIM stores its data in a relational database. The search uses an elastic search database.
 
-The search uses an elastic search database
+Architecture CQRS
+
+![schema](docs/cqrs.png)
+
 
 ## Cart
 ...

@@ -1,0 +1,955 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1609402571">
+  <project timestamp="1609402571">
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Create/CreateProductCommand.php">
+      <class name="App\Catalog\Application\Product\Create\CreateProductCommand" namespace="global">
+        <metrics complexity="13" methods="13" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="9" elements="27" coveredelements="17"/>
+      </class>
+      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="2"/>
+      <line num="26" type="stmt" count="2"/>
+      <line num="28" type="method" name="getReference" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="30" type="stmt" count="1"/>
+      <line num="33" type="method" name="getName" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="method" name="getPrice" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="43" type="method" name="getStock" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="48" type="method" name="getBrandId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="53" type="method" name="getCategoryId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="58" type="method" name="getCode" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="63" type="method" name="getSellerId" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="65" type="stmt" count="1"/>
+      <line num="68" type="method" name="getIntro" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="73" type="method" name="getDescription" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="75" type="stmt" count="0"/>
+      <line num="78" type="method" name="getOriginalPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="80" type="stmt" count="0"/>
+      <line num="83" type="method" name="getShippingId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="85" type="stmt" count="0"/>
+      <metrics loc="87" ncloc="87" classes="1" methods="13" coveredmethods="8" conditionals="0" coveredconditionals="0" statements="14" coveredstatements="9" elements="27" coveredelements="17"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Create/CreateProductHandler.php">
+      <class name="App\Catalog\Application\Product\Create\CreateProductHandler" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="16" elements="19" coveredelements="17"/>
+      </class>
+      <line num="27" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="35" type="stmt" count="1"/>
+      <line num="38" type="method" name="__invoke" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="40" type="stmt" count="1"/>
+      <line num="41" type="stmt" count="1"/>
+      <line num="42" type="stmt" count="1"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="46" type="stmt" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="61" type="stmt" count="1"/>
+      <metrics loc="62" ncloc="61" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="17" coveredstatements="16" elements="19" coveredelements="17"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Delete/DeleteProductCommand.php">
+      <class name="App\Catalog\Application\Product\Delete\DeleteProductCommand" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="16" type="method" name="getReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="20" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Delete/DeleteProductHandler.php">
+      <class name="App\Catalog\Application\Product\Delete\DeleteProductHandler" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+      </class>
+      <line num="20" type="method" name="__invoke" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <metrics loc="30" ncloc="29" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="5" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Find/FindProduct.php">
+      <class name="App\Catalog\Application\Product\Find\FindProduct" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="19" type="method" name="__invoke" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <metrics loc="23" ncloc="22" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Find/QueryProduct.php">
+      <class name="App\Catalog\Application\Product\Find\QueryProduct" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="15" type="method" name="getReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <metrics loc="19" ncloc="19" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Update/UpdateProductCommand.php">
+      <class name="App\Catalog\Application\Product\Update\UpdateProductCommand" namespace="global">
+        <metrics complexity="6" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="10" coveredelements="0"/>
+      </class>
+      <line num="21" type="method" name="getReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="26" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="31" type="method" name="getPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <line num="36" type="method" name="getStock" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="41" type="method" name="getCategoryId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="43" type="stmt" count="0"/>
+      <metrics loc="45" ncloc="45" classes="1" methods="5" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="10" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Product/Update/UpdateProductHandler.php">
+      <class name="App\Catalog\Application\Product\Update\UpdateProductHandler" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="27" type="method" name="__invoke" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <metrics loc="43" ncloc="42" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Application/Search/Update/ProductProjectorHandler.php">
+      <class name="App\Catalog\Application\Search\Update\ProductProjectorHandler" namespace="global">
+        <metrics complexity="4" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="19" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="27" type="method" name="__invoke" visibility="public" complexity="3" crap="12" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <line num="33" type="stmt" count="0"/>
+      <metrics loc="37" ncloc="37" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Attribute/Attribute.php">
+      <class name="App\Catalog\Domain\Attribute\Attribute" namespace="global">
+        <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="19" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="21" type="stmt" count="0"/>
+      <line num="24" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="29" type="method" name="getValue" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="31" type="stmt" count="0"/>
+      <line num="34" type="method" name="getProductReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <metrics loc="38" ncloc="38" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Attribute/AttributeCollection.php">
+      <class name="App\Catalog\Domain\Attribute\AttributeCollection" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Attribute/Id.php">
+      <class name="App\Catalog\Domain\Attribute\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Brand/Brand.php">
+      <class name="App\Catalog\Domain\Brand\Brand" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="3" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <metrics loc="12" ncloc="12" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="1" elements="3" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Brand/BrandRepository.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Brand/Id.php">
+      <class name="App\Catalog\Domain\Brand\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Category/Category.php">
+      <class name="App\Catalog\Domain\Category\Category" namespace="global">
+        <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="10" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="15" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="20" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="22" type="stmt" count="0"/>
+      <line num="25" type="method" name="setName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <metrics loc="29" ncloc="29" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="1" elements="10" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Category/CategoryRepository.php">
+      <metrics loc="13" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Category/Id.php">
+      <class name="App\Catalog\Domain\Category\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Document/Document.php">
+      <class name="App\Catalog\Domain\Document\Document" namespace="global">
+        <metrics complexity="5" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="17" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="22" type="method" name="getHost" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="27" type="method" name="getPath" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="method" name="getTitle" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <metrics loc="36" ncloc="36" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Document/DocumentCollection.php">
+      <class name="App\Catalog\Domain\Document\DocumentCollection" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Document/Id.php">
+      <class name="App\Catalog\Domain\Document\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/CategoryNotFoundException.php">
+      <class name="App\Catalog\Domain\Exception\CategoryNotFoundException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/DomainException.php">
+      <class name="App\Catalog\Domain\Exception\DomainException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/ProductDeleteFailedException.php">
+      <class name="App\Catalog\Domain\Exception\ProductDeleteFailedException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/ProductNotFound.php">
+      <class name="App\Catalog\Domain\Exception\ProductNotFound" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="11" type="stmt" count="0"/>
+      <metrics loc="13" ncloc="13" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/ProductSaveFailedException.php">
+      <class name="App\Catalog\Domain\Exception\ProductSaveFailedException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Exception/SellerNotFoundException.php">
+      <class name="App\Catalog\Domain\Exception\SellerNotFoundException" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Picture/Id.php">
+      <class name="App\Catalog\Domain\Picture\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Picture/Picture.php">
+      <class name="App\Catalog\Domain\Picture\Picture" namespace="global">
+        <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="18" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="23" type="method" name="getPath" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="25" type="stmt" count="0"/>
+      <line num="28" type="method" name="getTitle" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="32" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Picture/PictureCollection.php">
+      <class name="App\Catalog\Domain\Picture\PictureCollection" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/Code.php">
+      <class name="App\Catalog\Domain\Product\Code" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="13" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <metrics loc="17" ncloc="17" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/Product.php">
+      <class name="App\Catalog\Domain\Product\Product" namespace="global">
+        <metrics complexity="31" methods="30" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="27" elements="99" coveredelements="29"/>
+      </class>
+      <line num="47" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="68" type="stmt" count="1"/>
+      <line num="69" type="stmt" count="1"/>
+      <line num="70" type="stmt" count="1"/>
+      <line num="71" type="stmt" count="1"/>
+      <line num="72" type="stmt" count="1"/>
+      <line num="73" type="stmt" count="1"/>
+      <line num="74" type="stmt" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="79" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="1"/>
+      <line num="81" type="stmt" count="1"/>
+      <line num="82" type="stmt" count="1"/>
+      <line num="83" type="stmt" count="1"/>
+      <line num="84" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="86" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="89" type="method" name="create" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="102" type="stmt" count="1"/>
+      <line num="103" type="stmt" count="1"/>
+      <line num="104" type="stmt" count="1"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="107" type="stmt" count="1"/>
+      <line num="116" type="stmt" count="1"/>
+      <line num="118" type="stmt" count="1"/>
+      <line num="121" type="method" name="getReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="123" type="stmt" count="0"/>
+      <line num="126" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="128" type="stmt" count="0"/>
+      <line num="131" type="method" name="getCode" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="133" type="stmt" count="0"/>
+      <line num="136" type="method" name="getPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="138" type="stmt" count="0"/>
+      <line num="141" type="method" name="getPriceWithTax" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="143" type="stmt" count="0"/>
+      <line num="144" type="stmt" count="0"/>
+      <line num="148" type="stmt" count="0"/>
+      <line num="151" type="method" name="setPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="153" type="stmt" count="0"/>
+      <line num="155" type="stmt" count="0"/>
+      <line num="156" type="stmt" count="0"/>
+      <line num="157" type="stmt" count="0"/>
+      <line num="158" type="stmt" count="0"/>
+      <line num="161" type="stmt" count="0"/>
+      <line num="164" type="method" name="getOriginalPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="166" type="stmt" count="0"/>
+      <line num="169" type="method" name="setOriginalPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="171" type="stmt" count="0"/>
+      <line num="173" type="stmt" count="0"/>
+      <line num="176" type="method" name="getBrand" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="178" type="stmt" count="0"/>
+      <line num="181" type="method" name="getStock" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="183" type="stmt" count="0"/>
+      <line num="186" type="method" name="setStock" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="188" type="stmt" count="0"/>
+      <line num="190" type="stmt" count="0"/>
+      <line num="192" type="stmt" count="0"/>
+      <line num="195" type="method" name="getCategory" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="197" type="stmt" count="0"/>
+      <line num="200" type="method" name="getDocuments" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="202" type="stmt" count="0"/>
+      <line num="205" type="method" name="getGallery" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="207" type="stmt" count="0"/>
+      <line num="210" type="method" name="addDocuments" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="212" type="stmt" count="0"/>
+      <line num="214" type="stmt" count="0"/>
+      <line num="217" type="method" name="addGallery" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="219" type="stmt" count="0"/>
+      <line num="221" type="stmt" count="0"/>
+      <line num="224" type="method" name="getPicture" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="226" type="stmt" count="0"/>
+      <line num="229" type="method" name="setPicture" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="231" type="stmt" count="0"/>
+      <line num="234" type="method" name="getIntro" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="236" type="stmt" count="0"/>
+      <line num="239" type="method" name="getDescription" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="241" type="stmt" count="0"/>
+      <line num="244" type="method" name="getTaxes" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="246" type="stmt" count="0"/>
+      <line num="249" type="method" name="getShipping" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="251" type="stmt" count="0"/>
+      <line num="254" type="method" name="getSeller" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="256" type="stmt" count="0"/>
+      <line num="259" type="method" name="getStatus" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="261" type="stmt" count="0"/>
+      <line num="264" type="method" name="getCreatedAt" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="266" type="stmt" count="0"/>
+      <line num="269" type="method" name="getUpdatedAt" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="271" type="stmt" count="0"/>
+      <line num="274" type="method" name="setName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="276" type="stmt" count="0"/>
+      <line num="278" type="stmt" count="0"/>
+      <line num="281" type="method" name="setCategory" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="283" type="stmt" count="0"/>
+      <line num="285" type="stmt" count="0"/>
+      <metrics loc="287" ncloc="286" classes="1" methods="30" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="69" coveredstatements="27" elements="99" coveredelements="29"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/ProductCollection.php">
+      <class name="App\Catalog\Domain\Product\ProductCollection" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/ProductPrice.php">
+      <class name="App\Catalog\Domain\Product\ProductPrice" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="11" type="method" name="getUnite" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/ProductProjector.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/ProductRepository.php">
+      <metrics loc="23" ncloc="20" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/Reference.php">
+      <class name="App\Catalog\Domain\Product\Reference" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/Status.php">
+      <class name="App\Catalog\Domain\Product\Status" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="21" ncloc="15" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Product/Stock.php">
+      <class name="App\Catalog\Domain\Product\Stock" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="13" type="method" name="getValue" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <metrics loc="17" ncloc="17" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Seller/Id.php">
+      <class name="App\Catalog\Domain\Seller\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Seller/Seller.php">
+      <class name="App\Catalog\Domain\Seller\Seller" namespace="global">
+        <metrics complexity="4" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="1" elements="9" coveredelements="1"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="18" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="23" type="method" name="getEmail" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="25" type="stmt" count="0"/>
+      <line num="28" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <metrics loc="32" ncloc="32" classes="1" methods="4" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="1" elements="9" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Seller/SellerRepository.php">
+      <metrics loc="13" ncloc="12" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Shipping/Id.php">
+      <class name="App\Catalog\Domain\Shipping\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Shipping/Shipping.php">
+      <class name="App\Catalog\Domain\Shipping\Shipping" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Tax/Id.php">
+      <class name="App\Catalog\Domain\Tax\Id" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="11" ncloc="11" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Tax/Tax.php">
+      <class name="App\Catalog\Domain\Tax\Tax" namespace="global">
+        <metrics complexity="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+      </class>
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Domain/Tax/TaxCollection.php">
+      <class name="App\Catalog\Domain\Tax\TaxCollection" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="14" type="stmt" count="1"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="2" elements="3" coveredelements="3"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Infrastructure/Http/Product/CreateProductController.php">
+      <class name="App\Catalog\Infrastructure\Http\Product\CreateProductController" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="28" elements="31" coveredelements="29"/>
+      </class>
+      <line num="23" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="2"/>
+      <line num="27" type="stmt" count="2"/>
+      <line num="29" type="method" name="__invoke" visibility="public" complexity="2" crap="2" count="2"/>
+      <line num="31" type="stmt" count="2"/>
+      <line num="32" type="stmt" count="2"/>
+      <line num="33" type="stmt" count="2"/>
+      <line num="34" type="stmt" count="2"/>
+      <line num="35" type="stmt" count="2"/>
+      <line num="36" type="stmt" count="2"/>
+      <line num="37" type="stmt" count="2"/>
+      <line num="38" type="stmt" count="2"/>
+      <line num="39" type="stmt" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="1"/>
+      <line num="45" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="49" type="stmt" count="1"/>
+      <line num="50" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="1"/>
+      <line num="54" type="stmt" count="1"/>
+      <line num="55" type="stmt" count="1"/>
+      <line num="56" type="stmt" count="1"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="58" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="60" type="stmt" count="1"/>
+      <line num="63" type="stmt" count="1"/>
+      <metrics loc="65" ncloc="65" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="29" coveredstatements="28" elements="31" coveredelements="29"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Infrastructure/Http/Product/DeleteProductController.php">
+      <class name="App\Catalog\Infrastructure\Http\Product\DeleteProductController" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+      </class>
+      <line num="25" type="method" name="__invoke" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <metrics loc="31" ncloc="31" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="3" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Infrastructure/Http/Product/FindProductController.php">
+      <class name="App\Catalog\Infrastructure\Http\Product\FindProductController" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="24" type="method" name="__invoke" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="26" type="stmt" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <metrics loc="34" ncloc="34" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Infrastructure/Http/Product/UpdateProductController.php">
+      <class name="App\Catalog\Infrastructure\Http\Product\UpdateProductController" namespace="global">
+        <metrics complexity="3" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+      </class>
+      <line num="28" type="method" name="__invoke" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="30" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="40" type="stmt" count="0"/>
+      <line num="41" type="stmt" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="52" type="stmt" count="0"/>
+      <metrics loc="54" ncloc="54" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="7" coveredstatements="0" elements="8" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Catalog/Infrastructure/Normalizer/ProductNormalizer.php">
+      <class name="App\Catalog\Infrastructure\Normalizer\ProductNormalizer" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="11" type="method" name="normalize" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <metrics loc="21" ncloc="21" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Bus/Command/CommandBus.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Bus/Command/DomainCommand.php">
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Bus/Event/DomainEvent.php">
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Bus/Event/EventBus.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Bus/Event/EventHandlerInterface.php">
+      <metrics loc="9" ncloc="9" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Clock/ClockInterface.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/DataStructure/Collection.php">
+      <class name="App\Shared\Domain\DataStructure\Collection" namespace="global">
+        <metrics complexity="33" methods="21" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="60" elements="85" coveredelements="78"/>
+      </class>
+      <line num="12" type="method" name="__construct" visibility="public" complexity="1" crap="1" count="21"/>
+      <line num="14" type="stmt" count="21"/>
+      <line num="15" type="stmt" count="21"/>
+      <line num="16" type="stmt" count="21"/>
+      <line num="18" type="method" name="add" visibility="public" complexity="4" crap="4.02" count="20"/>
+      <line num="20" type="stmt" count="20"/>
+      <line num="22" type="stmt" count="20"/>
+      <line num="23" type="stmt" count="20"/>
+      <line num="24" type="stmt" count="1"/>
+      <line num="27" type="stmt" count="19"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="31" type="stmt" count="19"/>
+      <line num="32" type="stmt" count="19"/>
+      <line num="35" type="stmt" count="19"/>
+      <line num="38" type="method" name="remove" visibility="public" complexity="4" crap="4.18" count="2"/>
+      <line num="40" type="stmt" count="2"/>
+      <line num="42" type="stmt" count="2"/>
+      <line num="43" type="stmt" count="2"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="47" type="stmt" count="2"/>
+      <line num="48" type="stmt" count="0"/>
+      <line num="51" type="stmt" count="2"/>
+      <line num="52" type="stmt" count="2"/>
+      <line num="55" type="stmt" count="2"/>
+      <line num="58" type="method" name="count" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="60" type="stmt" count="4"/>
+      <line num="63" type="method" name="isEmpty" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="65" type="stmt" count="1"/>
+      <line num="68" type="method" name="contains" visibility="public" complexity="2" crap="2.15" count="19"/>
+      <line num="70" type="stmt" count="19"/>
+      <line num="71" type="stmt" count="0"/>
+      <line num="74" type="stmt" count="19"/>
+      <line num="77" type="method" name="findFirst" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="79" type="stmt" count="1"/>
+      <line num="80" type="stmt" count="1"/>
+      <line num="81" type="stmt" count="1"/>
+      <line num="85" type="stmt" count="1"/>
+      <line num="88" type="method" name="hasOne" visibility="public" complexity="3" crap="3" count="1"/>
+      <line num="90" type="stmt" count="1"/>
+      <line num="91" type="stmt" count="1"/>
+      <line num="92" type="stmt" count="1"/>
+      <line num="96" type="stmt" count="1"/>
+      <line num="99" type="method" name="filter" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="101" type="stmt" count="2"/>
+      <line num="103" type="stmt" count="2"/>
+      <line num="104" type="stmt" count="2"/>
+      <line num="106" type="stmt" count="2"/>
+      <line num="109" type="method" name="reduce" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="111" type="stmt" count="1"/>
+      <line num="114" type="method" name="map" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="116" type="stmt" count="1"/>
+      <line num="118" type="stmt" count="1"/>
+      <line num="119" type="stmt" count="1"/>
+      <line num="121" type="stmt" count="1"/>
+      <line num="124" type="method" name="toArray" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="126" type="stmt" count="1"/>
+      <line num="129" type="method" name="sort" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="131" type="stmt" count="1"/>
+      <line num="133" type="stmt" count="1"/>
+      <line num="135" type="stmt" count="1"/>
+      <line num="136" type="stmt" count="1"/>
+      <line num="138" type="stmt" count="1"/>
+      <line num="142" type="method" name="current" visibility="public" complexity="1" crap="1" count="3"/>
+      <line num="144" type="stmt" count="3"/>
+      <line num="147" type="method" name="next" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="149" type="stmt" count="7"/>
+      <line num="150" type="stmt" count="7"/>
+      <line num="152" type="method" name="key" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="154" type="stmt" count="7"/>
+      <line num="157" type="method" name="valid" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="159" type="stmt" count="7"/>
+      <line num="162" type="method" name="rewind" visibility="public" complexity="1" crap="1" count="7"/>
+      <line num="164" type="stmt" count="7"/>
+      <line num="165" type="stmt" count="7"/>
+      <line num="167" type="method" name="first" visibility="public" complexity="1" crap="1" count="2"/>
+      <line num="169" type="stmt" count="2"/>
+      <line num="172" type="method" name="merge" visibility="public" complexity="2" crap="2" count="1"/>
+      <line num="174" type="stmt" count="1"/>
+      <line num="176" type="stmt" count="1"/>
+      <line num="177" type="stmt" count="1"/>
+      <line num="180" type="stmt" count="1"/>
+      <line num="183" type="method" name="diff" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="185" type="stmt" count="1"/>
+      <line num="186" type="stmt" count="1"/>
+      <line num="188" type="stmt" count="1"/>
+      <metrics loc="190" ncloc="189" classes="1" methods="21" coveredmethods="18" conditionals="0" coveredconditionals="0" statements="64" coveredstatements="60" elements="85" coveredelements="78"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/DataStructure/Decimal.php">
+      <class name="App\Shared\Domain\DataStructure\Decimal" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="13" type="method" name="getValue" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <metrics loc="17" ncloc="17" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/DataStructure/Enum.php">
+      <class name="App\Shared\Domain\DataStructure\Enum" namespace="global">
+        <metrics complexity="20" methods="14" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="14" elements="52" coveredelements="17"/>
+      </class>
+      <line num="13" type="method" name="of" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="20" type="method" name="isValid" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="25" type="stmt" count="0"/>
+      <line num="28" type="stmt" count="0"/>
+      <line num="34" type="method" name="values" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="36" type="stmt" count="0"/>
+      <line num="37" type="stmt" count="0"/>
+      <line num="38" type="stmt" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="42" type="stmt" count="0"/>
+      <line num="45" type="method" name="byKey" visibility="private" complexity="3" crap="3.14" count="1"/>
+      <line num="47" type="stmt" count="1"/>
+      <line num="48" type="stmt" count="1"/>
+      <line num="51" type="stmt" count="1"/>
+      <line num="52" type="stmt" count="1"/>
+      <line num="53" type="stmt" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="57" type="stmt" count="1"/>
+      <line num="59" type="stmt" count="1"/>
+      <line num="62" type="method" name="search" visibility="private" complexity="2" crap="6" count="0"/>
+      <line num="64" type="stmt" count="0"/>
+      <line num="65" type="stmt" count="0"/>
+      <line num="66" type="stmt" count="0"/>
+      <line num="67" type="stmt" count="0"/>
+      <line num="70" type="stmt" count="0"/>
+      <line num="73" type="method" name="toArray" visibility="private" complexity="2" crap="2" count="1"/>
+      <line num="75" type="stmt" count="1"/>
+      <line num="76" type="stmt" count="1"/>
+      <line num="77" type="stmt" count="1"/>
+      <line num="78" type="stmt" count="1"/>
+      <line num="81" type="stmt" count="1"/>
+      <line num="84" type="method" name="__construct" visibility="private" complexity="1" crap="1" count="1"/>
+      <line num="86" type="stmt" count="1"/>
+      <line num="87" type="stmt" count="1"/>
+      <line num="89" type="method" name="getKey" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="91" type="stmt" count="0"/>
+      <line num="94" type="method" name="getValue" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="96" type="stmt" count="0"/>
+      <line num="99" type="method" name="equals" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="101" type="stmt" count="0"/>
+      <line num="104" type="method" name="__callStatic" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="106" type="stmt" count="1"/>
+      <line num="109" type="method" name="__clone" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="111" type="stmt" count="0"/>
+      <line num="114" type="method" name="__sleep" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="116" type="stmt" count="0"/>
+      <line num="119" type="method" name="__wakeup" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="121" type="stmt" count="0"/>
+      <metrics loc="123" ncloc="120" classes="1" methods="14" coveredmethods="3" conditionals="0" coveredconditionals="0" statements="38" coveredstatements="14" elements="52" coveredelements="17"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/DataStructure/IntegerValue.php">
+      <class name="App\Shared\Domain\DataStructure\IntegerValue" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="11" type="stmt" count="1"/>
+      <line num="13" type="method" name="getId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <metrics loc="17" ncloc="17" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/DataStructure/UuidValue.php">
+      <class name="App\Shared\Domain\DataStructure\UuidValue" namespace="global">
+        <metrics complexity="3" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="1" elements="7" coveredelements="1"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="13" type="stmt" count="1"/>
+      <line num="15" type="method" name="getValue" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="21" type="method" name="__toString" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <metrics loc="25" ncloc="25" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="1" elements="7" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Email.php">
+      <class name="App\Shared\Domain\Email" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
+      </class>
+      <line num="9" type="method" name="__construct" visibility="public" complexity="2" crap="2.06" count="9"/>
+      <line num="11" type="stmt" count="9"/>
+      <line num="12" type="stmt" count="4"/>
+      <line num="14" type="stmt" count="5"/>
+      <line num="16" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="4"/>
+      <line num="18" type="stmt" count="4"/>
+      <metrics loc="20" ncloc="20" classes="1" methods="2" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="4" elements="7" coveredelements="5"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Entity.php">
+      <class name="App\Shared\Domain\Entity" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+      </class>
+      <line num="13" type="method" name="pullDomainEvents" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="15" type="stmt" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="18" type="stmt" count="1"/>
+      <line num="21" type="method" name="record" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="23" type="stmt" count="1"/>
+      <line num="24" type="stmt" count="1"/>
+      <metrics loc="25" ncloc="25" classes="1" methods="2" coveredmethods="2" conditionals="0" coveredconditionals="0" statements="5" coveredstatements="5" elements="7" coveredelements="7"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Event/Product/ProductHasChanged.php">
+      <class name="App\Shared\Domain\Event\Product\ProductHasChanged" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="16" type="method" name="getProductReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="20" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Event/Product/ProductPriceHasChanged.php">
+      <class name="App\Shared\Domain\Event\Product\ProductPriceHasChanged" namespace="global">
+        <metrics complexity="4" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="22" type="method" name="getProductId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="27" type="method" name="getProductPrice" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="method" name="getProductPriceWithTax" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <metrics loc="36" ncloc="36" classes="1" methods="3" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Event/Product/ProductStockHasChanged.php">
+      <class name="App\Shared\Domain\Event\Product\ProductStockHasChanged" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+      </class>
+      <line num="18" type="method" name="getProductId" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <line num="23" type="method" name="getStock" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="25" type="stmt" count="0"/>
+      <metrics loc="27" ncloc="27" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="2" coveredstatements="0" elements="4" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Event/Product/ProductWasCreated.php">
+      <class name="App\Shared\Domain\Event\Product\ProductWasCreated" namespace="global">
+        <metrics complexity="2" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+      </class>
+      <line num="14" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="1"/>
+      <line num="16" type="stmt" count="1"/>
+      <line num="18" type="method" name="getProductReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="20" type="stmt" count="0"/>
+      <metrics loc="22" ncloc="22" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="3" coveredstatements="1" elements="5" coveredelements="1"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Event/Product/ProductWasDeleted.php">
+      <class name="App\Shared\Domain\Event\Product\ProductWasDeleted" namespace="global">
+        <metrics complexity="2" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="16" type="method" name="getProductReference" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="18" type="stmt" count="0"/>
+      <metrics loc="20" ncloc="20" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Uuid/UuidGeneratorInterface.php">
+      <metrics loc="10" ncloc="10" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Domain/Uuid/UuidInterface.php">
+      <metrics loc="16" ncloc="16" classes="0" methods="0" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="0" coveredstatements="0" elements="0" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Infrastructure/Clock/Clock.php">
+      <class name="App\Shared\Infrastructure\Clock\Clock" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="11" type="method" name="now" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="13" type="stmt" count="0"/>
+      <metrics loc="15" ncloc="15" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Infrastructure/PHPStan/EnumMethodReflection.php">
+      <class name="App\Shared\Infrastructure\PHPStan\EnumMethodReflection" namespace="global">
+        <metrics complexity="15" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="31" coveredelements="0"/>
+      </class>
+      <line num="21" type="method" name="__construct" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="23" type="stmt" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <line num="27" type="method" name="getName" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="29" type="stmt" count="0"/>
+      <line num="32" type="method" name="getDeclaringClass" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="34" type="stmt" count="0"/>
+      <line num="37" type="method" name="isStatic" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="39" type="stmt" count="0"/>
+      <line num="42" type="method" name="isPrivate" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="44" type="stmt" count="0"/>
+      <line num="47" type="method" name="isPublic" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="49" type="stmt" count="0"/>
+      <line num="52" type="method" name="getPrototype" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="54" type="stmt" count="0"/>
+      <line num="57" type="method" name="getVariants" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="59" type="stmt" count="0"/>
+      <line num="70" type="method" name="getDocComment" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="72" type="stmt" count="0"/>
+      <line num="75" type="method" name="isDeprecated" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="77" type="stmt" count="0"/>
+      <line num="80" type="method" name="getDeprecatedDescription" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="82" type="stmt" count="0"/>
+      <line num="85" type="method" name="isFinal" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="87" type="stmt" count="0"/>
+      <line num="90" type="method" name="isInternal" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="92" type="stmt" count="0"/>
+      <line num="95" type="method" name="getThrowType" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="97" type="stmt" count="0"/>
+      <line num="100" type="method" name="hasSideEffects" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="102" type="stmt" count="0"/>
+      <metrics loc="104" ncloc="104" classes="1" methods="15" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="16" coveredstatements="0" elements="31" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Infrastructure/PHPStan/EnumMethodsClassReflectionExtension.php">
+      <class name="App\Shared\Infrastructure\PHPStan\EnumMethodsClassReflectionExtension" namespace="global">
+        <metrics complexity="3" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
+      </class>
+      <line num="13" type="method" name="hasMethod" visibility="public" complexity="2" crap="6" count="0"/>
+      <line num="15" type="stmt" count="0"/>
+      <line num="16" type="stmt" count="0"/>
+      <line num="19" type="stmt" count="0"/>
+      <line num="22" type="method" name="getMethod" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="24" type="stmt" count="0"/>
+      <metrics loc="26" ncloc="26" classes="1" methods="2" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="4" coveredstatements="0" elements="6" coveredelements="0"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Infrastructure/Uuid/Uuid.php">
+      <class name="App\Shared\Infrastructure\Uuid\Uuid" namespace="global">
+        <metrics complexity="5" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="11" coveredelements="3"/>
+      </class>
+      <line num="11" type="method" name="__construct" visibility="public" complexity="1" crap="1.12" count="2"/>
+      <line num="13" type="stmt" count="2"/>
+      <line num="15" type="method" name="equal" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="17" type="stmt" count="0"/>
+      <line num="20" type="method" name="__toString" visibility="public" complexity="1" crap="1" count="1"/>
+      <line num="22" type="stmt" count="1"/>
+      <line num="25" type="method" name="isValid" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="27" type="stmt" count="0"/>
+      <line num="30" type="method" name="fromString" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="32" type="stmt" count="0"/>
+      <metrics loc="34" ncloc="34" classes="1" methods="5" coveredmethods="1" conditionals="0" coveredconditionals="0" statements="6" coveredstatements="2" elements="11" coveredelements="3"/>
+    </file>
+    <file name="/home/hugo/projets/php-domain-design/src/Shared/Infrastructure/Uuid/UuidGenerator.php">
+      <class name="App\Shared\Infrastructure\Uuid\UuidGenerator" namespace="global">
+        <metrics complexity="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+      </class>
+      <line num="12" type="method" name="generate" visibility="public" complexity="1" crap="2" count="0"/>
+      <line num="14" type="stmt" count="0"/>
+      <metrics loc="16" ncloc="16" classes="1" methods="1" coveredmethods="0" conditionals="0" coveredconditionals="0" statements="1" coveredstatements="0" elements="2" coveredelements="0"/>
+    </file>
+    <metrics files="77" loc="2246" ncloc="2226" classes="47" methods="173" coveredmethods="40" conditionals="0" coveredconditionals="0" statements="367" coveredstatements="180" elements="540" coveredelements="220"/>
+  </project>
+</coverage>

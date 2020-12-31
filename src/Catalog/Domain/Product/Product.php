@@ -9,9 +9,10 @@ use App\Shared\Domain\{
     Event\Product\ProductPriceHasChanged,
     Event\Product\ProductStockHasChanged,
     Event\Product\ProductWasCreated,
-    Uuid\UuidInterface};
+    Uuid\UuidInterface
+};
 use App\Catalog\Domain\{
-    Attribute\AttributeCollection,
+    Brand\Brand,
     Category\Category,
     Document\Document,
     Document\DocumentCollection,
@@ -19,8 +20,7 @@ use App\Catalog\Domain\{
     Picture\PictureCollection,
     Seller\Seller,
     Shipping\Shipping,
-    Tax\TaxCollection
-};
+    Tax\TaxCollection};
 
 final class Product extends Entity
 {
@@ -31,17 +31,18 @@ final class Product extends Entity
     private ?ProductPrice $originalPrice;
     private ProductPrice $price;
     private Stock $stock;
+    private Brand $brand;
     private Category $category;
     private Status $status;
     private DocumentCollection $documents;
-    private PictureCollection $pictures;
-    private AttributeCollection $attributes;
+    private PictureCollection $gallery;
     private TaxCollection $taxes;
     private ?string $intro;
     private ?string $description;
     private ?Shipping $shipping;
+    private ?Picture $picture;
     private \DateTimeImmutable $createdAt;
-    private \DateTimeImmutable $updatedAt;
+    private ?\DateTimeImmutable $updatedAt;
 
     public function __construct(
         Reference $reference,
@@ -49,16 +50,20 @@ final class Product extends Entity
         string $name,
         ProductPrice $price,
         Stock $stock,
+        Brand $brand,
         Seller $seller,
         Category $category,
         TaxCollection $taxes,
         Status $status,
+        \DateTimeImmutable $createdAt,
+        ?\DateTimeImmutable $updatedAt = null,
+        ?Picture $picture = null,
+        ?Shipping $shipping = null,
         ?string $intro = null,
         ?string $description = null,
         ?ProductPrice $originalPrice = null,
         ?PictureCollection $pictures = null,
         ?DocumentCollection $documents = null,
-        ?AttributeCollection $attributes = null,
     ) {
         $this->reference = $reference;
         $this->code = $code;
@@ -67,14 +72,18 @@ final class Product extends Entity
         $this->price = $price;
         $this->originalPrice = $originalPrice;
         $this->stock = $stock;
+        $this->brand = $brand;
         $this->category = $category;
+        $this->picture = $picture;
         $this->intro = $intro;
         $this->description = $description;
         $this->taxes = $taxes;
         $this->status = $status;
-        $this->pictures = $pictures ?? new PictureCollection();
+        $this->shipping = $shipping;
+        $this->createdAt = $createdAt;
+        $this->updatedAt = $updatedAt;
+        $this->gallery = $pictures ?? new PictureCollection();
         $this->documents = $documents ?? new DocumentCollection();
-        $this->attributes = $attributes ?? new AttributeCollection();
     }
 
     public static function create(
@@ -83,10 +92,12 @@ final class Product extends Entity
         string $name,
         float $price,
         int $stock,
+        Brand $brand,
         Seller $seller,
         Category $category,
         TaxCollection $taxes,
         Status $status,
+        \DateTimeImmutable $createdAt,
     ): self {
         $self = new self(
             new Reference($reference),
@@ -94,10 +105,12 @@ final class Product extends Entity
             $name,
             new ProductPrice($price),
             new Stock($stock),
+            $brand,
             $seller,
             $category,
             $taxes,
             $status,
+            $createdAt
         );
 
         $self->record(new ProductWasCreated($reference));
@@ -160,6 +173,11 @@ final class Product extends Entity
         return $this;
     }
 
+    public function getBrand(): Brand
+    {
+        return $this->brand;
+    }
+
     public function getStock(): Stock
     {
         return $this->stock;
@@ -184,9 +202,9 @@ final class Product extends Entity
         return $this->documents;
     }
 
-    public function getPictures(): PictureCollection
+    public function getGallery(): PictureCollection
     {
-        return $this->pictures;
+        return $this->gallery;
     }
 
     public function addDocuments(Document ...$documents): self
@@ -196,11 +214,21 @@ final class Product extends Entity
         return $this;
     }
 
-    public function addPictures(Picture ...$pictures): self
+    public function addGallery(Picture ...$pictures): self
     {
-        $this->pictures = $this->pictures->add(...$pictures);
+        $this->gallery = $this->gallery->add(...$pictures);
 
         return $this;
+    }
+
+    public function getPicture(): ?Picture
+    {
+        return $this->picture;
+    }
+
+    public function setPicture(): ?Picture
+    {
+        return $this->picture;
     }
 
     public function getIntro(): ?string
@@ -213,11 +241,6 @@ final class Product extends Entity
         return $this->description;
     }
 
-    public function getAttributes(): AttributeCollection
-    {
-        return $this->attributes;
-    }
-
     public function getTaxes(): TaxCollection
     {
         return $this->taxes;
@@ -228,13 +251,37 @@ final class Product extends Entity
         return $this->shipping;
     }
 
+    public function getSeller(): Seller
+    {
+        return $this->seller;
+    }
+
+    public function getStatus(): Status
+    {
+        return $this->status;
+    }
+
     public function getCreatedAt(): \DateTimeImmutable
     {
         return $this->createdAt;
     }
 
-    public function getUpdatedAt(): \DateTimeImmutable
+    public function getUpdatedAt(): ?\DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    public function setName(string $name): self
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    public function setCategory(Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
     }
 }

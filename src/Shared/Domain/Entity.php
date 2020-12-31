@@ -18,7 +18,7 @@ abstract class Entity
         return $domainEvents;
     }
 
-    final protected function record(DomainEvent $domainEvent): void
+    final public function record(DomainEvent $domainEvent): void
     {
         $this->domainEvents[] = $domainEvent;
     }

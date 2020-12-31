@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Tests\Catalog\Infrastructure\Controller\Product;
+namespace App\Tests\Catalog\Infrastructure\Http\Product;
 
 use App\Catalog\Application\Product\Create\CreateProductCommand;
-use App\Catalog\Infrastructure\Controller\Product\CreateProductController;
+use App\Catalog\Infrastructure\Http\Product\CreateProductController;
 use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Tests\Mock\FakeUuidGenerator;
 use PHPUnit\Framework\TestCase;
@@ -28,8 +28,10 @@ final class CreateProductControllerTest extends TestCase
             'name' => 'Laptop',
             'price' => 12.2,
             'stock' => 12,
+            'brandId' => 34,
             'categoryId' => 2,
             'sellerId' => 12,
+            'shippingId' => 4,
         ]);
 
         $commandBus
@@ -41,13 +43,34 @@ final class CreateProductControllerTest extends TestCase
                 'Laptop',
                 12.2,
                 12,
+                34,
                 2,
                 12,
+                4,
             ));
 
         $response = $controller($request);
 
         self::assertInstanceOf(JsonResponse::class, $response);
         self::assertSame(['reference' => (string) $reference], json_decode($response->getContent(), true));
+    }
+
+    public function testBadArguments(): void
+    {
+        $controller = new CreateProductController(
+            $commandBus = $this->createMock(CommandBus::class),
+            $generator = new FakeUuidGenerator('uuid-123')
+        );
+
+        $request = new Request([], [
+            'code' => 'RZE-OO1',
+            'name' => 'Laptop',
+            'price' => 12.2,
+        ]);
+
+        $response = $controller($request);
+
+        self::assertInstanceOf(JsonResponse::class, $response);
+        self::assertSame(400, $response->getStatusCode());
     }
 }

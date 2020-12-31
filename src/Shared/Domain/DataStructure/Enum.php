@@ -62,7 +62,7 @@ abstract class Enum
     private static function search(string|int|float $value): string
     {
         $key = array_search($value, static::toArray(), true);
-        if (false === $key || false === is_string($key)) {
+        if (false === is_string($key)) {
             $class = static::class;
             throw new \InvalidArgumentException("Unknow value '$value' for enum '$class'");
         }

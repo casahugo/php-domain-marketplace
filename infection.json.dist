@@ -4,11 +4,12 @@
             "src/**/Domain"
         ]
     },
-    "timeout": 10,
+    "timeout": 3,
+    "minMsi": 44,
+    "minCoveredMsi": 66,
     "logs": {
         "text": "var/infection/infection.log",
         "summary": "var/infection/summary.log",
-        "json": "var/infection/infection-log.json",
         "perMutator": "var/infection/per-mutator.md",
         "github": true,
         "badge": {
@@ -32,5 +33,7 @@
                 "\\$this->logger.*"
             ]
         }
-    }
+    },
+    "tmpDir": "var",
+    "testFrameworkOptions": "-vvv"
 }

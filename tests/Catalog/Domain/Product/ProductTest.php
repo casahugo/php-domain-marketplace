@@ -21,8 +21,8 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Seller\Id as SellerId,
-    Seller\Seller,
+    Company\Id as SellerId,
+    Company\Company,
     Shipping\Shipping,
     Shipping\ShippingCollection,
     Tax\Code as CodeTax,
@@ -32,8 +32,8 @@ use App\Catalog\Domain\{
 };
 use App\Shared\{
     Domain\Email,
-    Infrastructure\Uuid\Uuid
-};
+    Domain\Event\Product\ProductStockHasChanged,
+    Infrastructure\Uuid\Uuid};
 use PHPUnit\Framework\TestCase;
 
 final class ProductTest extends TestCase
@@ -59,9 +59,9 @@ final class ProductTest extends TestCase
         self::assertEquals(new \DateTimeImmutable("2020-01-01"), $product->getCreatedAt());
         self::assertEquals(new \DateTimeImmutable("2020-02-01"), $product->getUpdatedAt());
         self::assertSame(Status::WAIT_MODERATION(), $product->getStatus());
-        self::assertSame(123, $product->getSeller()->getId()->getValue());
-        self::assertSame('Inc Corporation', $product->getSeller()->getName());
-        self::assertSame('company@tld.com', (string) $product->getSeller()->getEmail());
+        self::assertSame(123, $product->getCompany()->getId()->getValue());
+        self::assertSame('Inc Corporation', $product->getCompany()->getName());
+        self::assertSame('company@tld.com', (string) $product->getCompany()->getEmail());
 
         self::assertCount(1, $product->getTaxes());
         /** @var Tax $tax */
@@ -90,9 +90,9 @@ final class ProductTest extends TestCase
         self::assertSame('Toshiba', $product->getBrand()->getName());
         self::assertSame(2, $product->getCategory()->getId()->getValue());
         self::assertSame('Computer', $product->getCategory()->getName());
-        self::assertSame(123, $product->getSeller()->getId()->getValue());
-        self::assertSame('Inc Corporation', $product->getSeller()->getName());
-        self::assertSame('company@tld.com', (string) $product->getSeller()->getEmail());
+        self::assertSame(123, $product->getCompany()->getId()->getValue());
+        self::assertSame('Inc Corporation', $product->getCompany()->getName());
+        self::assertSame('company@tld.com', (string) $product->getCompany()->getEmail());
     }
 
     public function testAddPictureGallery(): void
@@ -123,6 +123,19 @@ final class ProductTest extends TestCase
         self::assertSame($document, $product->getDocuments()->findFirst(fn(Document $excepted) => $excepted === $document));
     }
 
+    public function testChangeStock(): void
+    {
+        $product = $this->getProduct();
+
+        $product->setStock(new Stock(5));
+        $events = $product->pullDomainEvents();
+
+        self::assertCount(1, $events);
+        self::assertEquals(new ProductStockHasChanged((string) $product->getReference(), 5), $events[0]);
+
+        self::assertSame(5, $product->getStock()->getValue());
+    }
+
     private function getProduct(): Product
     {
         return new Product(
@@ -132,7 +145,7 @@ final class ProductTest extends TestCase
             new ProductPrice(12.1),
             new Stock(2),
             new Brand(new BrandId(34), 'Toshiba'),
-            new Seller(new SellerId(123), new Email('company@tld.com'), 'Inc Corporation'),
+            new Company(new SellerId(123), new Email('company@tld.com'), 'Inc Corporation'),
             new Category(new Id(2), 'Computer'),
             (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), new TaxValue(19.6))),
             Status::WAIT_MODERATION(),

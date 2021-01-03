@@ -4,32 +4,28 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Event\Product;
 
-use App\Shared\{
-    Domain\Bus\Event\DomainEvent,
-    Domain\DataStructure\Decimal,
-    Domain\Uuid\UuidInterface
-};
+use App\Shared\Domain\Bus\Event\DomainEvent;
 
 final class ProductPriceHasChanged implements DomainEvent
 {
     public function __construct(
-        private UuidInterface $productId,
-        private Decimal $price,
-        private Decimal $priceWithTax
+        private string $productId,
+        private float $price,
+        private float $priceWithTax
     ) {
     }
 
-    public function getProductId(): UuidInterface
+    public function getProductId(): string
     {
         return $this->productId;
     }
 
-    public function getProductPrice(): Decimal
+    public function getProductPrice(): float
     {
         return $this->price;
     }
 
-    public function getProductPriceWithTax(): Decimal
+    public function getProductPriceWithTax(): float
     {
         return $this->priceWithTax;
     }

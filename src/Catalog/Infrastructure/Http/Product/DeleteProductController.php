@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Http\Product;
 
-use App\Shared\Infrastructure\Uuid\Uuid;
 use App\Catalog\Application\{
     Product\Delete\DeleteProductCommand
 };
@@ -22,7 +21,7 @@ final class DeleteProductController
     ) {
     }
 
-    public function __invoke(Uuid $productReference): JsonResponse
+    public function __invoke(string $productReference): JsonResponse
     {
         $this->commandBus->dispatch(new DeleteProductCommand($productReference));
 

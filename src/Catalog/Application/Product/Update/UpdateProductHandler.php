@@ -26,7 +26,7 @@ final class UpdateProductHandler
     /** @throws DomainException */
     public function __invoke(UpdateProductCommand $command): void
     {
-        $product = $this->productRepository->get(new Reference($command->getReference()));
+        $product = $this->productRepository->get(Reference::fromString($command->getReference()));
         $category = $this->categoryRepository->get(new Id($command->getCategoryId()));
 
         $product

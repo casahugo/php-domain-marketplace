@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\DataStructure;
 
-abstract class StringValue
+abstract class StringValue implements \Stringable
 {
-    public function __construct(private string $value)
+    public function __construct(protected string $value)
     {
     }
 

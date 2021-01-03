@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Catalog\Domain\Seller;
+namespace App\Catalog\Domain\Company;
 
 use App\Shared\Domain\DataStructure\IntegerValue;
 

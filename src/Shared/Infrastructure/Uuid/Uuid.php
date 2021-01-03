@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Uuid;
 
-use App\Shared\Domain\Uuid\UuidInterface;
+use App\Shared\Domain\Uuid\Uuid as UuidInterface;
 
 final class Uuid implements UuidInterface
 {
@@ -27,7 +27,7 @@ final class Uuid implements UuidInterface
         return true;
     }
 
-    public static function fromString(string $uuid): UuidInterface
+    public static function fromString(string $uuid): Uuid
     {
         return new self($uuid);
     }

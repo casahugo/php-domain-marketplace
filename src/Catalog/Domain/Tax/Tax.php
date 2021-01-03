@@ -8,7 +8,7 @@ use App\Shared\Domain\DataStructure\Decimal;
 
 final class Tax
 {
-    public function __construct(private Code $code, private Decimal $taxValue)
+    public function __construct(private Code $code, private TaxValue $taxValue)
     {
     }
 
@@ -17,7 +17,7 @@ final class Tax
         return $this->code;
     }
 
-    public function getTaxValue(): Decimal
+    public function getTaxValue(): TaxValue
     {
         return $this->taxValue;
     }

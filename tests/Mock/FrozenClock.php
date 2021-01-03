@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Tests\Mock;
 
-use App\Shared\Domain\Clock\ClockInterface;
+use App\Shared\Domain\Clock\Clock;
 
-final class FrozenClock implements ClockInterface
+final class FrozenClock implements Clock
 {
     public function __construct(private \DateTimeImmutable $date)
     {

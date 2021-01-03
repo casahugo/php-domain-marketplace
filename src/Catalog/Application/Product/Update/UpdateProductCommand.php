@@ -5,12 +5,11 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Product\Update;
 
 use App\Shared\Domain\Bus\Command\DomainCommand;
-use App\Shared\Domain\Uuid\UuidInterface;
 
 final class UpdateProductCommand implements DomainCommand
 {
     public function __construct(
-        private UuidInterface $reference,
+        private string $reference,
         private string $name,
         private float $price,
         private int $stock,
@@ -18,7 +17,7 @@ final class UpdateProductCommand implements DomainCommand
     ) {
     }
 
-    public function getReference(): UuidInterface
+    public function getReference(): string
     {
         return $this->reference;
     }

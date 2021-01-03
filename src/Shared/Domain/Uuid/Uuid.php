@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\Uuid;
 
-interface UuidInterface
+interface Uuid
 {
-    public function equal(UuidInterface $uuid): bool;
+    public function equal(Uuid $uuid): bool;
 
     public function __toString(): string;
 

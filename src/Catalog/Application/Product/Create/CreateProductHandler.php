@@ -6,7 +6,7 @@ namespace App\Catalog\Application\Product\Create;
 
 use App\Shared\{
     Domain\Bus\Event\EventBus,
-    Domain\Clock\ClockInterface
+    Domain\Clock\Clock
 };
 use App\Catalog\Domain\{
     Brand,
@@ -15,11 +15,13 @@ use App\Catalog\Domain\{
     Category,
     Exception\DomainException,
     Product\Product,
+    Product\ProductPrice,
     Product\ProductRepository,
     Product\Status,
-    Seller,
-    Seller\SellerRepository,
-    Tax\TaxCollection
+    Company,
+    Company\CompanyRepository,
+    Tax\Code,
+    Tax\TaxRepository
 };
 
 final class CreateProductHandler
@@ -29,8 +31,9 @@ final class CreateProductHandler
         private ProductRepository $productRepository,
         private CategoryRepository $categoryRepository,
         private BrandRepository $brandRepository,
-        private SellerRepository $sellerRepository,
-        private ClockInterface $clock,
+        private CompanyRepository $companyRepository,
+        private TaxRepository $taxRepository,
+        private Clock $clock,
     ) {
     }
 
@@ -39,7 +42,11 @@ final class CreateProductHandler
     {
         $category = $this->categoryRepository->get(new Category\Id($command->getCategoryId()));
         $brand = $this->brandRepository->get(new Brand\Id($command->getBrandId()));
-        $seller = $this->sellerRepository->get(new Seller\Id($command->getSellerId()));
+        $seller = $this->companyRepository->get(new Company\Id($command->getCompanyId()));
+        $taxes = $this->taxRepository->findByCode(...array_map(
+            fn(string $code): Code => new Code($code),
+            $command->getTaxCodes()
+        ));
 
         $product = Product::create(
             $command->getReference(),
@@ -50,10 +57,17 @@ final class CreateProductHandler
             $brand,
             $seller,
             $category,
-            new TaxCollection(),
+            $taxes,
             Status::WAIT_MODERATION(),
             $this->clock->now(),
         );
+
+        $product->setIntro($command->getIntro());
+        $product->setDescription($command->getDescription());
+
+        if (null !== $command->getOriginalPrice()) {
+            $product->setOriginalPrice(new ProductPrice($command->getOriginalPrice()));
+        }
 
         $this->productRepository->save($product);
 

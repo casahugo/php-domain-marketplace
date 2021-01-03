@@ -9,7 +9,6 @@ use App\Catalog\Application\{
 };
 use App\Shared\Domain\{
     Bus\Command\CommandBus,
-    Uuid\UuidInterface
 };
 use Symfony\Component\{
     HttpFoundation\JsonResponse,
@@ -25,7 +24,7 @@ final class UpdateProductController
     ) {
     }
 
-    public function __invoke(UuidInterface $productReference, Request $request): JsonResponse
+    public function __invoke(string $productReference, Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
             ->setRequired(['name', 'price', 'stock', 'categoryId'])

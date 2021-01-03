@@ -9,7 +9,6 @@ use App\Shared\Domain\{
     Event\Product\ProductPriceHasChanged,
     Event\Product\ProductStockHasChanged,
     Event\Product\ProductWasCreated,
-    Uuid\UuidInterface
 };
 use App\Catalog\Domain\{
     Brand\Brand,
@@ -18,19 +17,22 @@ use App\Catalog\Domain\{
     Document\DocumentCollection,
     Picture\Picture,
     Picture\PictureCollection,
-    Seller\Seller,
+    Company\Company,
     Shipping\Shipping,
     Shipping\ShippingCollection,
     Tax\Tax,
     Tax\TaxCollection,
 };
 
+/**
+ * Aggregate root.
+ */
 final class Product extends Aggregate
 {
     private Reference $reference;
     private string $name;
     private Code $code;
-    private Seller $seller;
+    private Company $company;
     private ?ProductPrice $originalPrice;
     private ProductPrice $price;
     private Stock $stock;
@@ -53,7 +55,7 @@ final class Product extends Aggregate
         ProductPrice $price,
         Stock $stock,
         Brand $brand,
-        Seller $seller,
+        Company $company,
         Category $category,
         TaxCollection $taxes,
         Status $status,
@@ -69,7 +71,7 @@ final class Product extends Aggregate
         $this->reference = $reference;
         $this->code = $code;
         $this->name = $name;
-        $this->seller = $seller;
+        $this->company = $company;
         $this->price = $price;
         $this->originalPrice = $originalPrice;
         $this->stock = $stock;
@@ -79,38 +81,38 @@ final class Product extends Aggregate
         $this->description = $description;
         $this->taxes = $taxes;
         $this->status = $status;
-        $this->shippings = $shippings ?? new ShippingCollection();
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
+        $this->shippings = $shippings ?? new ShippingCollection();
         $this->gallery = $pictures ?? new PictureCollection();
         $this->documents = $documents ?? new DocumentCollection();
     }
 
     public static function create(
-        UuidInterface $reference,
+        string $reference,
         string $code,
         string $name,
         float $price,
         int $stock,
         Brand $brand,
-        Seller $seller,
+        Company $company,
         Category $category,
         TaxCollection $taxes,
         Status $status,
         \DateTimeImmutable $createdAt,
     ): self {
         $self = new self(
-            new Reference($reference),
+            Reference::fromString($reference),
             new Code($code),
             $name,
             new ProductPrice($price),
             new Stock($stock),
             $brand,
-            $seller,
+            $company,
             $category,
             $taxes,
             $status,
-            $createdAt
+            $createdAt,
         );
 
         $self->record(new ProductWasCreated($reference));
@@ -148,9 +150,9 @@ final class Product extends Aggregate
         $this->price = $productPrice;
 
         $this->record(new ProductPriceHasChanged(
-            $this->reference->getValue(),
-            $this->price,
-            $this->getPriceWithTax()
+            (string) $this->reference->getValue(),
+            $this->price->getValue(),
+            $this->getPriceWithTax()->getValue(),
         ));
 
         return $this;
@@ -201,7 +203,7 @@ final class Product extends Aggregate
     {
         $this->stock = $stock;
 
-        $this->record(new ProductStockHasChanged($this->reference->getValue(), $this->stock->getValue()));
+        $this->record(new ProductStockHasChanged((string) $this->reference, $this->stock->getValue()));
 
         return $this;
     }
@@ -274,9 +276,9 @@ final class Product extends Aggregate
         return $this;
     }
 
-    public function getSeller(): Seller
+    public function getCompany(): Company
     {
-        return $this->seller;
+        return $this->company;
     }
 
     public function getStatus(): Status
@@ -304,6 +306,20 @@ final class Product extends Aggregate
     public function setCategory(Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function setIntro(?string $intro): self
+    {
+        $this->intro = $intro;
+
+        return $this;
+    }
+
+    public function setDescription(?string $description): self
+    {
+        $this->description = $description;
 
         return $this;
     }

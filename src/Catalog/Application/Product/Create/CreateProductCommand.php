@@ -5,27 +5,27 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Product\Create;
 
 use App\Shared\Domain\Bus\Command\DomainCommand;
-use App\Shared\Domain\Uuid\UuidInterface;
 
 final class CreateProductCommand implements DomainCommand
 {
     public function __construct(
-        private UuidInterface $reference,
+        private string $reference,
         private string $code,
         private string $name,
         private float $price,
         private int $stock,
         private int $brandId,
         private int $categoryId,
-        private int $sellerId,
-        private int $shippingId,
+        private int $companyId,
+        private array $taxCodes,
+        private ?array $shippingId = null,
         private ?string $intro = null,
         private ?string $description = null,
         private ?float $originalPrice = null,
     ) {
     }
 
-    public function getReference(): UuidInterface
+    public function getReference(): string
     {
         return $this->reference;
     }
@@ -45,6 +45,11 @@ final class CreateProductCommand implements DomainCommand
         return $this->stock;
     }
 
+    public function getTaxCodes(): array
+    {
+        return $this->taxCodes;
+    }
+
     public function getBrandId(): int
     {
         return $this->brandId;
@@ -60,9 +65,9 @@ final class CreateProductCommand implements DomainCommand
         return $this->code;
     }
 
-    public function getSellerId(): int
+    public function getCompanyId(): int
     {
-        return $this->sellerId;
+        return $this->companyId;
     }
 
     public function getIntro(): ?string
@@ -80,7 +85,7 @@ final class CreateProductCommand implements DomainCommand
         return $this->originalPrice;
     }
 
-    public function getShippingId(): int
+    public function getShippingId(): ?array
     {
         return $this->shippingId;
     }

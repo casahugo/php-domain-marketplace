@@ -18,6 +18,6 @@ final class FindProduct
     /** @throws ProductNotFound */
     public function __invoke(QueryProduct $query): Product
     {
-        return $this->productRepository->get(new Reference($query->getReference()));
+        return $this->productRepository->get(Reference::fromString($query->getReference()));
     }
 }

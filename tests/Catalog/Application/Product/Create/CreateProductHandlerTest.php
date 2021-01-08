@@ -23,15 +23,17 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Seller\Id as SellerId,
-    Seller\Seller,
-    Seller\SellerRepository,
-    Tax\TaxCollection};
+    Company\Id as SellerId,
+    Company\Company,
+    Company\CompanyRepository,
+    Tax\TaxCollection,
+    Tax\TaxRepository
+};
 use App\Shared\{
     Domain\Bus\Event\EventBus,
     Domain\Email,
     Domain\Event\Product\ProductWasCreated,
-    Infrastructure\Uuid\Uuid};
+};
 use PHPUnit\Framework\TestCase;
 
 final class CreateProductHandlerTest extends TestCase
@@ -43,7 +45,8 @@ final class CreateProductHandlerTest extends TestCase
             $productRepository = $this->createMock(ProductRepository::class),
             $categoryRepository = $this->createMock(CategoryRepository::class),
             $brandRepository = $this->createMock(BrandRepository::class),
-            $sellerRepository = $this->createMock(SellerRepository::class),
+            $sellerRepository = $this->createMock(CompanyRepository::class),
+            $taxRepository = $this->createMock(TaxRepository::class),
             new FrozenClock(new \DateTimeImmutable("2020-01-01"))
         );
 
@@ -57,7 +60,7 @@ final class CreateProductHandlerTest extends TestCase
             ->expects(self::once())
             ->method('get')
             ->with($sellerId = new SellerId(123))
-            ->willReturn($seller = new Seller($sellerId, new Email('company@tld.com'), 'Inc Corporation'));
+            ->willReturn($seller = new Company($sellerId, new Email('company@tld.com'), 'Inc Corporation'));
 
         $brandRepository
             ->expects(self::once())
@@ -65,8 +68,13 @@ final class CreateProductHandlerTest extends TestCase
             ->with($brandId = new BrandId(34))
             ->willReturn($brand = new Brand($brandId, 'Toshiba'));
 
+        $taxRepository
+            ->expects(self::once())
+            ->method('findByCode')
+            ->willReturn(new TaxCollection());
+
         $product = new Product(
-            new Reference($uuid = new Uuid('123')),
+            Reference::fromString('123'),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
@@ -79,7 +87,7 @@ final class CreateProductHandlerTest extends TestCase
             new \DateTimeImmutable("2020-01-01"),
         );
 
-        $product->record(new ProductWasCreated($uuid));
+        $product->record(new ProductWasCreated('123'));
 
         $productRepository
             ->expects(self::once())
@@ -87,7 +95,7 @@ final class CreateProductHandlerTest extends TestCase
             ->with();
 
         $handler(new CreateProductCommand(
-            new Uuid('123'),
+            '123',
             'code',
             'Laptop',
             12.1,
@@ -95,7 +103,8 @@ final class CreateProductHandlerTest extends TestCase
             34,
             2,
             123,
-            4,
+            ['TVA_20'],
+            [4],
         ));
     }
 }

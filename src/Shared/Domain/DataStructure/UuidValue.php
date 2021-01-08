@@ -4,12 +4,18 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain\DataStructure;
 
-use App\Shared\Domain\Uuid\UuidInterface;
+use App\Shared\Domain\Uuid\Uuid as UuidInterface;
+use App\Shared\Infrastructure\Uuid\Uuid;
 
-abstract class UuidValue
+abstract class UuidValue implements \Stringable
 {
-    public function __construct(private UuidInterface $value)
+    final public function __construct(private UuidInterface $value)
     {
+    }
+
+    public static function fromString(string $value): static
+    {
+        return new static(Uuid::fromString($value));
     }
 
     public function getValue(): UuidInterface

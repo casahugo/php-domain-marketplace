@@ -6,5 +6,7 @@ namespace App\Catalog\Domain\Product;
 
 interface ProductProjector
 {
-    public function __invoke(Product $product): void;
+    public function push(Product $product): void;
+
+    public function delete(Product $product): void;
 }

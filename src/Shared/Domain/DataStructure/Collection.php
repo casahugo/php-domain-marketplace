@@ -20,7 +20,7 @@ class Collection implements \Iterator
         $set = $this;
 
         foreach ($values as $value) {
-            if (!$value instanceof $this->type) {
+            if (false === $value instanceof $this->type) {
                 throw new \InvalidArgumentException();
             }
 
@@ -40,11 +40,11 @@ class Collection implements \Iterator
         $set = $this;
 
         foreach ($values as $value) {
-            if (!$value instanceof $this->type) {
+            if (false === $value instanceof $this->type) {
                 throw new \InvalidArgumentException();
             }
 
-            if (!$this->contains($value)) {
+            if (false ===$this->contains($value)) {
                 continue;
             }
 
@@ -67,7 +67,7 @@ class Collection implements \Iterator
 
     public function contains(mixed $value): bool
     {
-        if (!$value instanceof $this->type) {
+        if (false === $value instanceof $this->type) {
             throw new \InvalidArgumentException();
         }
 

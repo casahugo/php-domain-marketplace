@@ -10,7 +10,6 @@ use App\Catalog\Application\{
 };
 use App\Catalog\Domain\Exception\ProductNotFound;
 use App\Catalog\Infrastructure\Normalizer\ProductNormalizer;
-use App\Shared\Domain\Uuid\UuidInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 final class FindProductController
@@ -21,7 +20,7 @@ final class FindProductController
     ) {
     }
 
-    public function __invoke(UuidInterface $reference): JsonResponse
+    public function __invoke(string $reference): JsonResponse
     {
         try {
             $product = ($this->finder)(new QueryProduct($reference));

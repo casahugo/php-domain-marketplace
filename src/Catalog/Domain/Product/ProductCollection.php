@@ -12,4 +12,9 @@ final class ProductCollection extends Collection
     {
         parent::__construct(Product::class);
     }
+
+    public function findByCode(Code $code): ?Product
+    {
+        return $this->findFirst(fn(Product $product): bool => $product->getCode()->equal($code));
+    }
 }

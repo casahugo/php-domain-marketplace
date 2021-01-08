@@ -8,6 +8,9 @@ use App\Catalog\Domain\Exception\ProductDeleteFailedException;
 use App\Catalog\Domain\Exception\ProductNotFound;
 use App\Catalog\Domain\Exception\ProductSaveFailedException;
 
+/**
+ * Store Aggregate root.
+ */
 interface ProductRepository
 {
     /** @throws ProductNotFound */
@@ -20,4 +23,6 @@ interface ProductRepository
     public function save(Product $product): void;
 
     public function list(int $limit, int $offset, array $filters, array $orders = []): ProductCollection;
+
+    public function findByCode(Code ...$codes): ProductCollection;
 }

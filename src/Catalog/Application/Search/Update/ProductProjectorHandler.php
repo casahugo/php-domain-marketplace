@@ -8,10 +8,10 @@ use App\Catalog\Domain\Product\ProductProjector;
 use App\Catalog\Domain\Product\ProductRepository;
 use App\Catalog\Domain\Product\Reference;
 use App\Catalog\Domain\Product\Status;
-use App\Shared\Domain\Bus\Event\EventHandlerInterface;
+use App\Shared\Domain\Bus\Event\EventHandler;
 use App\Shared\Domain\Event\Product\ProductHasChanged;
 
-final class ProductProjectorHandler implements EventHandlerInterface
+final class ProductProjectorHandler implements EventHandler
 {
     private ProductRepository $productRepository;
     private array $productProjector;
@@ -26,11 +26,15 @@ final class ProductProjectorHandler implements EventHandlerInterface
 
     public function __invoke(ProductHasChanged $event): void
     {
-        $product = $this->productRepository->get(new Reference($event->getProductReference()));
+        $product = $this->productRepository->get(Reference::fromString($event->getProductReference()));
 
         if ($product->getStatus()->equals(Status::ENABLED())) {
             foreach ($this->productProjector as $projector) {
-                $projector($product);
+                $projector->push($product);
+            }
+        } else {
+            foreach ($this->productProjector as $projector) {
+                $projector->delete($product);
             }
         }
     }

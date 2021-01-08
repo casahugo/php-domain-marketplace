@@ -21,7 +21,7 @@ final class CreateProductControllerTest extends TestCase
             $generator = new FakeUuidGenerator('uuid-123')
         );
 
-        $reference = $generator->generate();
+        $reference = (string) $generator->generate();
 
         $request = new Request([], [
             'code' => 'RZE-OO1',
@@ -31,7 +31,8 @@ final class CreateProductControllerTest extends TestCase
             'brandId' => 34,
             'categoryId' => 2,
             'sellerId' => 12,
-            'shippingId' => 4,
+            'taxes' => ['TVA_20'],
+            'shippings' => [4],
         ]);
 
         $commandBus
@@ -46,13 +47,14 @@ final class CreateProductControllerTest extends TestCase
                 34,
                 2,
                 12,
-                4,
+                ['TVA_20'],
+                [4],
             ));
 
         $response = $controller($request);
 
         self::assertInstanceOf(JsonResponse::class, $response);
-        self::assertSame(['reference' => (string) $reference], json_decode($response->getContent(), true));
+        self::assertSame(['reference' => $reference], json_decode($response->getContent(), true));
     }
 
     public function testBadArguments(): void

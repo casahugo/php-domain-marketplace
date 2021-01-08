@@ -9,7 +9,7 @@ use App\Catalog\Application\{
 };
 use App\Shared\Domain\{
     Bus\Command\CommandBus,
-    Uuid\UuidGeneratorInterface
+    Uuid\UuidGenerator
 };
 use Symfony\Component\{
     HttpFoundation\JsonResponse,
@@ -22,14 +22,14 @@ final class CreateProductController
 {
     public function __construct(
         private CommandBus $commandBus,
-        private UuidGeneratorInterface $uuidGenerator
+        private UuidGenerator $uuidGenerator
     ) {
     }
 
     public function __invoke(Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
-            ->setRequired(['code', 'name', 'price', 'stock', 'brandId', 'categoryId', 'sellerId', 'shippingId'])
+            ->setRequired(['code', 'name', 'price', 'stock', 'brandId', 'categoryId', 'sellerId', 'taxes', 'shippings'])
             ->setAllowedTypes('code', 'string')
             ->setAllowedTypes('name', 'string')
             ->setAllowedTypes('price', 'float')
@@ -37,7 +37,9 @@ final class CreateProductController
             ->setAllowedTypes('brandId', 'int')
             ->setAllowedTypes('categoryId', 'int')
             ->setAllowedTypes('sellerId', 'int')
-            ->setAllowedTypes('shippingId', 'int');
+            ->setAllowedTypes('taxes', 'string[]')
+            ->setAllowedTypes('shippings', 'int[]')
+        ;
 
         try {
             $payload = $resolver->resolve($request->request->all());
@@ -46,7 +48,7 @@ final class CreateProductController
         }
 
         $this->commandBus->dispatch(new CreateProductCommand(
-            $reference = $this->uuidGenerator->generate(),
+            $reference = (string) $this->uuidGenerator->generate(),
             $payload['code'],
             $payload['name'],
             $payload['price'],
@@ -54,12 +56,13 @@ final class CreateProductController
             $payload['brandId'],
             $payload['categoryId'],
             $payload['sellerId'],
-            $payload['shippingId'],
+            $payload['taxes'],
+            $payload['shippings'],
             $payload['intro'] ?? null,
             $payload['description'] ?? null,
-            $payload['originalPrice'] ?? null,
+            isset($payload['originalPrice']) ? (float) $payload['originalPrice'] : null,
         ));
 
-        return new JsonResponse(['reference' => (string) $reference], JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['reference' => $reference], JsonResponse::HTTP_CREATED);
     }
 }

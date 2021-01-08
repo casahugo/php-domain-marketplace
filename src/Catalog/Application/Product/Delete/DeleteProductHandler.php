@@ -19,7 +19,7 @@ final class DeleteProductHandler
     /** @throws DomainException */
     public function __invoke(DeleteProductCommand $command): void
     {
-        $product = $this->productRepository->get(new Reference($command->getReference()));
+        $product = $this->productRepository->get(Reference::fromString($command->getReference()));
 
         $product->record(new ProductWasDeleted($command->getReference()));
 

@@ -4,14 +4,12 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Product;
 
-final class Code
-{
-    public function __construct(private string $value)
-    {
-    }
+use App\Shared\Domain\DataStructure\StringValue;
 
-    public function __toString(): string
+final class Code extends StringValue
+{
+    public function equal(Code $code): bool
     {
-        return $this->value;
+        return $this->value === $code->value;
     }
 }

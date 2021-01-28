@@ -13,6 +13,18 @@
     <env name="APP_DEBUG" value="1"/>
     <env name="APP_SECRET" value="s$cretf0rt3st"/>
     <env name="SHELL_VERBOSITY" value="-1"/>
+
+        <!-- ###+ symfony/framework-bundle ### -->
+        <env name="APP_ENV" value="dev"/>
+        <env name="APP_SECRET" value="ed84a1ab645e4e3eaec69d689d9c43b6"/>
+        <!-- ###- symfony/framework-bundle ### -->
+
+        <!-- ###+ symfony/messenger ### -->
+        <!-- Choose one of the transports below -->
+        <!-- MESSENGER_TRANSPORT_DSN=doctrine://default -->
+        <!-- MESSENGER_TRANSPORT_DSN=amqp://guest:guest@localhost:5672/%2f/messages -->
+        <!-- MESSENGER_TRANSPORT_DSN=redis://localhost:6379/messages -->
+        <!-- ###- symfony/messenger ### -->
   </php>
   <testsuites>
     <testsuite name="Project Test Suite">

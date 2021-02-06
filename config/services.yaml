@@ -20,4 +20,5 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
-    #App\Shared\Domain\Bus\Command\CommandBus: '@App\Shared\Integration\Bus\Command'
+    App\Shared\Domain\Bus\Command\CommandBus: '@App\Shared\Infrastructure\Bus\MessengerCommandBus'
+    App\Shared\Domain\Bus\Event\EventBus: '@App\Shared\Infrastructure\Bus\MessengerEventBus'

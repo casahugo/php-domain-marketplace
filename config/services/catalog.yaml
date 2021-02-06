@@ -19,5 +19,12 @@ services:
         resource: '../../src/Catalog/Infrastructure/Http/'
         tags: ['controller.service_arguments']
 
+    App\Catalog\Application\Product\Create\CreateProductHandler:
+        tags: [ messenger.message_handler ]
+
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductRepository'
+    App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
+    App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
+    App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'

@@ -6,5 +6,5 @@ namespace App\Catalog\Domain\Brand;
 
 interface BrandRepository
 {
-    public function get(Id $brand): Brand;
+    public function get(Id $id): Brand;
 }

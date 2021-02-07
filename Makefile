@@ -6,6 +6,9 @@ database:
 	bin/console doctrine:database:create --connection=catalog
 	bin/console doctrine:migrations:migrate --no-interaction
 
+fixtures:
+	bin/console doctrine:fixtures:load --no-interaction --purge-with-truncate --em=catalog
+
 test:
 	vendor/bin/phpunit
 
@@ -29,5 +32,5 @@ cs-fix:
 docker-start:
 	docker-compose up -d --force-recreate --remove-orphans
 
-dev: install docker-start
+dev: install database fixtures
 	sudo php -S localhost:666 -t public -d xdebug.remote_enable=1

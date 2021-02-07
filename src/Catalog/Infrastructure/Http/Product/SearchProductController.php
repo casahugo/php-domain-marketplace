@@ -17,7 +17,9 @@ final class SearchProductController
     {
         $parameters = [
             'q'         =>  '',
+            'page'        =>  '1',
             'query_by'         =>  'name',
+            'facet_by' => 'stock, sorted_price',
         ];
 
         return new JsonResponse($this->client->collections['product']->documents->search($parameters));

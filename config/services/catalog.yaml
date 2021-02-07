@@ -26,6 +26,16 @@ services:
         resource: '../../src/Catalog/Infrastructure/Normalizer/*'
         tags: [ serializer.normalizer ]
 
+    # repositories
+    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository'
+    App\Catalog\Domain\Product\ProductReadModelRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductReadModelRepository'
+    App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
+    App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
+    App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'
+
+    # product projector
+    App\Catalog\Domain\Product\ProductProjector: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductProjector'
+
     # typesense
     Typesense\Client:
         arguments:
@@ -37,13 +47,3 @@ services:
                         host: '%env(TYPESENSE_HOST)%'
                         port: '%env(TYPESENSE_PORT)%'
                         protocol: 'http'
-
-    # repositories
-    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository'
-    App\Catalog\Domain\Product\ProductReadModelRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductReadModelRepository'
-    App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
-    App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
-    App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'
-
-    # product projector
-    App\Catalog\Domain\Product\ProductProjector: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductProjector'

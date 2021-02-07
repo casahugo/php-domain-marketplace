@@ -19,14 +19,14 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        //$start = microtime(true);
+        $start = microtime(true);
         $faker = Factory::create();
 
-        for ($i = 0; $i < 10; $i++) {
+        for ($i = 0; $i < 100; $i++) {
             $this->commandBus->dispatch(new CreateProductCommand(
                 $reference = $this->uuidGenerator->generate(),
                 $faker->ean8,
-                $faker->title,
+                $faker->streetName,
                 $faker->randomFloat(2, 10, 100),
                 $faker->randomNumber(2),
                 2,
@@ -36,6 +36,6 @@ class AppFixtures extends Fixture
             ));
         }
 
-        //dump("end:", (float) microtime(true) - (float) $start);
+        dump("end:", (float) microtime(true) - (float) $start);
     }
 }

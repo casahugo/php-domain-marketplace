@@ -7,11 +7,14 @@ namespace App\Catalog\Infrastructure\TypeSense;
 use App\Catalog\Domain\Product\Product;
 use App\Catalog\Domain\Product\ProductProjector;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Throwable;
 use Typesense\Client;
+use Typesense\Collection;
 
 final class TypeSenseProductProjector implements ProductProjector
 {
-    public const SORT = 'sortedPrice';
+    public const INDEX = 'product';
+    public const SORT = 'sorted_price';
 
     public function __construct(private Client $client, private NormalizerInterface $serializer)
     {
@@ -21,12 +24,8 @@ final class TypeSenseProductProjector implements ProductProjector
     {
         $this->client->collections->create([
             'name'      => 'product',
-            'num_documents'=> 0,
+            'num_documents'=> 100,
             'fields'    => [
-                [
-                    'name'  => 'reference',
-                    'type'  => 'string',
-                ],
                 [
                     'name'  => 'code',
                     'type'  => 'string',
@@ -36,8 +35,18 @@ final class TypeSenseProductProjector implements ProductProjector
                     'type'  => 'string',
                 ],
                 [
-                    'name'  => 'sortedPrice',
+                    'name'  => 'sorted_price',
                     'type'  => 'float',
+                    'facet' => true,
+                ],
+                [
+                    'name'  => 'stock',
+                    'type'  => 'int32',
+                    'facet' => true,
+                ],
+                [
+                    'name'  => 'created_at',
+                    'type'  => 'string',
                     'facet' => true,
                 ],
             ],
@@ -47,21 +56,36 @@ final class TypeSenseProductProjector implements ProductProjector
 
     public function create(Product $product): void
     {
-        $this->client->collections['product']->documents->create(
-            array_merge($this->serializer->normalize($product), ['sortedPrice' => $product->getPrice()->getValue()])
+        $this->getCollection()->documents->create(
+            array_merge(
+                $this->serializer->normalize($product),
+                [
+                    'sorted_price' => $product->getPrice()->getValue(),
+                    'created_at' => $product->getCreatedAt()->format(DATE_ATOM),
+                    'id' => (string) $product->getReference(),
+                ],
+            )
         );
     }
 
     public function delete(Product $product): void
     {
-        $this->client->collections['product']->documents['124']->delete();
+        $this->getCollection()
+            ->documents[(string) $product->getReference()]
+            ->delete()
+        ;
     }
 
     public function reset(): void
     {
         try {
             $this->client->collections['product']->delete();
-        } catch (\Throwable) {
+        } catch (Throwable) {
         }
+    }
+
+    private function getCollection(): Collection
+    {
+        return $this->client->collections[self::INDEX];
     }
 }

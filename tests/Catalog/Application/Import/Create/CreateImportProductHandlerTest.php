@@ -36,7 +36,7 @@ final class CreateImportProductHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('save')
-            ->with(Import::create('123', '/tmp/product.csv'));
+            ->with(Import::create('01E439TP9XJZ9RPFH3T1PYBCR8', '/tmp/product.csv'));
 
         $reader
             ->expects(self::once())
@@ -49,18 +49,18 @@ final class CreateImportProductHandlerTest extends TestCase
             ->method('dispatch')
             ->withConsecutive(
                 [new BulkProductCommand(
-                    '123',
+                    '01E439TP9XJZ9RPFH3T1PYBCR8',
                     2,
                     array_slice($products, 0, 5)
                 )],
                 [new BulkProductCommand(
-                    '123',
+                    '01E439TP9XJZ9RPFH3T1PYBCR8',
                     2,
                     array_slice($products, 5)
                 )],
             );
 
-        $handler(new CreateImportProductCommand('123', 2, '/tmp/product.csv'));
+        $handler(new CreateImportProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', 2, '/tmp/product.csv'));
     }
 
     private function getProductLine(): array

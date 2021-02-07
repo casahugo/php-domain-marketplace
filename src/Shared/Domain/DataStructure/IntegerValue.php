@@ -14,4 +14,9 @@ abstract class IntegerValue
     {
         return $this->value;
     }
+
+    public static function fromInt(int $value): static
+    {
+        return new static($value);
+    }
 }

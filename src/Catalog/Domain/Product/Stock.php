@@ -4,14 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Product;
 
-final class Stock
-{
-    public function __construct(private int $value)
-    {
-    }
+use App\Shared\Domain\DataStructure\IntegerValue;
 
-    public function getValue(): int
-    {
-        return $this->value;
-    }
+final class Stock extends IntegerValue
+{
 }

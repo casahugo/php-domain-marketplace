@@ -7,3 +7,15 @@ services:
            - 8108:8108
         volumes:
             - /tmp/typesense-data:/data
+
+    mysql:
+        image: mysql:5.7
+        volumes:
+            - db-datas:/var/lib/mysql:rw
+        ports:
+            - 3310:3306
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+
+volumes:
+    db-datas: { }

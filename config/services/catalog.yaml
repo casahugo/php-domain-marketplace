@@ -1,30 +1,32 @@
-# Put parameters here that don't need to change on each machine where the app is deployed
-# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
 
 services:
-    # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
+    _instanceof:
+        App\Shared\Domain\Bus\Command\CommandHandlerInterface:
+            tags: [ messenger.message_handler ]
+
+        App\Shared\Domain\Bus\Event\EventHandlerInterface:
+            tags: [ messenger.message_handler ]
+
+    # context
     App\Catalog\:
         resource: '../../src/Catalog/'
 
-    # controllers are imported separately to make sure services can be injected
-    # as action arguments even if you don't extend any base controller class
+    # controllers
     App\Catalog\Infrastructure\Http\:
         resource: '../../src/Catalog/Infrastructure/Http/'
         tags: ['controller.service_arguments']
 
-    App\Catalog\Application\Product\Create\CreateProductHandler:
-        tags: [ messenger.message_handler ]
+    App\Catalog\Infrastructure\Normalizer\:
+        resource: '../../src/Catalog/Infrastructure/Normalizer/*'
+        tags: [ serializer.normalizer ]
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductRepository'
+    # repositories
+    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository'
     App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
     App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
     App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'

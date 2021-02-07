@@ -11,10 +11,11 @@ use App\Catalog\Domain\Product\ProductPrice;
 use App\Catalog\Domain\Product\ProductRepository;
 use App\Catalog\Domain\Product\Reference;
 use App\Catalog\Domain\Product\Stock;
+use App\Shared\Domain\Bus\Command\CommandHandlerInterface;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Shared\Domain\Event\Product\ProductHasChanged;
 
-final class UpdateProductHandler
+final class UpdateProductHandler implements CommandHandlerInterface
 {
     public function __construct(
         private EventBus $eventBus,

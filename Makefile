@@ -1,6 +1,11 @@
 install:
 	composer install
 
+database:
+	bin/console doctrine:database:drop --connection=catalog --force
+	bin/console doctrine:database:create --connection=catalog
+	bin/console doctrine:migrations:migrate --no-interaction
+
 test:
 	vendor/bin/phpunit
 
@@ -20,3 +25,9 @@ cs: ## Run coding style analysis
 
 cs-fix:
 	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v
+
+docker-start:
+	docker-compose up -d --force-recreate --remove-orphans
+
+dev: install docker-start
+	sudo php -S localhost:666 -t public -d xdebug.remote_enable=1

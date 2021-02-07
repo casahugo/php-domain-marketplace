@@ -36,7 +36,7 @@ final class ProductProjectHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('get')
-            ->with($reference = Reference::fromString('123'))
+            ->with($reference = Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'))
             ->willReturn($product = new Product(
                 $reference,
                 new Code('345'),
@@ -60,7 +60,7 @@ final class ProductProjectHandlerTest extends TestCase
             ->expects(self::never())
             ->method('delete');
 
-        $handler(new ProductHasChanged('123'));
+        $handler(new ProductHasChanged('01E439TP9XJZ9RPFH3T1PYBCR8'));
     }
 
     public function testDeleteProduct(): void
@@ -73,16 +73,16 @@ final class ProductProjectHandlerTest extends TestCase
         $repository
             ->expects(self::once())
             ->method('get')
-            ->with($reference = Reference::fromString('123'))
+            ->with($reference = Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'))
             ->willReturn($product = new Product(
                 $reference,
                 new Code('345'),
                 'Laptop',
                 new ProductPrice(12.2),
                 new Stock(34),
-                new Brand(new Id(1), 'Samsung'),
+                new Brand(new Id('SMSG'), 'Samsung'),
                 new Company(new CompanyId(2), new Email('contact@email.com'), 'Inc Coporation'),
-                new Category(new CategoryId(2), 'Hardware'),
+                new Category(new CategoryId('HDRW'), 'Hardware'),
                 new TaxCollection(),
                 Status::DISABLED(),
                 new \DateTimeImmutable()
@@ -97,6 +97,6 @@ final class ProductProjectHandlerTest extends TestCase
             ->method('delete')
             ->with($product);
 
-        $handler(new ProductHasChanged('123'));
+        $handler(new ProductHasChanged('01E439TP9XJZ9RPFH3T1PYBCR8'));
     }
 }

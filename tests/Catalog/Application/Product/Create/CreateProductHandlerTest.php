@@ -74,7 +74,7 @@ final class CreateProductHandlerTest extends TestCase
             ->willReturn(new TaxCollection());
 
         $product = new Product(
-            Reference::fromString('123'),
+            Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
@@ -95,7 +95,7 @@ final class CreateProductHandlerTest extends TestCase
             ->with();
 
         $handler(new CreateProductCommand(
-            '123',
+            '01E439TP9XJZ9RPFH3T1PYBCR8',
             'code',
             'Laptop',
             12.1,

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Catalog\Domain\Category;
 
-use App\Shared\Domain\DataStructure\IntegerValue;
+use App\Shared\Domain\DataStructure\StringValue;
 
-final class Id extends IntegerValue
+final class Id extends StringValue
 {
 }

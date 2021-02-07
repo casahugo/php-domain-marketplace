@@ -53,13 +53,13 @@ final class BulkProductHandlerTest extends TestCase
             ->withConsecutive(
                 [
                     new CreateProductCommand(
-                        '123',
+                        '01E439TP9XJZ9RPFH3T1PYBCR8',
                         'REF-120',
                         'Screen',
                         34,
                         4,
-                        1,
-                        3,
+                        'SMGS',
+                        'HRDW',
                         2,
                         ['TVA_20'],
                         [2, 3],
@@ -70,13 +70,13 @@ final class BulkProductHandlerTest extends TestCase
                 ],
                 [
                     new CreateProductCommand(
-                        '123',
+                        '01E439TP9XJZ9RPFH3T1PYBCR8',
                         'REF-183',
                         'Mouse',
                         22.3,
                         4,
-                        1,
-                        3,
+                        'SMGS',
+                        'HRDW',
                         2,
                         ['TVA_20'],
                         [2],
@@ -87,19 +87,19 @@ final class BulkProductHandlerTest extends TestCase
                 ]
             );
 
-        $handler(new BulkProductCommand('1435', 2, $this->getProductLine()));
+        $handler(new BulkProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', 2, $this->getProductLine()));
     }
 
     private function getProductEntity(): ProductCollection
     {
-        $category = new Category(new CategoryId(3), 'Hardware');
-        $brand = new Brand(new Id(1), 'Samsung');
+        $category = new Category(new CategoryId('HRDW'), 'Hardware');
+        $brand = new Brand(new Id('SMGS'), 'Samsung');
         $tax = new Tax(new TaxCode('TVA_20'), new TaxValue(20));
         $company = new Company(new CompanyId(2), new Email('contact@email.pro'), 'Inc Corporation');
 
         return (new ProductCollection())->add(
             new Product(
-                Reference::fromString('56'),
+                Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
                 new Code('REF-123'),
                 'Laptop',
                 new ProductPrice(120.),
@@ -112,7 +112,7 @@ final class BulkProductHandlerTest extends TestCase
                 new \DateTimeImmutable('2020-01-01')
             ),
             new Product(
-                Reference::fromString('57'),
+                Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
                 new Code('REF-121'),
                 'Keyboard',
                 new ProductPrice(30.),
@@ -135,24 +135,24 @@ final class BulkProductHandlerTest extends TestCase
                 'name' => 'Laptop',
                 'price' => 34,
                 'stock' => 4,
-                'brandId' => 1,
-                'categoryId' => 3,
+                'brandId' => 'SMGS',
+                'categoryId' => 'HRDW',
             ],
             [
                 'code' => 'REF-121',
                 'name' => 'Keyboard',
                 'price' => 34,
                 'stock' => 4,
-                'brandId' => 1,
-                'categoryId' => 3,
+                'brandId' => 'SMGS',
+                'categoryId' => 'HRDW',
             ],
             [
                 'code' => 'REF-120',
                 'name' => 'Screen',
                 'price' => 34,
                 'stock' => 4,
-                'brandId' => 1,
-                'categoryId' => 3,
+                'brandId' => 'SMSG',
+                'categoryId' => 'HRDW',
                 'taxes' => ['TVA_20'],
                 'shippings' => [2, 3],
                 'intro' => 'Screen introduction',
@@ -164,8 +164,8 @@ final class BulkProductHandlerTest extends TestCase
                 'name' => 'Mouse',
                 'price' => 22.3,
                 'stock' => 4,
-                'brandId' => 1,
-                'categoryId' => 3,
+                'brandId' => 'SMSG',
+                'categoryId' => 'HRDW',
                 'taxes' => ['TVA_20'],
                 'shippings' => [2],
                 'intro' => 'Mouse introduction',

@@ -42,7 +42,7 @@ final class ProductTest extends TestCase
     {
         $product = $this->getProduct();
 
-        self::assertSame('1234-4567-455-1234', (string) $product->getReference());
+        self::assertSame('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $product->getReference());
         self::assertSame('code', (string) $product->getCode());
         self::assertSame('Laptop', $product->getName());
         self::assertSame('Presentation Laptop', $product->getIntro());
@@ -73,14 +73,14 @@ final class ProductTest extends TestCase
         self::assertCount(1, $product->getGallery());
         /** @var Picture $picture */
         $picture = $product->getGallery()->first();
-        self::assertEquals('1234-4567-455-1234', (string) $picture->getId());
+        self::assertEquals('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $picture->getId());
         self::assertEquals('http://hosting.com/image.jpeg', $picture->getPath());
         self::assertEquals('Image title', $picture->getTitle());
 
         self::assertCount(1, $product->getDocuments());
         /** @var Document $document */
         $document = $product->getDocuments()->first();
-        self::assertEquals('1234-4567-455-1234', (string) $document->getId());
+        self::assertEquals('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $document->getId());
         self::assertEquals('http://hosting.com/document.pdf', $document->getPath());
         self::assertEquals('Document title', $document->getTitle());
 
@@ -100,7 +100,7 @@ final class ProductTest extends TestCase
         $product = $this->getProduct();
 
         $product->addGallery($picture = new Picture(
-            new PictureId(new Uuid('9876-4567-455-1234')),
+            new PictureId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
             'http://hosting.com/image2.jpeg',
             'Second Image title'
         ));
@@ -114,7 +114,7 @@ final class ProductTest extends TestCase
         $product = $this->getProduct();
 
         $product->addDocuments($document = new Document(
-            new DocumentId(new Uuid('9876-4567-455-1234')),
+            new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
             'http://hosting.com/document2.pdf',
             'Second Document title'
         ));
@@ -139,7 +139,7 @@ final class ProductTest extends TestCase
     private function getProduct(): Product
     {
         return new Product(
-            new Reference($uuid = new Uuid('1234-4567-455-1234')),
+            new Reference($uuid = new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
@@ -156,12 +156,12 @@ final class ProductTest extends TestCase
             'Description Laptop',
             new ProductPrice(14),
             (new PictureCollection())->add(new Picture(
-                new PictureId(new Uuid('1234-4567-455-1234')),
+                new PictureId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
                 'http://hosting.com/image.jpeg',
                 'Image title'
             )),
             (new DocumentCollection())->add(new Document(
-                new DocumentId(new Uuid('1234-4567-455-1234')),
+                new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
                 'http://hosting.com/document.pdf',
                 'Document title'
             ))

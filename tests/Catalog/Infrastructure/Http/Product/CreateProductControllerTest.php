@@ -18,7 +18,7 @@ final class CreateProductControllerTest extends TestCase
     {
         $controller = new CreateProductController(
             $commandBus = $this->createMock(CommandBus::class),
-            $generator = new FakeUuidGenerator('uuid-123')
+            $generator = new FakeUuidGenerator('01E439TP9XJZ9RPFH3T1PYBCR8')
         );
 
         $reference = (string) $generator->generate();

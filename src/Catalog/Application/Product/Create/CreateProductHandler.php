@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Product\Create;
 
 use App\Shared\{
+    Domain\Bus\Command\CommandHandlerInterface,
     Domain\Bus\Event\EventBus,
     Domain\Clock\Clock
 };
@@ -24,7 +25,7 @@ use App\Catalog\Domain\{
     Tax\TaxRepository
 };
 
-final class CreateProductHandler
+final class CreateProductHandler implements CommandHandlerInterface
 {
     public function __construct(
         private EventBus $eventBus,

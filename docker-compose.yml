@@ -4,9 +4,12 @@ services:
     typesense:
         image: typesense/typesense:0.18.0
         ports:
-           - 8108:8108
+           - $TYPESENSE_PORT:8108
         volumes:
             - /tmp/typesense-data:/data
+        environment:
+            - TYPESENSE_API_KEY=$TYPESENSE_API_KEY
+            - TYPESENSE_DATA_DIR=var/
 
     mysql:
         image: mysql:5.7

@@ -7,6 +7,7 @@ use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Uuid\UuidGeneratorInterface;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
+use Faker\Factory;
 
 class AppFixtures extends Fixture
 {
@@ -18,43 +19,23 @@ class AppFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        $this->commandBus->dispatch(new CreateProductCommand(
-            $reference = $this->uuidGenerator->generate(),
-            'CODE01',
-            'Laptop',
-            12.23,
-            100,
-            2,
-            5,
-            1,
-            2,
-            'Best product'
-        ));
+        //$start = microtime(true);
+        $faker = Factory::create();
 
-        $this->commandBus->dispatch(new CreateProductCommand(
-            $reference = $this->uuidGenerator->generate(),
-            'CODE02',
-            'Mouse',
-            5.23,
-            100,
-            3,
-            6,
-            1,
-            2,
-            'Best mouse'
-        ));
+        for ($i = 0; $i < 10; $i++) {
+            $this->commandBus->dispatch(new CreateProductCommand(
+                $reference = $this->uuidGenerator->generate(),
+                $faker->ean8,
+                $faker->title,
+                $faker->randomFloat(2, 10, 100),
+                $faker->randomNumber(2),
+                2,
+                5,
+                1,
+                2,
+            ));
+        }
 
-        $this->commandBus->dispatch(new CreateProductCommand(
-            $reference = $this->uuidGenerator->generate(),
-            'CODE03',
-            'Keyboard',
-            12.98,
-            100,
-            3,
-            6,
-            1,
-            2,
-            'Best keyboard'
-        ));
+        //dump("end:", (float) microtime(true) - (float) $start);
     }
 }

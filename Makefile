@@ -5,6 +5,7 @@ database:
 	bin/console doctrine:database:drop --connection=catalog --force
 	bin/console doctrine:database:create --connection=catalog
 	bin/console doctrine:migrations:migrate --no-interaction
+	bin/console app:create-search
 
 fixtures:
 	bin/console doctrine:fixtures:load --no-interaction --purge-with-truncate --em=catalog
@@ -29,8 +30,8 @@ cs: ## Run coding style analysis
 cs-fix:
 	PHP_CS_FIXER_IGNORE_ENV=1 vendor/bin/php-cs-fixer fix --config=.php_cs.dist -v
 
-docker-start:
+docker-up:
 	docker-compose up -d --force-recreate --remove-orphans
 
-dev: install database fixtures
+dev: docker-up install database fixtures
 	sudo php -S localhost:666 -t public -d xdebug.remote_enable=1

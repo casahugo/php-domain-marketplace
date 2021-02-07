@@ -3,3 +3,9 @@ catalog_product_create:
     methods: [POST]
     controller: App\Catalog\Infrastructure\Http\Product\CreateProductController
     stateless: true
+
+catalog_product_search:
+    path: /catalog/search
+    methods: [GET]
+    controller: App\Catalog\Infrastructure\Http\Product\SearchProductController
+    stateless: true

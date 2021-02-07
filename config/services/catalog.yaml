@@ -21,12 +21,29 @@ services:
         resource: '../../src/Catalog/Infrastructure/Http/'
         tags: ['controller.service_arguments']
 
+    # normalizer
     App\Catalog\Infrastructure\Normalizer\:
         resource: '../../src/Catalog/Infrastructure/Normalizer/*'
         tags: [ serializer.normalizer ]
 
+    # typesense
+    Typesense\Client:
+        arguments:
+            -
+                api_key: '%env(TYPESENSE_API_KEY)%'
+                connection_timeout_seconds: 2
+                nodes:
+                    -
+                        host: '%env(TYPESENSE_HOST)%'
+                        port: '%env(TYPESENSE_PORT)%'
+                        protocol: 'http'
+
     # repositories
     App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository'
+    App\Catalog\Domain\Product\ProductReadModelRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductReadModelRepository'
     App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
     App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
     App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'
+
+    # product projector
+    App\Catalog\Domain\Product\ProductProjector: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductProjector'

@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Symfony\Serializer;
 
+use App\Shared\Domain\DataStructure\UuidValue;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
@@ -26,6 +27,8 @@ final class StringeableNormalizer implements NormalizerInterface, DenormalizerIn
 
     public function supportsDenormalization($data, string $type, string $format = null)
     {
-        return is_string($data) && isset(class_implements($type)[\Stringable::class]);
+        return is_string($data)
+            && UuidValue::class !== get_parent_class($type)
+            && isset(class_implements($type)[\Stringable::class]);
     }
 }

@@ -73,11 +73,11 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             $this->denormalizer->denormalize($data['taxes'], TaxCollection::class),
             $this->denormalizer->denormalize($data['status'], Status::class),
             $this->denormalizer->denormalize($data['createdAt'], \DateTimeImmutable::class),
-            $this->denormalizer->denormalize($data['updatedAt'], \DateTimeImmutable::class),
+            isset($data['updatedAt']) ? $this->denormalizer->denormalize($data['updatedAt'], \DateTimeImmutable::class) : null,
             $this->denormalizer->denormalize($data['shippings'], ShippingCollection::class),
             $data['intro'] ?? null,
             $data['description'] ?? null,
-            $this->denormalizer->denormalize($data['originalPrice'], ProductPrice::class),
+            isset($data['originalPrice']) ? $this->denormalizer->denormalize($data['originalPrice'], ProductPrice::class) : null,
             $this->denormalizer->denormalize($data['gallery'], PictureCollection::class),
             $this->denormalizer->denormalize($data['documents'], DocumentCollection::class)
         );

@@ -27,11 +27,12 @@
         "typesense/typesense-php": "^4.4"
     },
     "require-dev": {
+        "doctrine/doctrine-fixtures-bundle": "^3.4",
         "phpunit/phpunit": "^9.4",
         "phpstan/phpstan": "^0.12.64",
         "friendsofphp/php-cs-fixer": "^2.17",
         "infection/infection": "^0.20.2",
-        "doctrine/doctrine-fixtures-bundle": "^3.4"
+        "fzaninotto/faker": "^1.5"
     },
     "autoload": {
         "psr-4": {

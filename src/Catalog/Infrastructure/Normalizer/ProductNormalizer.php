@@ -4,23 +4,27 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Normalizer;
 
-use App\Catalog\Domain\Brand\Brand;
-use App\Catalog\Domain\Category\Category;
-use App\Catalog\Domain\Document\DocumentCollection;
-use App\Catalog\Domain\Picture\PictureCollection;
-use App\Catalog\Domain\Product\Code;
-use App\Catalog\Domain\Product\Product;
-use App\Catalog\Domain\Product\ProductPrice;
-use App\Catalog\Domain\Product\Reference;
-use App\Catalog\Domain\Product\Status;
-use App\Catalog\Domain\Product\Stock;
-use App\Catalog\Domain\Seller\Seller;
-use App\Catalog\Domain\Shipping\ShippingCollection;
-use App\Catalog\Domain\Tax\TaxCollection;
-use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerAwareInterface;
-use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use App\Catalog\Domain\{
+    Brand\Brand,
+    Category\Category,
+    Document\DocumentCollection,
+    Picture\PictureCollection,
+    Product\Code,
+    Product\Product,
+    Product\ProductPrice,
+    Product\Reference,
+    Product\Status,
+    Product\Stock,
+    Seller\Seller,
+    Shipping\ShippingCollection,
+    Tax\TaxCollection
+};
+use Symfony\Component\Serializer\Normalizer\{
+    DenormalizerAwareInterface,
+    DenormalizerInterface,
+    NormalizerAwareInterface,
+    NormalizerInterface
+};
 
 final class ProductNormalizer implements NormalizerInterface, DenormalizerInterface, DenormalizerAwareInterface, NormalizerAwareInterface
 {
@@ -54,12 +58,12 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
         ];
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof Product;
     }
 
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, string $type, string $format = null, array $context = []): Product
     {
         return new Product(
             $this->denormalizer->denormalize($data['reference'], Reference::class),
@@ -83,17 +87,17 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
         );
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return Product::class === $type;
     }
 
-    public function setDenormalizer(DenormalizerInterface $denormalizer)
+    public function setDenormalizer(DenormalizerInterface $denormalizer): void
     {
         $this->denormalizer = $denormalizer;
     }
 
-    public function setNormalizer(NormalizerInterface $normalizer)
+    public function setNormalizer(NormalizerInterface $normalizer): void
     {
         $this->normalizer = $normalizer;
     }

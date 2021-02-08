@@ -30,7 +30,7 @@ final class ExtractJsonRequestEventSubscriber implements EventSubscriberInterfac
             return;
         }
 
-        if ('json' !== $request->getContentType()) {
+        if ('json' !== $request->getContentType() || false === is_string($request->getContent())) {
             return;
         }
 

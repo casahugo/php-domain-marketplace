@@ -16,7 +16,7 @@ final class SearchProductWasCreatedHandler implements EventHandlerInterface
     {
     }
 
-    public function __invoke(ProductWasCreated $created)
+    public function __invoke(ProductWasCreated $created): void
     {
         $product = $this->repository->get(new Reference($created->getProductReference()));
 

@@ -12,7 +12,7 @@ final class CollectionNormalizer implements DenormalizerInterface, DenormalizerA
 {
     private DenormalizerInterface $denormalizer;
 
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, string $type, string $format = null, array $context = []): Collection
     {
         /** @var Collection $collection */
         $collection = new $type();
@@ -25,12 +25,12 @@ final class CollectionNormalizer implements DenormalizerInterface, DenormalizerA
         return $collection;
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return is_array($data) && Collection::class === get_parent_class($type);
     }
 
-    public function setDenormalizer(DenormalizerInterface $denormalizer)
+    public function setDenormalizer(DenormalizerInterface $denormalizer): void
     {
         $this->denormalizer = $denormalizer;
     }

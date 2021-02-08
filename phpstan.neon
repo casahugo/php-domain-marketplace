@@ -4,6 +4,8 @@ parameters:
     checkGenericClassInNonGenericObjectType: false
     paths:
         - src
+    ignoreErrors:
+            - '~Unsafe usage of new static\(\).~'
 
 services:
     - class: App\Shared\Infrastructure\PHPStan\EnumMethodsClassReflectionExtension

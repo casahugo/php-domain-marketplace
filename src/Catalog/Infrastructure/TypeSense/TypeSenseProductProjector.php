@@ -58,7 +58,7 @@ final class TypeSenseProductProjector implements ProductProjector
     {
         $this->getCollection()->documents->create(
             array_merge(
-                $this->serializer->normalize($product),
+                (array) $this->serializer->normalize($product),
                 [
                     'sorted_price' => $product->getPrice()->getValue(),
                     'created_at' => $product->getCreatedAt()->format(DATE_ATOM),

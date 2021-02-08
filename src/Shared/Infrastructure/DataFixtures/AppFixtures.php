@@ -17,9 +17,8 @@ class AppFixtures extends Fixture
     ) {
     }
 
-    public function load(ObjectManager $manager)
+    public function load(ObjectManager $manager): void
     {
-        $start = microtime(true);
         $faker = Factory::create();
 
         for ($i = 0; $i < 100; $i++) {
@@ -35,7 +34,5 @@ class AppFixtures extends Fixture
                 2,
             ));
         }
-
-        dump("end:", (float) microtime(true) - (float) $start);
     }
 }

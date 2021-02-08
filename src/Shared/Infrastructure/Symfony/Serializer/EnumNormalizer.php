@@ -12,25 +12,24 @@ final class EnumNormalizer implements NormalizerInterface, DenormalizerInterface
 {
     /**
      * @param string $data
-     * @param Enum $type
      */
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, string $type, string $format = null, array $context = []): object
     {
         return $type::of($data);
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return is_string($data) && Enum::class === get_parent_class($type);
     }
 
     /** @param Enum $object */
-    public function normalize($object, string $format = null, array $context = [])
+    public function normalize($object, string $format = null, array $context = []): float|int|string
     {
         return $object->getValue();
     }
 
-    public function supportsNormalization($data, string $format = null)
+    public function supportsNormalization($data, string $format = null): bool
     {
         return $data instanceof Enum;
     }

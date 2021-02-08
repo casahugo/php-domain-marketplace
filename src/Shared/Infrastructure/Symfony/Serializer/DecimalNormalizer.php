@@ -23,14 +23,13 @@ final class DecimalNormalizer implements NormalizerInterface, DenormalizerInterf
 
     /**
      * @param int|float $data
-     * @param Decimal $type
      */
-    public function denormalize($data, string $type, string $format = null, array $context = [])
+    public function denormalize($data, string $type, string $format = null, array $context = []): Decimal
     {
         return new $type($data);
     }
 
-    public function supportsDenormalization($data, string $type, string $format = null)
+    public function supportsDenormalization($data, string $type, string $format = null): bool
     {
         return (is_float($data) || is_int($data)) && Decimal::class === get_parent_class($type);
     }

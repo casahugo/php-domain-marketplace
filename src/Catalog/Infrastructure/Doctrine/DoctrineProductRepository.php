@@ -9,7 +9,8 @@ use App\Catalog\Domain\{
     Product\ProductCollection,
     Product\ProductReadModelRepository,
     Product\ProductRepository,
-    Product\Reference};
+    Product\Reference
+};
 use Doctrine\DBAL\Connection;
 
 final class DoctrineProductRepository implements ProductRepository
@@ -22,7 +23,6 @@ final class DoctrineProductRepository implements ProductRepository
 
     public function get(Reference $reference): Product
     {
-
     }
 
     public function delete(Product $product): void

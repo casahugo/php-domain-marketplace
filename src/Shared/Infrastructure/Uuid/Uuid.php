@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Infrastructure\Uuid;
 
-use App\Shared\Domain\Uuid\Uuid as UuidInterface;
+use App\Shared\Domain\Uuid\UuidInterface;
 use Symfony\Component\Uid\AbstractUid;
 use Symfony\Component\Uid\Ulid;
 
@@ -28,7 +28,7 @@ final class Uuid implements UuidInterface
 
     public function equal(UuidInterface $uuid): bool
     {
-        return $this->value === (string) $uuid;
+        return $this->value->equals($uuid);
     }
 
     public function __toString(): string
@@ -41,7 +41,7 @@ final class Uuid implements UuidInterface
         return Ulid::isValid($uuid);
     }
 
-    public static function fromString(string $uuid): Uuid
+    public static function fromString(string $uuid): UuidInterface
     {
         return new self($uuid);
     }

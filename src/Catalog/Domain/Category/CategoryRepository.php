@@ -9,5 +9,7 @@ use App\Catalog\Domain\Exception\CategoryNotFoundException;
 interface CategoryRepository
 {
     /** @throws CategoryNotFoundException */
-    public function get(Id $id): Category;
+    public function get(Code $code): Category;
+
+    public function save(Category $category): void;
 }

@@ -14,9 +14,9 @@ final class CreateProductCommand implements DomainCommand
         private string $name,
         private float $price,
         private int $stock,
-        private int $brandId,
-        private int $categoryId,
-        private int $companyId,
+        private string $brandCode,
+        private string $categoryCode,
+        private string $companyId,
         private array $taxCodes,
         private ?array $shippingId = null,
         private ?string $intro = null,
@@ -50,14 +50,14 @@ final class CreateProductCommand implements DomainCommand
         return $this->taxCodes;
     }
 
-    public function getBrandId(): int
+    public function getBrandCode(): string
     {
-        return $this->brandId;
+        return $this->brandCode;
     }
 
-    public function getCategoryId(): int
+    public function getCategoryCode(): string
     {
-        return $this->categoryId;
+        return $this->categoryCode;
     }
 
     public function getCode(): string
@@ -65,7 +65,7 @@ final class CreateProductCommand implements DomainCommand
         return $this->code;
     }
 
-    public function getCompanyId(): int
+    public function getCompanyId(): string
     {
         return $this->companyId;
     }

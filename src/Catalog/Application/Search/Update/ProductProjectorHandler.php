@@ -30,7 +30,7 @@ final class ProductProjectorHandler implements EventHandler
 
         if ($product->getStatus()->equals(Status::ENABLED())) {
             foreach ($this->productProjector as $projector) {
-                $projector->push($product);
+                $projector->create($product);
             }
         } else {
             foreach ($this->productProjector as $projector) {

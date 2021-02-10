@@ -4,24 +4,28 @@ declare(strict_types=1);
 
 namespace App\Tests\Catalog\Application\Search\Update;
 
-use App\Catalog\Application\Search\Update\ProductProjectorHandler;
-use App\Catalog\Domain\Brand\Brand;
-use App\Catalog\Domain\Brand\Id;
-use App\Catalog\Domain\Category\Category;
-use App\Catalog\Domain\Category\Id as CategoryId;
-use App\Catalog\Domain\Company\Company;
-use App\Catalog\Domain\Company\Id as CompanyId;
-use App\Catalog\Domain\Product\Code;
-use App\Catalog\Domain\Product\Product;
-use App\Catalog\Domain\Product\ProductPrice;
-use App\Catalog\Domain\Product\ProductProjector;
-use App\Catalog\Domain\Product\ProductRepository;
-use App\Catalog\Domain\Product\Reference;
-use App\Catalog\Domain\Product\Status;
-use App\Catalog\Domain\Product\Stock;
-use App\Catalog\Domain\Tax\TaxCollection;
-use App\Shared\Domain\Email;
-use App\Shared\Domain\Event\Product\ProductHasChanged;
+use App\Catalog\{
+    Application\Search\Update\ProductProjectorHandler,
+    Domain\Brand\Brand,
+    Domain\Brand\Code as BrandCode,
+    Domain\Category\Category,
+    Domain\Category\Code as CategoryCode,
+    Domain\Company\Company,
+    Domain\Company\Id as CompanyId,
+    Domain\Product\Code,
+    Domain\Product\Product,
+    Domain\Product\ProductPrice,
+    Domain\Product\ProductProjector,
+    Domain\Product\ProductRepository,
+    Domain\Product\Reference,
+    Domain\Product\Status,
+    Domain\Product\Stock,
+    Domain\Tax\TaxCollection
+};
+use App\Shared\{
+    Domain\Email,
+    Domain\Event\Product\ProductHasChanged
+};
 use PHPUnit\Framework\TestCase;
 
 final class ProductProjectHandlerTest extends TestCase
@@ -43,9 +47,9 @@ final class ProductProjectHandlerTest extends TestCase
                 'Laptop',
                 new ProductPrice(12.2),
                 new Stock(34),
-                new Brand(new Id(1), 'Samsung'),
-                new Company(new CompanyId(2), new Email('contact@email.com'), 'Inc Coporation'),
-                new Category(new CategoryId(2), 'Hardware'),
+                new Brand(new BrandCode('SMSG'), 'Samsung'),
+                new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('contact@email.com'), 'Inc Coporation'),
+                new Category(new CategoryCode('HRDW'), 'Hardware'),
                 new TaxCollection(),
                 Status::ENABLED(),
                 new \DateTimeImmutable()
@@ -53,7 +57,7 @@ final class ProductProjectHandlerTest extends TestCase
 
         $projector
             ->expects(self::once())
-            ->method('push')
+            ->method('create')
             ->with($product);
 
         $projector
@@ -80,9 +84,9 @@ final class ProductProjectHandlerTest extends TestCase
                 'Laptop',
                 new ProductPrice(12.2),
                 new Stock(34),
-                new Brand(new Id('SMSG'), 'Samsung'),
-                new Company(new CompanyId(2), new Email('contact@email.com'), 'Inc Coporation'),
-                new Category(new CategoryId('HDRW'), 'Hardware'),
+                new Brand(new BrandCode('SMSG'), 'Samsung'),
+                new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('contact@email.com'), 'Inc Coporation'),
+                new Category(new CategoryCode('HDRW'), 'Hardware'),
                 new TaxCollection(),
                 Status::DISABLED(),
                 new \DateTimeImmutable()
@@ -90,7 +94,7 @@ final class ProductProjectHandlerTest extends TestCase
 
         $projector
             ->expects(self::never())
-            ->method('push');
+            ->method('create');
 
         $projector
             ->expects(self::once())

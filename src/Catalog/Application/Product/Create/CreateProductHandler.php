@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Catalog\Application\Product\Create;
 
 use App\Shared\{
-    Domain\Bus\Command\CommandHandlerInterface,
+    Domain\Bus\Command\CommandHandler,
     Domain\Bus\Event\EventBus,
     Domain\Clock\Clock
 };
@@ -25,7 +25,7 @@ use App\Catalog\Domain\{
     Tax\TaxRepository
 };
 
-final class CreateProductHandler implements CommandHandlerInterface
+final class CreateProductHandler implements CommandHandler
 {
     public function __construct(
         private EventBus $eventBus,
@@ -41,9 +41,9 @@ final class CreateProductHandler implements CommandHandlerInterface
     /** @throws DomainException */
     public function __invoke(CreateProductCommand $command): void
     {
-        $category = $this->categoryRepository->get(new Category\Id($command->getCategoryId()));
-        $brand = $this->brandRepository->get(new Brand\Id($command->getBrandId()));
-        $seller = $this->companyRepository->get(new Company\Id($command->getCompanyId()));
+        $category = $this->categoryRepository->get(new Category\Code($command->getCategoryCode()));
+        $brand = $this->brandRepository->get(new Brand\Code($command->getBrandCode()));
+        $seller = $this->companyRepository->get(Company\Id::fromString($command->getCompanyId()));
         $taxes = $this->taxRepository->findByCode(...array_map(
             fn(string $code): Code => new Code($code),
             $command->getTaxCodes()

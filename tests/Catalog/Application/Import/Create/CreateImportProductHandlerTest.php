@@ -50,17 +50,17 @@ final class CreateImportProductHandlerTest extends TestCase
             ->withConsecutive(
                 [new BulkProductCommand(
                     '01E439TP9XJZ9RPFH3T1PYBCR8',
-                    2,
+                    '01E439TP9XJZ9RPFH3T1PYBCR8',
                     array_slice($products, 0, 5)
                 )],
                 [new BulkProductCommand(
                     '01E439TP9XJZ9RPFH3T1PYBCR8',
-                    2,
+                    '01E439TP9XJZ9RPFH3T1PYBCR8',
                     array_slice($products, 5)
                 )],
             );
 
-        $handler(new CreateImportProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', 2, '/tmp/product.csv'));
+        $handler(new CreateImportProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', '01E439TP9XJZ9RPFH3T1PYBCR8', '/tmp/product.csv'));
     }
 
     private function getProductLine(): array

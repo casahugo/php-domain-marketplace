@@ -2,7 +2,7 @@ install:
 	composer install
 
 database:
-	bin/console doctrine:database:drop --connection=catalog --force
+	bin/console doctrine:database:drop --connection=catalog --force --if-exists
 	bin/console doctrine:database:create --connection=catalog
 	bin/console doctrine:migrations:migrate --no-interaction
 	bin/console app:create-search
@@ -35,3 +35,6 @@ docker-up:
 
 dev: docker-up install database fixtures
 	sudo php -S localhost:666 -t public -d xdebug.remote_enable=1
+
+clean:
+	bin/console c:c

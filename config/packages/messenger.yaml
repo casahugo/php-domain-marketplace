@@ -12,5 +12,7 @@ framework:
         routing:
             # Route your messages to the transports
             'App\Catalog\Application\Product\Create\CreateProductCommand': sync
+            'App\Catalog\Application\Category\Create\CreateCategoryCommand': sync
+            'App\Catalog\Application\Brand\Create\CreateBrandCommand': sync
 
             'App\Shared\Domain\Event\Product\ProductWasCreated': sync

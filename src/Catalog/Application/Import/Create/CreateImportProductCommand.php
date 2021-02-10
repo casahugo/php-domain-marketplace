@@ -8,7 +8,7 @@ use App\Shared\Domain\Bus\Command\DomainCommand;
 
 final class CreateImportProductCommand implements DomainCommand
 {
-    public function __construct(private string $importId, private int $companyId, private string $filePath)
+    public function __construct(private string $importId, private string $companyId, private string $filePath)
     {
     }
 
@@ -17,7 +17,7 @@ final class CreateImportProductCommand implements DomainCommand
         return $this->importId;
     }
 
-    public function getCompanyId(): int
+    public function getCompanyId(): string
     {
         return $this->companyId;
     }

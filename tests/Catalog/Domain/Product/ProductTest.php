@@ -6,9 +6,9 @@ namespace App\Tests\Catalog\Domain\Product;
 
 use App\Catalog\Domain\{
     Brand\Brand,
-    Brand\Id as BrandId,
+    Brand\Code as BrandCode,
     Category\Category,
-    Category\Id,
+    Category\Code as CategoryCode,
     Document\Document,
     Document\DocumentCollection,
     Document\Id as DocumentId,
@@ -21,7 +21,7 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Company\Id as SellerId,
+    Company\Id as CompanyId,
     Company\Company,
     Shipping\Shipping,
     Shipping\ShippingCollection,
@@ -59,7 +59,7 @@ final class ProductTest extends TestCase
         self::assertEquals(new \DateTimeImmutable("2020-01-01"), $product->getCreatedAt());
         self::assertEquals(new \DateTimeImmutable("2020-02-01"), $product->getUpdatedAt());
         self::assertSame(Status::WAIT_MODERATION(), $product->getStatus());
-        self::assertSame(123, $product->getCompany()->getId()->getValue());
+        self::assertSame('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $product->getCompany()->getId());
         self::assertSame('Inc Corporation', $product->getCompany()->getName());
         self::assertSame('company@tld.com', (string) $product->getCompany()->getEmail());
 
@@ -86,11 +86,11 @@ final class ProductTest extends TestCase
 
         self::assertCount(1, $product->getShippings());
 
-        self::assertSame(34, $product->getBrand()->getId()->getValue());
+        self::assertSame("TSB", (string) $product->getBrand()->getCode());
         self::assertSame('Toshiba', $product->getBrand()->getName());
-        self::assertSame(2, $product->getCategory()->getId()->getValue());
+        self::assertSame('COMPUT', (string) $product->getCategory()->getCode());
         self::assertSame('Computer', $product->getCategory()->getName());
-        self::assertSame(123, $product->getCompany()->getId()->getValue());
+        self::assertSame('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $product->getCompany()->getId());
         self::assertSame('Inc Corporation', $product->getCompany()->getName());
         self::assertSame('company@tld.com', (string) $product->getCompany()->getEmail());
     }
@@ -139,14 +139,14 @@ final class ProductTest extends TestCase
     private function getProduct(): Product
     {
         return new Product(
-            new Reference($uuid = new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
+            Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
             new Stock(2),
-            new Brand(new BrandId(34), 'Toshiba'),
-            new Company(new SellerId(123), new Email('company@tld.com'), 'Inc Corporation'),
-            new Category(new Id(2), 'Computer'),
+            new Brand(new BrandCode('TSB'), 'Toshiba'),
+            new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('company@tld.com'), 'Inc Corporation'),
+            new Category(new CategoryCode('COMPUT'), 'Computer'),
             (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), new TaxValue(19.6))),
             Status::WAIT_MODERATION(),
             new \DateTimeImmutable("2020-01-01"),

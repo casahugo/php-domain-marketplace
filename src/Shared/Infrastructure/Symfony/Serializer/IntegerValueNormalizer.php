@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Shared\Infrastructure\Symfony\Serializer;
 
 use App\Shared\Domain\DataStructure\IntegerValue;
-use App\Shared\Domain\EntityId;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 

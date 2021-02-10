@@ -6,10 +6,10 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     _instanceof:
-        App\Shared\Domain\Bus\Command\CommandHandlerInterface:
+        App\Shared\Domain\Bus\Command\CommandHandler:
             tags: [ messenger.message_handler ]
 
-        App\Shared\Domain\Bus\Event\EventHandlerInterface:
+        App\Shared\Domain\Bus\Event\EventHandler:
             tags: [ messenger.message_handler ]
 
     # context
@@ -32,6 +32,8 @@ services:
     App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
     App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
     App\Catalog\Domain\Seller\SellerRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineSellerRepository'
+    App\Catalog\Domain\Tax\TaxRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineTaxRepository'
+    App\Catalog\Domain\Import\ImportRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineImportRepository'
 
     # product projector
     App\Catalog\Domain\Product\ProductProjector: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductProjector'

@@ -61,7 +61,6 @@ final class DoctrineProductReadModelRepository implements ProductReadModelReposi
             ]
         );
 
-
         if ($result === 0) {
             throw new ProductSaveFailedException((string) $product->getReference());
         }

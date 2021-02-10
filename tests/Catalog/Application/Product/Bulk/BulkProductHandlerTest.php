@@ -8,9 +8,9 @@ use App\Catalog\Application\Product\Bulk\BulkProductCommand;
 use App\Catalog\Application\Product\Bulk\BulkProductHandler;
 use App\Catalog\Application\Product\Create\CreateProductCommand;
 use App\Catalog\Domain\Brand\Brand;
-use App\Catalog\Domain\Brand\Id;
+use App\Catalog\Domain\Brand\Code as BrandCode;
 use App\Catalog\Domain\Category\Category;
-use App\Catalog\Domain\Category\Id as CategoryId;
+use App\Catalog\Domain\Category\Code as CategoryCode;
 use App\Catalog\Domain\Company\Company;
 use App\Catalog\Domain\Company\Id as CompanyId;
 use App\Catalog\Domain\Product\Code;
@@ -39,7 +39,7 @@ final class BulkProductHandlerTest extends TestCase
             $commandBus = $this->createMock(CommandBus::class),
             $repository = $this->createMock(ProductRepository::class),
             $logger = $this->createMock(Logger::class),
-            new FakeUuidGenerator('123'),
+            new FakeUuidGenerator('01E439TP9XJZ9RPFH3T1PYBCR8'),
         );
 
         $repository
@@ -58,9 +58,9 @@ final class BulkProductHandlerTest extends TestCase
                         'Screen',
                         34,
                         4,
-                        'SMGS',
+                        'SMSG',
                         'HRDW',
-                        2,
+                        '01E439TP9XJZ9RPFH3T1PYBCR8',
                         ['TVA_20'],
                         [2, 3],
                         'Screen introduction',
@@ -75,9 +75,9 @@ final class BulkProductHandlerTest extends TestCase
                         'Mouse',
                         22.3,
                         4,
-                        'SMGS',
+                        'SMSG',
                         'HRDW',
-                        2,
+                        '01E439TP9XJZ9RPFH3T1PYBCR8',
                         ['TVA_20'],
                         [2],
                         'Mouse introduction',
@@ -87,15 +87,15 @@ final class BulkProductHandlerTest extends TestCase
                 ]
             );
 
-        $handler(new BulkProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', 2, $this->getProductLine()));
+        $handler(new BulkProductCommand('01E439TP9XJZ9RPFH3T1PYBCR8', '01E439TP9XJZ9RPFH3T1PYBCR8', $this->getProductLine()));
     }
 
     private function getProductEntity(): ProductCollection
     {
-        $category = new Category(new CategoryId('HRDW'), 'Hardware');
-        $brand = new Brand(new Id('SMGS'), 'Samsung');
+        $category = new Category(new CategoryCode('HRDW'), 'Hardware');
+        $brand = new Brand(new BrandCode('SMGS'), 'Samsung');
         $tax = new Tax(new TaxCode('TVA_20'), new TaxValue(20));
-        $company = new Company(new CompanyId(2), new Email('contact@email.pro'), 'Inc Corporation');
+        $company = new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('contact@email.pro'), 'Inc Corporation');
 
         return (new ProductCollection())->add(
             new Product(
@@ -135,7 +135,7 @@ final class BulkProductHandlerTest extends TestCase
                 'name' => 'Laptop',
                 'price' => 34,
                 'stock' => 4,
-                'brandId' => 'SMGS',
+                'brandId' => 'SMSG',
                 'categoryId' => 'HRDW',
             ],
             [

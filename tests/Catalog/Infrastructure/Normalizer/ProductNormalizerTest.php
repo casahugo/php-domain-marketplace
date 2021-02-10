@@ -6,8 +6,9 @@ namespace App\Tests\Catalog\Infrastructure\Normalizer;
 
 use App\Catalog\{
     Domain\Brand\Brand,
-    Domain\Brand\Id as BrandId,
+    Domain\Brand\Code as BrandCode,
     Domain\Category\Category,
+    Domain\Category\Code as CategoryCode,
     Domain\Category\Id,
     Domain\Company\Company,
     Domain\Company\Id as CompanyId,
@@ -130,12 +131,12 @@ final class ProductNormalizerTest extends TestCase
               "value":16.74
            },
            "brand":{
-              "id":34,
+              "code":"TSB",
               "name":"Toshiba"
            },
            "stock":2,
            "category":{
-              "id":2,
+              "code":"COMPUT",
               "name":"Computer"
            },
            "documents":[
@@ -162,8 +163,8 @@ final class ProductNormalizerTest extends TestCase
               }
            ],
            "shippings":[],
-           "seller":{
-              "id":123,
+           "company":{
+              "id":"01E439TP9XJZ9RPFH3T1PYBCR8",
               "email":"company@tld.com",
               "name":"Inc Corporation"
            },
@@ -177,14 +178,14 @@ final class ProductNormalizerTest extends TestCase
     private function getProduct(): Product
     {
         return new Product(
-            new Reference($uuid = new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
+            Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
             new Stock(2),
-            new Brand(new BrandId(34), 'Toshiba'),
-            new Company(new CompanyId(123), new Email('company@tld.com'), 'Inc Corporation'),
-            new Category(new Id(2), 'Computer'),
+            new Brand(new BrandCode('TSB'), 'Toshiba'),
+            new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('company@tld.com'), 'Inc Corporation'),
+            new Category(new CategoryCode("COMPUT"), 'Computer'),
             (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), new TaxValue(19.6))),
             Status::WAIT_MODERATION(),
             new \DateTimeImmutable("2020-01-01"),

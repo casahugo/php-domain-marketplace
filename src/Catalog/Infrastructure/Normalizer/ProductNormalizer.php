@@ -7,6 +7,7 @@ namespace App\Catalog\Infrastructure\Normalizer;
 use App\Catalog\Domain\{
     Brand\Brand,
     Category\Category,
+    Company\Company,
     Document\DocumentCollection,
     Picture\PictureCollection,
     Product\Code,
@@ -15,7 +16,6 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Seller\Seller,
     Shipping\ShippingCollection,
     Tax\TaxCollection
 };
@@ -51,7 +51,7 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             "description" => $product->getDescription(),
             "taxes" => $this->normalizer->normalize($product->getTaxes()),
             "shippings" => $this->normalizer->normalize($product->getShippings()),
-            "seller" => $this->normalizer->normalize($product->getSeller()),
+            "company" => $this->normalizer->normalize($product->getCompany()),
             "status" => $this->normalizer->normalize($product->getStatus()),
             "createdAt" => $this->normalizer->normalize($product->getCreatedAt()),
             "updatedAt" => $this->normalizer->normalize($product->getUpdatedAt()),
@@ -72,7 +72,7 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             $this->denormalizer->denormalize($data['price'], ProductPrice::class),
             $this->denormalizer->denormalize($data['stock'], Stock::class),
             $this->denormalizer->denormalize($data['brand'], Brand::class),
-            $this->denormalizer->denormalize($data['seller'], Seller::class),
+            $this->denormalizer->denormalize($data['company'], Company::class),
             $this->denormalizer->denormalize($data['category'], Category::class),
             $this->denormalizer->denormalize($data['taxes'], TaxCollection::class),
             $this->denormalizer->denormalize($data['status'], Status::class),

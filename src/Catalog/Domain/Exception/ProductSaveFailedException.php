@@ -8,6 +8,6 @@ final class ProductSaveFailedException extends DomainException
 {
     public function __construct(string $reference)
     {
-        parent::__construct("Failed save product #$reference");
+        parent::__construct("Failed save product #$reference", 500);
     }
 }

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Symfony\Serializer;
+namespace App\Shared\Infrastructure\Symfony\Normalizer;
 
 use App\Shared\Domain\DataStructure\UuidValue;
 use App\Shared\Infrastructure\Uuid\Uuid;

@@ -59,8 +59,8 @@ final class CreateProductHandlerTest extends TestCase
         $sellerRepository
             ->expects(self::once())
             ->method('get')
-            ->with($sellerId = CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'))
-            ->willReturn($seller = new Company($sellerId, new Email('company@tld.com'), 'Inc Corporation'));
+            ->with($companyId = CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'))
+            ->willReturn($company = new Company($companyId, new Email('company@tld.com'), 'Inc Corporation'));
 
         $brandRepository
             ->expects(self::once())
@@ -80,7 +80,7 @@ final class CreateProductHandlerTest extends TestCase
             new ProductPrice(12.1),
             new Stock(2),
             $brand,
-            $seller,
+            $company,
             $category,
             new TaxCollection(),
             Status::WAIT_MODERATION(),

@@ -32,6 +32,7 @@ use App\Catalog\Domain\{
 };
 use App\Shared\{
     Domain\Email,
+    Domain\Event\Product\ProductPriceHasChanged,
     Domain\Event\Product\ProductStockHasChanged,
     Infrastructure\Uuid\Uuid};
 use PHPUnit\Framework\TestCase;
@@ -134,6 +135,26 @@ final class ProductTest extends TestCase
         self::assertEquals(new ProductStockHasChanged((string) $product->getReference(), 5), $events[0]);
 
         self::assertSame(5, $product->getStock()->getValue());
+    }
+
+    public function testChangePrice(): void
+    {
+        $product = $this->getProduct();
+
+        $product->setPrice(new ProductPrice(25.99));
+        $product->setOriginalPrice(null);
+        $events = $product->pullDomainEvents();
+
+        self::assertCount(1, $events);
+        self::assertEquals(
+            new ProductPriceHasChanged((string) $product->getReference(), 25.99, 31.08),
+            $events[0]
+        );
+
+        self::assertSame(25.99, $product->getPrice()->getValue());
+        self::assertSame(31.08, $product->getPriceWithTax()->getValue());
+        self::assertNull($product->getOriginalPrice());
+        self::assertNull($product->getOriginalPriceWithTax());
     }
 
     private function getProduct(): Product

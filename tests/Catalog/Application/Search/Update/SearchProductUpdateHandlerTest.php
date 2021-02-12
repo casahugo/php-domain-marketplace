@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Catalog\Application\Search\Update;
 
 use App\Catalog\{
-    Application\Search\Update\ProductProjectorHandler,
+    Application\Search\Update\SearchProductUpdateHandler,
     Domain\Brand\Brand,
     Domain\Brand\Code as BrandCode,
     Domain\Category\Category,
@@ -28,11 +28,11 @@ use App\Shared\{
 };
 use PHPUnit\Framework\TestCase;
 
-final class ProductProjectHandlerTest extends TestCase
+final class SearchProductUpdateHandlerTest extends TestCase
 {
     public function testPushProductIfEnable(): void
     {
-        $handler = new ProductProjectorHandler(
+        $handler = new SearchProductUpdateHandler(
             $repository = $this->createMock(ProductRepository::class),
             $projector = $this->createMock(ProductProjector::class)
         );
@@ -69,7 +69,7 @@ final class ProductProjectHandlerTest extends TestCase
 
     public function testDeleteProduct(): void
     {
-        $handler = new ProductProjectorHandler(
+        $handler = new SearchProductUpdateHandler(
             $repository = $this->createMock(ProductRepository::class),
             $projector = $this->createMock(ProductProjector::class)
         );

@@ -32,13 +32,17 @@ final class DoctrineCategoryRepository implements CategoryRepository
 
     public function save(Category $category): void
     {
-        $result = $this->connection->executeStatement(
-            "INSERT IGNORE INTO category(code, name) VALUE (:code, :name)",
-            [
-                'code' => (string) $category->getCode(),
-                'name' => $category->getName(),
-            ]
-        );
+        try {
+            $result = $this->connection->executeStatement(
+                "INSERT IGNORE INTO category(code, name) VALUE (:code, :name)",
+                [
+                    'code' => (string) $category->getCode(),
+                    'name' => $category->getName(),
+                ]
+            );
+        } catch (\Throwable $exception) {
+            throw new CategorySaveFailedException((string) $category->getCode(), $exception);
+        }
 
         if ($result === 0) {
             throw new CategorySaveFailedException((string) $category->getCode());

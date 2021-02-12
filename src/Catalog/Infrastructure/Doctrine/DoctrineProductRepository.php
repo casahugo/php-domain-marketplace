@@ -19,7 +19,6 @@ use App\Catalog\Domain\{
     Product\Product,
     Product\ProductCollection,
     Product\ProductPrice,
-    Product\ProductReadModelRepository,
     Product\ProductRepository,
     Product\Reference,
     Product\Status,
@@ -29,21 +28,22 @@ use App\Catalog\Domain\{
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 
-final class DoctrineProductRepository implements ProductRepository
+class DoctrineProductRepository implements ProductRepository
 {
     public function __construct(
         private Connection $connection,
-        private ProductReadModelRepository $readModelRepository
     ) {
     }
 
     public function get(Reference $reference): Product
     {
         $product = $this->connection->fetchAssociative(<<<SQL
-            SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name
+            SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name,
+                   comp.id as company_id, comp.email as company_email, comp.name as company_email
             FROM product p
-            LEFT JOIN category c ON p.category_id = c.id
-            LEFT JOIN brand c ON p.brand_id = c.id
+            LEFT JOIN category c ON p.category_code = c.code
+            LEFT JOIN brand b ON p.brand_code = b.code
+            LEFT JOIN company comp ON p.company_id = comp.id
             WHERE p.reference = :reference
         SQL, [':reference' => (string) $reference]);
 
@@ -58,7 +58,7 @@ final class DoctrineProductRepository implements ProductRepository
             new ProductPrice((float) $product['price'], 'EUR'),
             new Stock((int) $product['stock']),
             new Brand(new BrandCode($product['brand_code']), $product['brand_name']),
-            new Company(Id::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('contact@tdl.com'), 'Inc Corporation'),
+            new Company(Id::fromString($product['company_id']), new Email($product['company_email']), $product['company_name']),
             new Category(new CategoryCode($product['category_code']), $product['category_name']),
             new TaxCollection(),
             Status::of($product['status']),
@@ -83,7 +83,7 @@ final class DoctrineProductRepository implements ProductRepository
         $save = [
             'reference' => (string) $product->getReference(),
             'code' => (string) $product->getCode(),
-            'seller_id' => (string) $product->getCompany()->getId(),
+            'company_id' => (string) $product->getCompany()->getId(),
             'category_code' => (string) $product->getCategory()->getCode(),
             'brand_code' => (string) $product->getBrand()->getCode(),
             'name' => $product->getName(),
@@ -102,8 +102,6 @@ final class DoctrineProductRepository implements ProductRepository
         if (0 === $result) {
             throw new ProductSaveFailedException((string) $product->getReference());
         }
-
-        $this->readModelRepository->save($product);
     }
 
     public function list(int $limit, int $offset, array $filters, array $orders = []): ProductCollection

@@ -18,8 +18,8 @@ services:
     Symfony\Component\Serializer\Serializer:
         alias: 'serializer'
 
-    App\Shared\Infrastructure\Symfony\Serializer\:
-        resource: '../src/Shared/Infrastructure/Symfony/Serializer/*'
+    App\Shared\Infrastructure\Symfony\Normalizer\:
+        resource: '../src/Shared/Infrastructure/Symfony/Normalizer/*'
         tags: [ serializer.normalizer ]
 
     # bus

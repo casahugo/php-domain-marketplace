@@ -39,16 +39,16 @@ final class Version20210208171734 extends AbstractMigration
         SQL);
 
         $this->addSql(<<<SQL
-            create table seller
+            create table company
             (
                 id varchar(26) not null,
                 email varchar(255) not null,
                 name varchar(255) not null
             );
 
-            create unique index seller_email_uindex on seller (email);
-            create unique index seller_id_uindex on seller (id);
-            alter table seller add constraint seller_pk primary key (id);
+            create unique index company_email_uindex on seller (email);
+            create unique index company_id_uindex on seller (id);
+            alter table company add constraint company_pk primary key (id);
         SQL);
 
         $this->addSql(<<<SQL
@@ -67,14 +67,14 @@ final class Version20210208171734 extends AbstractMigration
                 updated_at datetime null,
                 brand_code varchar(50) null,
                 category_code varchar(50) not null,
-                seller_id varchar(26) not null
+                company_id varchar(26) not null
             );
 
             create unique index product_code_uindex on product (code);
             create unique index product_reference_uindex on product (reference);
             alter table product add constraint product_pk primary key (reference);
             alter table product add constraint product_category_code_fkforeign key (category_code) references category (code);
-            alter table product add constraint product_seller_id_fkforeign key (seller_id) references seller (code);
+            alter table product add constraint product_company_id_fkforeign key (company_id) references company (code);
             alter table product add constraint product_brand_code_fkforeign key (brand_code) references brand (code);
         SQL);
     }

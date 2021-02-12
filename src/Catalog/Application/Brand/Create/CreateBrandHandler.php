@@ -9,7 +9,7 @@ use App\Catalog\Domain\Brand\BrandRepository;
 use App\Catalog\Domain\Brand\Code;
 use App\Shared\Domain\Bus\Command\CommandHandler;
 
-final class CreateCategoryHandler implements CommandHandler
+final class CreateBrandHandler implements CommandHandler
 {
     public function __construct(private BrandRepository $repository)
     {

@@ -13,7 +13,7 @@ use App\Shared\Domain\Event\Product\ProductWasDeleted;
 
 final class DeleteProductHandler implements CommandHandler
 {
-    private function __construct(private EventBus $eventBus, private ProductRepository $productRepository)
+    public function __construct(private EventBus $eventBus, private ProductRepository $productRepository)
     {
     }
 

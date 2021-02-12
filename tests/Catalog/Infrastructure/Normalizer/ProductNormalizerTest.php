@@ -36,12 +36,12 @@ use App\Catalog\{
 };
 use App\Shared\{
     Domain\Email,
-    Infrastructure\Symfony\Serializer\CollectionNormalizer,
-    Infrastructure\Symfony\Serializer\DecimalNormalizer,
-    Infrastructure\Symfony\Serializer\EnumNormalizer,
-    Infrastructure\Symfony\Serializer\IntegerValueNormalizer,
-    Infrastructure\Symfony\Serializer\StringeableNormalizer,
-    Infrastructure\Symfony\Serializer\UuidValueNormalizer,
+    Infrastructure\Symfony\Normalizer\CollectionNormalizer,
+    Infrastructure\Symfony\Normalizer\DecimalNormalizer,
+    Infrastructure\Symfony\Normalizer\EnumNormalizer,
+    Infrastructure\Symfony\Normalizer\IntegerValueNormalizer,
+    Infrastructure\Symfony\Normalizer\StringeableNormalizer,
+    Infrastructure\Symfony\Normalizer\UuidValueNormalizer,
     Infrastructure\Uuid\Uuid
 };
 use PHPUnit\Framework\TestCase;

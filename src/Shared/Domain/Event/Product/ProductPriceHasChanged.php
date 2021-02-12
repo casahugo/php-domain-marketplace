@@ -11,7 +11,7 @@ final class ProductPriceHasChanged implements DomainEvent
     public function __construct(
         private string $productId,
         private float $price,
-        private float $priceWithTax
+        private ?float $priceWithTax
     ) {
     }
 
@@ -25,7 +25,7 @@ final class ProductPriceHasChanged implements DomainEvent
         return $this->price;
     }
 
-    public function getProductPriceWithTax(): float
+    public function getProductPriceWithTax(): ?float
     {
         return $this->priceWithTax;
     }

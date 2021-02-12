@@ -9,14 +9,14 @@ use App\Catalog\Application\{
     Product\Find\QueryProduct
 };
 use App\Catalog\Domain\Exception\ProductNotFound;
-use App\Catalog\Infrastructure\Normalizer\ProductNormalizer;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 
 final class FindProductController
 {
     public function __construct(
         private FindProduct $finder,
-        private ProductNormalizer $productNormalizer
+        private NormalizerInterface $productNormalizer
     ) {
     }
 
@@ -25,7 +25,7 @@ final class FindProductController
         try {
             $product = ($this->finder)(new QueryProduct($reference));
         } catch (ProductNotFound $exception) {
-            return new JsonResponse(['error' => $exception->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(['message' => $exception->getMessage()], JsonResponse::HTTP_NOT_FOUND);
         }
 
         return new JsonResponse($this->productNormalizer->normalize($product));

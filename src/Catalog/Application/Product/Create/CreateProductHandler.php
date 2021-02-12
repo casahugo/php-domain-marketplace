@@ -43,7 +43,7 @@ final class CreateProductHandler implements CommandHandler
     {
         $category = $this->categoryRepository->get(new Category\Code($command->getCategoryCode()));
         $brand = $this->brandRepository->get(new Brand\Code($command->getBrandCode()));
-        $seller = $this->companyRepository->get(Company\Id::fromString($command->getCompanyId()));
+        $company = $this->companyRepository->get(Company\Id::fromString($command->getCompanyId()));
         $taxes = $this->taxRepository->findByCode(...array_map(
             fn(string $code): Code => new Code($code),
             $command->getTaxCodes()
@@ -56,7 +56,7 @@ final class CreateProductHandler implements CommandHandler
             $command->getPrice(),
             $command->getStock(),
             $brand,
-            $seller,
+            $company,
             $category,
             $taxes,
             Status::WAIT_MODERATION(),

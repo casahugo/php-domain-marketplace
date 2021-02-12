@@ -119,6 +119,14 @@ final class CollectionTest extends TestCase
         self::assertTrue($set->contains($value));
     }
 
+    public function testContainInvalidType(): void
+    {
+        $this->expectException(\InvalidArgumentException::class);
+
+        $set = new Collection(Foo::class);
+        self::assertFalse($set->contains(2));
+    }
+
     public function testMapEstVide(): void
     {
         $set = new Collection(Foo::class);

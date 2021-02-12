@@ -10,8 +10,8 @@ final class TaxValue extends Decimal
 {
     public function __construct(float|int $value)
     {
-        if ($value === 0 || $value === 0.) {
-            throw new \LogicException("Tax value must be greater thean 0");
+        if ($value <= 0) {
+            throw new \LogicException("Tax value must be greater than 0");
         }
 
         parent::__construct($value);

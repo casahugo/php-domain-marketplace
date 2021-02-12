@@ -32,13 +32,17 @@ final class DoctrineBrandRepository implements BrandRepository
 
     public function save(Brand $brand): void
     {
-        $result = $this->connection->executeStatement(
-            "INSERT IGNORE INTO brand(code, name) VALUE (:code, :name)",
-            [
-                'code' => (string) $brand->getCode(),
-                'name' => $brand->getName(),
-            ]
-        );
+        try {
+            $result = $this->connection->executeStatement(
+                "INSERT IGNORE INTO brand(code, name) VALUE (:code, :name)",
+                [
+                    'code' => (string) $brand->getCode(),
+                    'name' => $brand->getName(),
+                ]
+            );
+        } catch (\Exception $exception) {
+            throw new BrandSaveFailedException((string) $brand->getCode(), $exception);
+        }
 
         if ($result === 0) {
             throw new BrandSaveFailedException((string) $brand->getCode());

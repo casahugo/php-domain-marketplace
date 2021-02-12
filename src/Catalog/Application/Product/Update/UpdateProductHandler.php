@@ -39,6 +39,8 @@ final class UpdateProductHandler implements CommandHandler
 
         $product->record(new ProductHasChanged($command->getReference()));
 
+        $this->productRepository->save($product);
+
         $this->eventBus->dispatch(...$product->pullDomainEvents());
     }
 }

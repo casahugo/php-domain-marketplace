@@ -11,7 +11,7 @@ use App\Catalog\Domain\Product\Status;
 use App\Shared\Domain\Bus\Event\EventHandler;
 use App\Shared\Domain\Event\Product\ProductHasChanged;
 
-final class ProductProjectorHandler implements EventHandler
+final class SearchProductUpdateHandler implements EventHandler
 {
     private ProductRepository $productRepository;
     private array $productProjector;

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Shared\Infrastructure\Symfony\Serializer;
+namespace App\Shared\Infrastructure\Symfony\Normalizer;
 
 use App\Shared\Domain\DataStructure\Enum;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;

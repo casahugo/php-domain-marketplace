@@ -1,3 +1,21 @@
+catalog_product_find:
+    path: /catalog/product/{reference}
+    methods: [GET]
+    controller: App\Catalog\Infrastructure\Http\Product\FindProductController
+    stateless: true
+
+catalog_product_delete:
+    path: /catalog/product/{reference}
+    methods: [DELETE]
+    controller: App\Catalog\Infrastructure\Http\Product\DeleteProductController
+    stateless: true
+
+catalog_product_update:
+    path: /catalog/product/{reference}
+    methods: [PUT]
+    controller: App\Catalog\Infrastructure\Http\Product\UpdateProductController
+    stateless: true
+
 catalog_product_create:
     path: /catalog/product
     methods: [POST]

@@ -166,4 +166,14 @@ final class Factory
     {
         return new BrandCode($code);
     }
+
+    public static function getCompanyId(): Id
+    {
+        return Id::fromString(self::COMPANY_ID);
+    }
+
+    public static function getCompany(): Company
+    {
+        return new Company(self::getCompanyId(), new Email(self::COMPANY_EMAIL), self::COMPANY_NAME);
+    }
 }

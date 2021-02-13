@@ -4,10 +4,10 @@ namespace App\Catalog\Infrastructure\DataFixtures;
 
 use App\Catalog\Application\Brand\Create\CreateBrandCommand;
 use App\Catalog\Application\Category\Create\CreateCategoryCommand;
+use App\Catalog\Application\Company\Create\CreateCompanyCommand;
 use App\Catalog\Application\Product\Create\CreateProductCommand;
 use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Uuid\UuidGenerator;
-use App\Shared\Infrastructure\Uuid\Uuid;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Faker\Factory;
@@ -24,6 +24,23 @@ class AppFixtures extends Fixture
     {
         $faker = Factory::create();
 
+        $companiesId = [
+            (string) $this->uuidGenerator->generate(),
+            (string) $this->uuidGenerator->generate(),
+        ];
+
+        $this->commandBus->dispatch(new CreateCompanyCommand(
+            $companiesId[0],
+            'contact@hoboken.io',
+            'Hokoken'
+        ));
+
+        $this->commandBus->dispatch(new CreateCompanyCommand(
+            $companiesId[1],
+            'contact@inc.corp',
+            'Inc Corporation'
+        ));
+
         $this->commandBus->dispatch(new CreateCategoryCommand($categoryCode1 = 'COMPUT', 'Computer'));
         $this->commandBus->dispatch(new CreateCategoryCommand($categoryCode2 = 'KEYBRD', 'Keyboard'));
         $this->commandBus->dispatch(new CreateCategoryCommand($categoryCode3 = 'SCRN', 'Screen'));
@@ -34,14 +51,14 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 100; $i++) {
             $this->commandBus->dispatch(new CreateProductCommand(
-                $reference = $this->uuidGenerator->generate(),
+                (string) $this->uuidGenerator->generate(),
                 $faker->ean8,
                 $faker->streetName,
                 $faker->randomFloat(2, 10, 100),
                 $faker->randomNumber(2),
                 (string) $faker->randomElement([$brandCode1, $brandCode2, $brandCode3]),
                 (string) $faker->randomElement([$categoryCode1, $categoryCode2, $categoryCode3]),
-                new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8'),
+                (string) $faker->randomElement($companiesId),
                 ['TVA_20'],
             ));
         }

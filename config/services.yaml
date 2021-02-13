@@ -1,0 +1,27 @@
+imports:
+    - { resource: 'services/catalog.yaml' }
+
+# Put parameters here that don't need to change on each machine where the app is deployed
+# https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
+parameters:
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    # shared context
+    App\Shared\:
+        resource: '../src/Shared/'
+
+    # serializer
+    Symfony\Component\Serializer\Serializer:
+        alias: 'serializer'
+
+    App\Shared\Infrastructure\Symfony\Normalizer\:
+        resource: '../src/Shared/Infrastructure/Symfony/Normalizer/*'
+        tags: [ serializer.normalizer ]
+
+    # bus
+    App\Shared\Domain\Bus\Command\CommandBus: '@App\Shared\Infrastructure\Bus\MessengerCommandBus'
+    App\Shared\Domain\Bus\Event\EventBus: '@App\Shared\Infrastructure\Bus\MessengerEventBus'

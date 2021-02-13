@@ -18,7 +18,7 @@ final class CreateProductControllerTest extends TestCase
     {
         $controller = new CreateProductController(
             $commandBus = $this->createMock(CommandBus::class),
-            $generator = new FakeUuidGenerator('uuid-123')
+            $generator = new FakeUuidGenerator('01E439TP9XJZ9RPFH3T1PYBCR8')
         );
 
         $reference = (string) $generator->generate();
@@ -28,9 +28,9 @@ final class CreateProductControllerTest extends TestCase
             'name' => 'Laptop',
             'price' => 12.2,
             'stock' => 12,
-            'brandId' => 34,
-            'categoryId' => 2,
-            'sellerId' => 12,
+            'brandCode' => 'SMSG',
+            'categoryCode' => 'HRDW',
+            'companyId' => '01E439TP9XJZ9RPFH3T1PYBCR8',
             'taxes' => ['TVA_20'],
             'shippings' => [4],
         ]);
@@ -44,9 +44,9 @@ final class CreateProductControllerTest extends TestCase
                 'Laptop',
                 12.2,
                 12,
-                34,
-                2,
-                12,
+                'SMSG',
+                'HRDW',
+                '01E439TP9XJZ9RPFH3T1PYBCR8',
                 ['TVA_20'],
                 [4],
             ));
@@ -61,7 +61,7 @@ final class CreateProductControllerTest extends TestCase
     {
         $controller = new CreateProductController(
             $commandBus = $this->createMock(CommandBus::class),
-            $generator = new FakeUuidGenerator('uuid-123')
+            $generator = new FakeUuidGenerator('01E439TP9XJZ9RPFH3T1PYBCR8')
         );
 
         $request = new Request([], [

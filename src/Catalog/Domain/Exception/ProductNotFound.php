@@ -8,6 +8,6 @@ final class ProductNotFound extends DomainException
 {
     public function __construct(string $reference)
     {
-        parent::__construct("Product #$reference not found");
+        parent::__construct("Product #$reference not found", 404);
     }
 }

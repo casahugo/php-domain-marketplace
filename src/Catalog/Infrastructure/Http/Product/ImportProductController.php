@@ -24,7 +24,7 @@ final class ImportProductController
         }
 
         $importId = (string) $this->uuidGenerator->generate();
-        $companyId = $request->request->getInt('companyId');
+        $companyId = $request->request->get('companyId');
 
         $this->commandBus->dispatch(new CreateImportProductCommand(
             $importId,

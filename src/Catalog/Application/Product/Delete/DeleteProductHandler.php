@@ -7,12 +7,13 @@ namespace App\Catalog\Application\Product\Delete;
 use App\Catalog\Domain\Exception\DomainException;
 use App\Catalog\Domain\Product\ProductRepository;
 use App\Catalog\Domain\Product\Reference;
+use App\Shared\Domain\Bus\Command\CommandHandler;
 use App\Shared\Domain\Bus\Event\EventBus;
 use App\Shared\Domain\Event\Product\ProductWasDeleted;
 
-final class DeleteProductHandler
+final class DeleteProductHandler implements CommandHandler
 {
-    private function __construct(private EventBus $eventBus, private ProductRepository $productRepository)
+    public function __construct(private EventBus $eventBus, private ProductRepository $productRepository)
     {
     }
 

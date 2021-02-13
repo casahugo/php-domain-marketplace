@@ -11,7 +11,7 @@ use App\Shared\Domain\Bus\Command\DomainCommand;
  */
 final class BulkProductCommand implements DomainCommand
 {
-    public function __construct(private ?string $importId, private int $companyId, private array $products)
+    public function __construct(private ?string $importId, private string $companyId, private array $products)
     {
     }
 
@@ -25,7 +25,7 @@ final class BulkProductCommand implements DomainCommand
         return $this->products;
     }
 
-    public function getCompanyId(): int
+    public function getCompanyId(): string
     {
         return $this->companyId;
     }

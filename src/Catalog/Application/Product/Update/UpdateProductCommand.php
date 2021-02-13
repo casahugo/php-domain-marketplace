@@ -13,7 +13,7 @@ final class UpdateProductCommand implements DomainCommand
         private string $name,
         private float $price,
         private int $stock,
-        private int $categoryId,
+        private string $categoryCode,
     ) {
     }
 
@@ -37,8 +37,8 @@ final class UpdateProductCommand implements DomainCommand
         return $this->stock;
     }
 
-    public function getCategoryId(): int
+    public function getCategoryCode(): string
     {
-        return $this->categoryId;
+        return $this->categoryCode;
     }
 }

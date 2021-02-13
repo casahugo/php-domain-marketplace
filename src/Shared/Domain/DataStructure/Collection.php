@@ -15,6 +15,11 @@ class Collection implements \Iterator
         $this->data = [];
     }
 
+    public function getType(): string
+    {
+        return $this->type;
+    }
+
     public function add(mixed ...$values): static
     {
         $set = $this;

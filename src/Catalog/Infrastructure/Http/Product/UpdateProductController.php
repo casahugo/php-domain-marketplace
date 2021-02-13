@@ -27,17 +27,17 @@ final class UpdateProductController
     public function __invoke(string $productReference, Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
-            ->setRequired(['name', 'price', 'stock', 'categoryId'])
+            ->setRequired(['name', 'price', 'stock', 'categoryCode'])
             ->setAllowedTypes('name', 'string')
             ->setAllowedTypes('price', 'float')
             ->setAllowedTypes('stock', 'int')
-            ->setAllowedTypes('categoryId', 'int')
+            ->setAllowedTypes('categoryCode', 'string')
         ;
 
         try {
             $payload = $resolver->resolve($request->request->all());
         } catch (InvalidArgumentException $exception) {
-            return new JsonResponse(['error' => $exception->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['message' => $exception->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
 
         $this->commandBus->dispatch(new UpdateProductCommand(
@@ -45,7 +45,7 @@ final class UpdateProductController
             $payload['name'],
             $payload['price'],
             $payload['stock'],
-            $payload['categoryId'],
+            $payload['categoryCode'],
         ));
 
         return new JsonResponse(null, JsonResponse::HTTP_OK);

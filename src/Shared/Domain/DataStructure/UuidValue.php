@@ -6,8 +6,9 @@ namespace App\Shared\Domain\DataStructure;
 
 use App\Shared\Domain\Uuid\Uuid as UuidInterface;
 use App\Shared\Infrastructure\Uuid\Uuid;
+use Stringable;
 
-abstract class UuidValue implements \Stringable
+abstract class UuidValue implements Stringable
 {
     final public function __construct(private UuidInterface $value)
     {

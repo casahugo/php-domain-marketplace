@@ -1,0 +1,24 @@
+version: "3.7"
+
+services:
+    typesense:
+        image: typesense/typesense:0.18.0
+        ports:
+           - $TYPESENSE_PORT:8108
+        volumes:
+            - /tmp/typesense-data:/data
+        environment:
+            - TYPESENSE_API_KEY=$TYPESENSE_API_KEY
+            - TYPESENSE_DATA_DIR=var/
+
+    mysql:
+        image: mysql:5.7
+        volumes:
+            - db-datas:/var/lib/mysql:rw
+        ports:
+            - 3310:3306
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
+
+volumes:
+    db-datas: { }

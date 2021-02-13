@@ -29,14 +29,15 @@ final class CreateProductController
     public function __invoke(Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
-            ->setRequired(['code', 'name', 'price', 'stock', 'brandId', 'categoryId', 'sellerId', 'taxes', 'shippings'])
+            ->setRequired(['code', 'name', 'price', 'stock', 'brandCode', 'categoryCode', 'companyId', 'taxes', 'shippings'])
             ->setAllowedTypes('code', 'string')
             ->setAllowedTypes('name', 'string')
             ->setAllowedTypes('price', 'float')
             ->setAllowedTypes('stock', 'int')
-            ->setAllowedTypes('brandId', 'int')
-            ->setAllowedTypes('categoryId', 'int')
-            ->setAllowedTypes('sellerId', 'int')
+            ->setAllowedTypes('brandCode', 'string')
+            ->setAllowedTypes('categoryCode', 'string')
+            ->setAllowedTypes('companyId', 'string')
+            ->setAllowedTypes('shippings', 'int[]')
             ->setAllowedTypes('taxes', 'string[]')
             ->setAllowedTypes('shippings', 'int[]')
         ;
@@ -53,9 +54,9 @@ final class CreateProductController
             $payload['name'],
             $payload['price'],
             $payload['stock'],
-            $payload['brandId'],
-            $payload['categoryId'],
-            $payload['sellerId'],
+            $payload['brandCode'],
+            $payload['categoryCode'],
+            $payload['companyId'],
             $payload['taxes'],
             $payload['shippings'],
             $payload['intro'] ?? null,

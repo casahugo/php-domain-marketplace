@@ -6,13 +6,13 @@ namespace App\Catalog\Domain\Brand;
 
 final class Brand
 {
-    public function __construct(private Id $id, private string $name)
+    public function __construct(private Code $code, private string $name)
     {
     }
 
-    public function getId(): Id
+    public function getCode(): Code
     {
-        return $this->id;
+        return $this->code;
     }
 
     public function getName(): string

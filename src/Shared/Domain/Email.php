@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Shared\Domain;
 
-final class Email
+final class Email implements \Stringable
 {
     public function __construct(private string $value)
     {

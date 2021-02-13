@@ -1,0 +1,54 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true      # Automatically injects dependencies in your services.
+        autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
+
+    _instanceof:
+        App\Shared\Domain\Bus\Command\CommandHandler:
+            tags: [ messenger.message_handler ]
+
+        App\Shared\Domain\Bus\Event\EventHandler:
+            tags: [ messenger.message_handler ]
+
+    # context
+    App\Catalog\:
+        resource: '../../src/Catalog/'
+
+    # controllers
+    App\Catalog\Infrastructure\Http\:
+        resource: '../../src/Catalog/Infrastructure/Http/'
+        tags: ['controller.service_arguments']
+
+    # normalizer
+    App\Catalog\Infrastructure\Normalizer\:
+        resource: '../../src/Catalog/Infrastructure/Normalizer/*'
+        tags: [ serializer.normalizer ]
+
+    # repositories
+    App\Catalog\Domain\Product\ProductRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository'
+    App\Catalog\Domain\Category\CategoryRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCategoryRepository'
+    App\Catalog\Domain\Brand\BrandRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineBrandRepository'
+    App\Catalog\Domain\Company\CompanyRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCompanyRepository'
+    App\Catalog\Domain\Tax\TaxRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineTaxRepository'
+    App\Catalog\Domain\Import\ImportRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineImportRepository'
+
+    # decorate product repository
+    App\Catalog\Infrastructure\Doctrine\DoctrineProductReadModelRepository:
+        decorates: App\Catalog\Infrastructure\Doctrine\DoctrineProductRepository
+
+    # product projector
+    App\Catalog\Domain\Product\ProductProjector: '@App\Catalog\Infrastructure\TypeSense\TypeSenseProductProjector'
+
+    # typesense
+    Typesense\Client:
+        arguments:
+            -
+                api_key: '%env(TYPESENSE_API_KEY)%'
+                connection_timeout_seconds: 2
+                nodes:
+                    -
+                        host: '%env(TYPESENSE_HOST)%'
+                        port: '%env(TYPESENSE_PORT)%'
+                        protocol: 'http'

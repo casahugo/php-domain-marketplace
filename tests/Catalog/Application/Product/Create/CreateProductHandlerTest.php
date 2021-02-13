@@ -12,10 +12,10 @@ use App\Catalog\Application\{
 use App\Catalog\Domain\{
     Brand\Brand,
     Brand\BrandRepository,
-    Brand\Id as BrandId,
+    Brand\Code as BrandCode,
     Category\Category,
     Category\CategoryRepository,
-    Category\Id,
+    Category\Code as CategoryCode,
     Product\Code,
     Product\Product,
     Product\ProductPrice,
@@ -23,7 +23,7 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Company\Id as SellerId,
+    Company\Id as CompanyId,
     Company\Company,
     Company\CompanyRepository,
     Tax\TaxCollection,
@@ -53,20 +53,20 @@ final class CreateProductHandlerTest extends TestCase
         $categoryRepository
             ->expects(self::once())
             ->method('get')
-            ->with($categoryId = new Id(2))
+            ->with($categoryId = new CategoryCode("HRDW"))
             ->willReturn($category = new Category($categoryId, 'Computer'));
 
         $sellerRepository
             ->expects(self::once())
             ->method('get')
-            ->with($sellerId = new SellerId(123))
-            ->willReturn($seller = new Company($sellerId, new Email('company@tld.com'), 'Inc Corporation'));
+            ->with($companyId = CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'))
+            ->willReturn($company = new Company($companyId, new Email('company@tld.com'), 'Inc Corporation'));
 
         $brandRepository
             ->expects(self::once())
             ->method('get')
-            ->with($brandId = new BrandId(34))
-            ->willReturn($brand = new Brand($brandId, 'Toshiba'));
+            ->with($brandId = new BrandCode("SMGS"))
+            ->willReturn($brand = new Brand($brandId, 'Samsung'));
 
         $taxRepository
             ->expects(self::once())
@@ -74,20 +74,20 @@ final class CreateProductHandlerTest extends TestCase
             ->willReturn(new TaxCollection());
 
         $product = new Product(
-            Reference::fromString('123'),
+            Reference::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'),
             new Code('code'),
             'Laptop',
             new ProductPrice(12.1),
             new Stock(2),
             $brand,
-            $seller,
+            $company,
             $category,
             new TaxCollection(),
             Status::WAIT_MODERATION(),
             new \DateTimeImmutable("2020-01-01"),
         );
 
-        $product->record(new ProductWasCreated('123'));
+        $product->record(new ProductWasCreated('01E439TP9XJZ9RPFH3T1PYBCR8'));
 
         $productRepository
             ->expects(self::once())
@@ -95,14 +95,14 @@ final class CreateProductHandlerTest extends TestCase
             ->with();
 
         $handler(new CreateProductCommand(
-            '123',
+            '01E439TP9XJZ9RPFH3T1PYBCR8',
             'code',
             'Laptop',
             12.1,
             2,
-            34,
-            2,
-            123,
+            'SMGS',
+            'HRDW',
+            '01E439TP9XJZ9RPFH3T1PYBCR8',
             ['TVA_20'],
             [4],
         ));

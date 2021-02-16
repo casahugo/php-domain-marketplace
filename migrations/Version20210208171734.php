@@ -43,12 +43,12 @@ final class Version20210208171734 extends AbstractMigration
             (
                 id varchar(26) not null,
                 email varchar(255) not null,
-                name varchar(255) not null
+                name varchar(255) not null,
+                constraint company_pk primary key (id)
             );
 
-            create unique index company_email_uindex on seller (email);
-            create unique index company_id_uindex on seller (id);
-            alter table company add constraint company_pk primary key (id);
+            create unique index company_email_uindex on company (email);
+            create unique index company_id_uindex on company (id);
         SQL);
 
         $this->addSql(<<<SQL
@@ -73,9 +73,10 @@ final class Version20210208171734 extends AbstractMigration
             create unique index product_code_uindex on product (code);
             create unique index product_reference_uindex on product (reference);
             alter table product add constraint product_pk primary key (reference);
-            alter table product add constraint product_category_code_fkforeign key (category_code) references category (code);
-            alter table product add constraint product_company_id_fkforeign key (company_id) references company (code);
-            alter table product add constraint product_brand_code_fkforeign key (brand_code) references brand (code);
+
+            alter table product add constraint product_category_code_fk foreign key (category_code) references category (code);
+            alter table product add constraint product_brand_code_fk foreign key (brand_code) references brand (code);
+            alter table product add constraint product_company_id_fk foreign key (company_id) references company (id);
         SQL);
     }
 

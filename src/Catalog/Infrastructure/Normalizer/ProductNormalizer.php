@@ -16,7 +16,7 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Shipping\ShippingCollection,
+    Shipping\Shipping,
     Tax\TaxCollection
 };
 use Symfony\Component\Serializer\Normalizer\{
@@ -50,7 +50,7 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             "intro" => $product->getIntro(),
             "description" => $product->getDescription(),
             "taxes" => $this->normalizer->normalize($product->getTaxes()),
-            "shippings" => $this->normalizer->normalize($product->getShippings()),
+            "shipping" => $this->normalizer->normalize($product->getShipping()),
             "company" => $this->normalizer->normalize($product->getCompany()),
             "status" => $this->normalizer->normalize($product->getStatus()),
             "createdAt" => $this->normalizer->normalize($product->getCreatedAt()),
@@ -78,7 +78,7 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             $this->denormalizer->denormalize($data['status'], Status::class),
             $this->denormalizer->denormalize($data['createdAt'], \DateTimeImmutable::class),
             isset($data['updatedAt']) ? $this->denormalizer->denormalize($data['updatedAt'], \DateTimeImmutable::class) : null,
-            $this->denormalizer->denormalize($data['shippings'], ShippingCollection::class),
+            isset($data['shipping']) ? $this->denormalizer->denormalize($data['shipping'], Shipping::class) : null,
             $data['intro'] ?? null,
             $data['description'] ?? null,
             isset($data['originalPrice']) ? $this->denormalizer->denormalize($data['originalPrice'], ProductPrice::class) : null,

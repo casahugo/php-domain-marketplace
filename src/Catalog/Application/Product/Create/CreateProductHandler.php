@@ -21,6 +21,8 @@ use App\Catalog\Domain\{
     Product\Status,
     Company,
     Company\CompanyRepository,
+    Shipping,
+    Shipping\ShippingRepository,
     Tax\Code,
     Tax\TaxRepository
 };
@@ -34,6 +36,7 @@ final class CreateProductHandler implements CommandHandler
         private BrandRepository $brandRepository,
         private CompanyRepository $companyRepository,
         private TaxRepository $taxRepository,
+        private ShippingRepository $shippingRepository,
         private Clock $clock,
     ) {
     }
@@ -49,6 +52,10 @@ final class CreateProductHandler implements CommandHandler
             $command->getTaxCodes()
         ));
 
+        if (null !== $command->getShippingCode()) {
+            $shipping = $this->shippingRepository->get(new Shipping\Code($command->getShippingCode()));
+        }
+
         $product = Product::create(
             $command->getReference(),
             $command->getCode(),
@@ -61,6 +68,7 @@ final class CreateProductHandler implements CommandHandler
             $taxes,
             Status::WAIT_MODERATION(),
             $this->clock->now(),
+            $shipping
         );
 
         $product->setIntro($command->getIntro());

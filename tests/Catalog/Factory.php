@@ -16,6 +16,8 @@ use App\Catalog\Domain\Product\ProductPrice;
 use App\Catalog\Domain\Product\Reference;
 use App\Catalog\Domain\Product\Status;
 use App\Catalog\Domain\Product\Stock;
+use App\Catalog\Domain\Shipping\Shipping;
+use App\Catalog\Domain\Shipping\ShippingPrice;
 use App\Catalog\Domain\Tax\TaxCollection;
 use App\Shared\Domain\Email;
 
@@ -175,5 +177,15 @@ final class Factory
     public static function getCompany(): Company
     {
         return new Company(self::getCompanyId(), new Email(self::COMPANY_EMAIL), self::COMPANY_NAME);
+    }
+
+    public static function getShippingCode(): \App\Catalog\Domain\Shipping\Code
+    {
+        return new \App\Catalog\Domain\Shipping\Code('UPS');
+    }
+
+    public static function getShipping(): Shipping
+    {
+        return new Shipping(self::getShippingCode(), 'UPS', new ShippingPrice(12.23));
     }
 }

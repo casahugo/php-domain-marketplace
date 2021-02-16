@@ -8,5 +8,4 @@ use App\Shared\Domain\DataStructure\StringValue;
 
 final class Code extends StringValue
 {
-
 }

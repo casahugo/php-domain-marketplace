@@ -15,9 +15,9 @@ use App\Catalog\Domain\{
     Category\CategoryRepository,
     Product\ProductRepository,
     Company\CompanyRepository,
+    Shipping\ShippingRepository,
     Tax\TaxCollection,
-    Tax\TaxRepository
-};
+    Tax\TaxRepository};
 use App\Shared\{
     Domain\Bus\Event\EventBus,
     Domain\Event\Product\ProductWasCreated,
@@ -35,6 +35,7 @@ final class CreateProductHandlerTest extends TestCase
             $brandRepository = $this->createMock(BrandRepository::class),
             $sellerRepository = $this->createMock(CompanyRepository::class),
             $taxRepository = $this->createMock(TaxRepository::class),
+            $shippingRepository = $this->createMock(ShippingRepository::class),
             new FrozenClock(new \DateTimeImmutable("2020-01-01"))
         );
 
@@ -61,6 +62,12 @@ final class CreateProductHandlerTest extends TestCase
             ->method('findByCode')
             ->willReturn(new TaxCollection());
 
+        $shippingRepository
+            ->expects(self::once())
+            ->method('get')
+            ->with(Factory::getShippingCode())
+            ->willReturn(Factory::getShipping());
+
         $product = Factory::getProduct();
 
         $product->record(new ProductWasCreated(Factory::PRODUCT_REFERENCE));
@@ -80,7 +87,7 @@ final class CreateProductHandlerTest extends TestCase
             Factory::CATEGORY_CODE,
             Factory::COMPANY_ID,
             ['TVA_20'],
-            [4],
+            'UPS',
         ));
     }
 }

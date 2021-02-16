@@ -18,7 +18,7 @@ final class CreateProductCommand implements DomainCommand
         private string $categoryCode,
         private string $companyId,
         private array $taxCodes,
-        private ?array $shippingId = null,
+        private ?string $shippingCode = null,
         private ?string $intro = null,
         private ?string $description = null,
         private ?float $originalPrice = null,
@@ -85,8 +85,8 @@ final class CreateProductCommand implements DomainCommand
         return $this->originalPrice;
     }
 
-    public function getShippingId(): ?array
+    public function getShippingCode(): ?string
     {
-        return $this->shippingId;
+        return $this->shippingCode;
     }
 }

@@ -19,7 +19,6 @@ use App\Catalog\Domain\{
     Picture\PictureCollection,
     Company\Company,
     Shipping\Shipping,
-    Shipping\ShippingCollection,
     Tax\Tax,
     Tax\TaxCollection,
 };
@@ -44,7 +43,7 @@ final class Product extends Aggregate
     private TaxCollection $taxes;
     private ?string $intro;
     private ?string $description;
-    private ShippingCollection $shippings;
+    private ?Shipping $shipping;
     private \DateTimeImmutable $createdAt;
     private ?\DateTimeImmutable $updatedAt;
 
@@ -61,7 +60,7 @@ final class Product extends Aggregate
         Status $status,
         \DateTimeImmutable $createdAt,
         ?\DateTimeImmutable $updatedAt = null,
-        ?ShippingCollection $shippings = null,
+        ?Shipping $shipping = null,
         ?string $intro = null,
         ?string $description = null,
         ?ProductPrice $originalPrice = null,
@@ -83,7 +82,7 @@ final class Product extends Aggregate
         $this->status = $status;
         $this->createdAt = $createdAt;
         $this->updatedAt = $updatedAt;
-        $this->shippings = $shippings ?? new ShippingCollection();
+        $this->shipping = $shipping;
         $this->gallery = $pictures ?? new PictureCollection();
         $this->documents = $documents ?? new DocumentCollection();
     }
@@ -100,6 +99,7 @@ final class Product extends Aggregate
         TaxCollection $taxes,
         Status $status,
         \DateTimeImmutable $createdAt,
+        ?Shipping $shipping = null,
     ): self {
         $self = new self(
             Reference::fromString($reference),
@@ -113,6 +113,8 @@ final class Product extends Aggregate
             $taxes,
             $status,
             $createdAt,
+            null,
+            $shipping
         );
 
         $self->record(new ProductWasCreated($reference));
@@ -264,14 +266,14 @@ final class Product extends Aggregate
         return $this;
     }
 
-    public function getShippings(): ?ShippingCollection
+    public function getShipping(): ?Shipping
     {
-        return $this->shippings;
+        return $this->shipping;
     }
 
-    public function addShipping(Shipping ...$shippings): self
+    public function setShipping(Shipping $shipping): self
     {
-        $this->shippings = $this->shippings->add(...$shippings);
+        $this->shipping = $shipping;
 
         return $this;
     }

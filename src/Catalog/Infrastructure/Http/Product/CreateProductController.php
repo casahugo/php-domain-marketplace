@@ -29,7 +29,7 @@ final class CreateProductController
     public function __invoke(Request $request): JsonResponse
     {
         $resolver = (new OptionsResolver())
-            ->setRequired(['code', 'name', 'price', 'stock', 'brandCode', 'categoryCode', 'companyId', 'taxes', 'shippings'])
+            ->setRequired(['code', 'name', 'price', 'stock', 'brandCode', 'categoryCode', 'companyId', 'taxes', 'shipping'])
             ->setAllowedTypes('code', 'string')
             ->setAllowedTypes('name', 'string')
             ->setAllowedTypes('price', 'float')
@@ -37,9 +37,8 @@ final class CreateProductController
             ->setAllowedTypes('brandCode', 'string')
             ->setAllowedTypes('categoryCode', 'string')
             ->setAllowedTypes('companyId', 'string')
-            ->setAllowedTypes('shippings', 'int[]')
             ->setAllowedTypes('taxes', 'string[]')
-            ->setAllowedTypes('shippings', 'int[]')
+            ->setAllowedTypes('shipping', 'string')
         ;
 
         try {
@@ -58,7 +57,7 @@ final class CreateProductController
             $payload['categoryCode'],
             $payload['companyId'],
             $payload['taxes'],
-            $payload['shippings'],
+            $payload['shipping'],
             $payload['intro'] ?? null,
             $payload['description'] ?? null,
             isset($payload['originalPrice']) ? (float) $payload['originalPrice'] : null,

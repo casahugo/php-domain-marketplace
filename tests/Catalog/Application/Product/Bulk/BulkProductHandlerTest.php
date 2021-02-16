@@ -24,7 +24,7 @@ use App\Catalog\Domain\Product\Stock;
 use App\Catalog\Domain\Tax\Code as TaxCode;
 use App\Catalog\Domain\Tax\Tax;
 use App\Catalog\Domain\Tax\TaxCollection;
-use App\Catalog\Domain\Tax\TaxValue;
+use App\Catalog\Domain\Tax\TaxAmount;
 use App\Shared\Domain\Bus\Command\CommandBus;
 use App\Shared\Domain\Email;
 use App\Shared\Domain\Logger\Logger;
@@ -62,7 +62,7 @@ final class BulkProductHandlerTest extends TestCase
                         'HRDW',
                         '01E439TP9XJZ9RPFH3T1PYBCR8',
                         ['TVA_20'],
-                        [2, 3],
+                        'COL',
                         'Screen introduction',
                         'Screen description',
                         45.5,
@@ -79,7 +79,7 @@ final class BulkProductHandlerTest extends TestCase
                         'HRDW',
                         '01E439TP9XJZ9RPFH3T1PYBCR8',
                         ['TVA_20'],
-                        [2],
+                        'COL',
                         'Mouse introduction',
                         'Mouse description',
                         32.5,
@@ -94,7 +94,7 @@ final class BulkProductHandlerTest extends TestCase
     {
         $category = new Category(new CategoryCode('HRDW'), 'Hardware');
         $brand = new Brand(new BrandCode('SMGS'), 'Samsung');
-        $tax = new Tax(new TaxCode('TVA_20'), new TaxValue(20));
+        $tax = new Tax(new TaxCode('TVA_20'), 'TVA 20%', new TaxAmount(20));
         $company = new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('contact@email.pro'), 'Inc Corporation');
 
         return (new ProductCollection())->add(
@@ -154,7 +154,7 @@ final class BulkProductHandlerTest extends TestCase
                 'brandId' => 'SMSG',
                 'categoryId' => 'HRDW',
                 'taxes' => ['TVA_20'],
-                'shippings' => [2, 3],
+                'shipping' => 'COL',
                 'intro' => 'Screen introduction',
                 'description' => 'Screen description',
                 'originalPrice' => 45.5,
@@ -167,7 +167,7 @@ final class BulkProductHandlerTest extends TestCase
                 'brandId' => 'SMSG',
                 'categoryId' => 'HRDW',
                 'taxes' => ['TVA_20'],
-                'shippings' => [2],
+                'shipping' => 'COL',
                 'intro' => 'Mouse introduction',
                 'description' => 'Mouse description',
                 'originalPrice' => 32.5,

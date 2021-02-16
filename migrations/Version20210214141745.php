@@ -36,7 +36,7 @@ final class Version20210214141745 extends AbstractMigration
             (
                 code varchar(50) not null,
                 name varchar(255) not null,
-                price decimal (12, 2) not null,
+                amount decimal (12, 2) not null,
                 constraint tax_pk primary key (code)
             );
 

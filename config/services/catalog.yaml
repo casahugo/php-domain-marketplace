@@ -33,6 +33,7 @@ services:
     App\Catalog\Domain\Company\CompanyRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineCompanyRepository'
     App\Catalog\Domain\Tax\TaxRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineTaxRepository'
     App\Catalog\Domain\Import\ImportRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineImportRepository'
+    App\Catalog\Domain\Shipping\ShippingRepository: '@App\Catalog\Infrastructure\Doctrine\DoctrineShippingRepository'
 
     # decorate product repository
     App\Catalog\Infrastructure\Doctrine\DoctrineProductReadModelRepository:

@@ -23,8 +23,10 @@ use App\Catalog\Domain\{
     Product\Reference,
     Product\Status,
     Product\Stock,
-    Tax\TaxCollection
-};
+    Shipping\Code as ShippingCode,
+    Shipping\Shipping,
+    Shipping\ShippingPrice,
+    Tax\TaxCollection};
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
 
@@ -39,11 +41,13 @@ class DoctrineProductRepository implements ProductRepository
     {
         $product = $this->connection->fetchAssociative(<<<SQL
             SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name,
-                   comp.id as company_id, comp.email as company_email, comp.name as company_email
+                   comp.id as company_id, comp.email as company_email, comp.name as company_email,
+                   sh.code as shipping_code, sh.name as shipping_name, sh.price as shipping_price
             FROM product p
             LEFT JOIN category c ON p.category_code = c.code
             LEFT JOIN brand b ON p.brand_code = b.code
             LEFT JOIN company comp ON p.company_id = comp.id
+            INNER JOIN shipping sh ON p.shipping_code = sh.code
             WHERE p.reference = :reference
         SQL, [':reference' => (string) $reference]);
 
@@ -62,7 +66,11 @@ class DoctrineProductRepository implements ProductRepository
             new Category(new CategoryCode($product['category_code']), $product['category_name']),
             new TaxCollection(),
             Status::of($product['status']),
-            new DateTimeImmutable($product['created_at'])
+            new DateTimeImmutable($product['created_at']),
+            isset($product['updated_at']) ? new DateTimeImmutable($product['updated_at']) : null,
+            isset($product['shipping_code'])
+                ? new Shipping(new ShippingCode($product['shipping_code']), $product['shipping_name'], new ShippingPrice($product['shipping_price']))
+                : null
         );
     }
 
@@ -95,6 +103,7 @@ class DoctrineProductRepository implements ProductRepository
             'intro' => $product->getIntro(),
             'created_at' => $product->getCreatedAt()->format('Y-m-d'),
             'updated_at' => null !== $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d') : null,
+            'shipping_code' => null !== $product->getShipping() ? (string) $product->getShipping()->getCode() : null,
         ];
 
         $result = $this->connection->insert('product', $save);

@@ -9,7 +9,6 @@ use App\Catalog\{
     Domain\Brand\Code as BrandCode,
     Domain\Category\Category,
     Domain\Category\Code as CategoryCode,
-    Domain\Category\Id,
     Domain\Company\Company,
     Domain\Company\Id as CompanyId,
     Domain\Document\Document,
@@ -24,15 +23,13 @@ use App\Catalog\{
     Domain\Product\Reference,
     Domain\Product\Status,
     Domain\Product\Stock,
-    Domain\Shipping\ShippingCollection,
+    Domain\Shipping\Shipping,
+    Domain\Shipping\ShippingPrice,
     Domain\Tax\Code as CodeTax,
     Domain\Tax\Tax,
     Domain\Tax\TaxCollection,
-    Domain\Tax\TaxValue,
-    Infrastructure\Normalizer\DocumentNormalizer,
-    Infrastructure\Normalizer\PictureNormalizer,
-    Infrastructure\Normalizer\ProductNormalizer,
-    Infrastructure\Normalizer\TaxNormalizer
+    Domain\Tax\TaxAmount,
+    Infrastructure\Normalizer\ProductNormalizer
 };
 use App\Shared\{
     Domain\Email,
@@ -52,8 +49,11 @@ use Symfony\Component\Serializer\Serializer;
 
 final class ProductNormalizerTest extends TestCase
 {
-    public function testEncode(): void
+    private Serializer $serializer;
+
+    public function setUp(): void
     {
+        parent::setUp();
         $encoders = [new JsonEncoder()];
 
         $normalizers = [
@@ -68,9 +68,12 @@ final class ProductNormalizerTest extends TestCase
             new ObjectNormalizer(),
         ];
 
-        $serializer = new Serializer($normalizers, $encoders);
+        $this->serializer = new Serializer($normalizers, $encoders);
+    }
 
-        $data = $serializer->serialize($this->getProduct(), 'json');
+    public function testEncode(): void
+    {
+        $data = $this->serializer->serialize($this->getProduct(), 'json');
 
         self::assertSame(
             json_decode($this->json(), true),
@@ -80,26 +83,7 @@ final class ProductNormalizerTest extends TestCase
 
     public function testDecoding(): void
     {
-        $encoders = [new JsonEncoder()];
-
-        $normalizers = [
-            new EnumNormalizer(),
-            new UuidValueNormalizer(),
-            new StringeableNormalizer(),
-            new IntegerValueNormalizer(),
-            new DecimalNormalizer(),
-            new DateTimeNormalizer(),
-            new CollectionNormalizer(),
-            new TaxNormalizer(),
-            new PictureNormalizer(),
-            new DocumentNormalizer(),
-            new ProductNormalizer(),
-            new ObjectNormalizer(),
-        ];
-
-        $serializer = new Serializer($normalizers, $encoders);
-
-        $product = $serializer->deserialize($this->json(), Product::class, 'json');
+        $product = $this->serializer->deserialize($this->json(), Product::class, 'json');
 
         self::assertEquals(
             $this->getProduct(),
@@ -158,11 +142,16 @@ final class ProductNormalizerTest extends TestCase
            "taxes":[
               {
                  "code":"TVA_20",
-                 "taxValue":19.6,
+                 "name":"TVA 20%",
+                 "taxAmount":19.6,
                  "percentage":0.2
               }
            ],
-           "shippings":[],
+           "shipping":{
+              "code":"COL",
+              "name":"Collissimo",
+              "price": 12.23
+           },
            "company":{
               "id":"01E439TP9XJZ9RPFH3T1PYBCR8",
               "email":"company@tld.com",
@@ -186,11 +175,15 @@ final class ProductNormalizerTest extends TestCase
             new Brand(new BrandCode('TSB'), 'Toshiba'),
             new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('company@tld.com'), 'Inc Corporation'),
             new Category(new CategoryCode("COMPUT"), 'Computer'),
-            (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), new TaxValue(19.6))),
+            (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), 'TVA 20%', new TaxAmount(19.6))),
             Status::WAIT_MODERATION(),
             new \DateTimeImmutable("2020-01-01"),
             new \DateTimeImmutable("2020-02-01"),
-            new ShippingCollection(),
+            new Shipping(
+                new \App\Catalog\Domain\Shipping\Code('COL'),
+                'Collissimo',
+                new ShippingPrice(12.23)
+            ),
             'Presentation Laptop',
             'Description Laptop',
             new ProductPrice(14),

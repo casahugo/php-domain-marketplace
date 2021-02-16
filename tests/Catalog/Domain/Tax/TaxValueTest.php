@@ -4,15 +4,15 @@ declare(strict_types=1);
 
 namespace App\Tests\Catalog\Domain\Tax;
 
-use App\Catalog\Domain\Tax\TaxValue;
+use App\Catalog\Domain\Tax\TaxAmount;
 use PHPUnit\Framework\TestCase;
 
 final class TaxValueTest extends TestCase
 {
     public function testCastIntFloat(): void
     {
-        self::assertSame(2., (new TaxValue(2.))->getValue());
-        self::assertSame(2., (new TaxValue(2))->getValue());
+        self::assertSame(2., (new TaxAmount(2.))->getValue());
+        self::assertSame(2., (new TaxAmount(2))->getValue());
     }
 
     /** @dataProvider invalidValueProvider */
@@ -20,7 +20,7 @@ final class TaxValueTest extends TestCase
     {
         $this->expectException(\LogicException::class);
 
-        new TaxValue($value);
+        new TaxAmount($value);
     }
 
     public function invalidValueProvider(): \Generator

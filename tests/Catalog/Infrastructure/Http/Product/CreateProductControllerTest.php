@@ -32,7 +32,7 @@ final class CreateProductControllerTest extends TestCase
             'categoryCode' => 'HRDW',
             'companyId' => '01E439TP9XJZ9RPFH3T1PYBCR8',
             'taxes' => ['TVA_20'],
-            'shippings' => [4],
+            'shipping' => 'UPS',
         ]);
 
         $commandBus
@@ -48,7 +48,7 @@ final class CreateProductControllerTest extends TestCase
                 'HRDW',
                 '01E439TP9XJZ9RPFH3T1PYBCR8',
                 ['TVA_20'],
-                [4],
+                'UPS',
             ));
 
         $response = $controller($request);

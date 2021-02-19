@@ -32,7 +32,7 @@ final class DoctrineCompanyRepository implements CompanyRepository
         return new Company(
             Id::fromString($company['id']),
             new Email($company['email']),
-            $company['email']
+            $company['name']
         );
     }
 

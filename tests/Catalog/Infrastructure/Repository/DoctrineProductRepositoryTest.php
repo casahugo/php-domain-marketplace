@@ -24,7 +24,7 @@ final class DoctrineProductRepositoryTest extends TestCase
             ->with(
                 <<<SQL
             SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name,
-                   comp.id as company_id, comp.email as company_email, comp.name as company_email,
+                   comp.id as company_id, comp.email as company_email, comp.name as company_name,
                    sh.code as shipping_code, sh.name as shipping_name, sh.price as shipping_price
             FROM product p
             LEFT JOIN category c ON p.category_code = c.code
@@ -53,7 +53,7 @@ final class DoctrineProductRepositoryTest extends TestCase
             ->with(
                 <<<SQL
             SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name,
-                   comp.id as company_id, comp.email as company_email, comp.name as company_email,
+                   comp.id as company_id, comp.email as company_email, comp.name as company_name,
                    sh.code as shipping_code, sh.name as shipping_name, sh.price as shipping_price
             FROM product p
             LEFT JOIN category c ON p.category_code = c.code
@@ -78,25 +78,30 @@ final class DoctrineProductRepositoryTest extends TestCase
 
         $connection
             ->expects(self::once())
-            ->method('insert')
+            ->method('executeStatement')
             ->with(
-                'product',
+                <<<SQL
+            INSERT IGNORE INTO product (reference, code, name, price, original_price, stock, status, intro, description,
+                                        created_at, updated_at, brand_code, category_code, company_id, shipping_code)
+            VALUE (:reference, :code, :name, :price, :original_price, :stock, :status, :intro, :description, :created_at,
+                   :updated_at, :brand_code, :category_code, :company_id, :shipping_code)
+        SQL,
                 [
-                    'reference' => Factory::PRODUCT_REFERENCE,
-                    'code' => Factory::PRODUCT_CODE,
-                    'company_id' => Factory::COMPANY_ID,
-                    'category_code' => Factory::CATEGORY_CODE,
-                    'brand_code' => Factory::BRAND_CODE,
-                    'name' => Factory::PRODUCT_NAME,
-                    'stock' => Factory::PRODUCT_STOCK,
-                    'price' => Factory::PRODUCT_PRICE,
-                    'original_price' => null,
-                    'status' => 'wait_moderation',
-                    'description' => null,
-                    'intro' => null,
-                    'created_at' => $product->getCreatedAt()->format('Y-m-d'),
-                    'updated_at' => null !== $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d') : null,
-                    'shipping_code' => null,
+                    ':reference' => Factory::PRODUCT_REFERENCE,
+                    ':code' => Factory::PRODUCT_CODE,
+                    ':company_id' => Factory::COMPANY_ID,
+                    ':category_code' => Factory::CATEGORY_CODE,
+                    ':brand_code' => Factory::BRAND_CODE,
+                    ':name' => Factory::PRODUCT_NAME,
+                    ':stock' => Factory::PRODUCT_STOCK,
+                    ':price' => Factory::PRODUCT_PRICE,
+                    ':original_price' => null,
+                    ':status' => 'wait_moderation',
+                    ':description' => null,
+                    ':intro' => null,
+                    ':created_at' => $product->getCreatedAt()->format('Y-m-d'),
+                    ':updated_at' => null !== $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d') : null,
+                    ':shipping_code' => null,
                 ]
             );
 

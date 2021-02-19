@@ -29,8 +29,8 @@ use App\Catalog\{
     Domain\Tax\Tax,
     Domain\Tax\TaxCollection,
     Domain\Tax\TaxAmount,
-    Infrastructure\Normalizer\ProductNormalizer
-};
+    Infrastructure\Normalizer\ProductNormalizer,
+    Infrastructure\Normalizer\TaxNormalizer};
 use App\Shared\{
     Domain\Email,
     Infrastructure\Symfony\Normalizer\CollectionNormalizer,
@@ -64,6 +64,7 @@ final class ProductNormalizerTest extends TestCase
             new DecimalNormalizer(),
             new DateTimeNormalizer(),
             new CollectionNormalizer(),
+            new TaxNormalizer(),
             new ProductNormalizer(),
             new ObjectNormalizer(),
         ];
@@ -143,8 +144,7 @@ final class ProductNormalizerTest extends TestCase
               {
                  "code":"TVA_20",
                  "name":"TVA 20%",
-                 "taxAmount":19.6,
-                 "percentage":0.2
+                 "amount":19.6
               }
            ],
            "shipping":{

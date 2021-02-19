@@ -48,7 +48,7 @@ final class CreateProductHandler implements CommandHandler
         $brand = $this->brandRepository->get(new Brand\Code($command->getBrandCode()));
         $company = $this->companyRepository->get(Company\Id::fromString($command->getCompanyId()));
         $taxes = $this->taxRepository->findByCode(...array_map(
-            fn(string $code): Code => new Code($code),
+            static fn(string $code): Code => new Code($code),
             $command->getTaxCodes()
         ));
 
@@ -68,7 +68,7 @@ final class CreateProductHandler implements CommandHandler
             $taxes,
             Status::WAIT_MODERATION(),
             $this->clock->now(),
-            $shipping
+            $shipping ?? null
         );
 
         $product->setIntro($command->getIntro());

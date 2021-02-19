@@ -69,7 +69,7 @@ final class ProductTest extends TestCase
         /** @var Tax $tax */
         $tax = $product->getTaxes()->first();
         self::assertEquals('TVA_20', (string) $tax->getCode());
-        self::assertEquals(19.6, $tax->getTaxAmount()->getValue());
+        self::assertEquals(19.6, $tax->getAmount()->getValue());
 
         self::assertSame($product->getPicture(), $product->getGallery()->first());
         self::assertCount(1, $product->getGallery());

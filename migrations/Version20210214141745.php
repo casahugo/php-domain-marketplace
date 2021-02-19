@@ -40,11 +40,15 @@ final class Version20210214141745 extends AbstractMigration
                 constraint tax_pk primary key (code)
             );
 
+            create unique index tax_code_uindex on tax (code);
+        SQL);
+
+        $this->addSql(<<<SQL
             create table product_tax
             (
                 product_reference varchar(26) not null,
                 tax_code varchar(50) not null,
-                constraint tax_pk primary key (code)
+                constraint product_tax_pk primary key (product_reference, tax_code)
             );
 
             create unique index product_tax__uindex on shipping (product_reference, tax_code);

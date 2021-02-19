@@ -26,6 +26,7 @@ use App\Catalog\Domain\{
     Shipping\Code as ShippingCode,
     Shipping\Shipping,
     Shipping\ShippingPrice,
+    Tax\Tax,
     Tax\TaxCollection};
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
@@ -41,7 +42,7 @@ class DoctrineProductRepository implements ProductRepository
     {
         $product = $this->connection->fetchAssociative(<<<SQL
             SELECT p.*, c.code as category_code, c.name as category_name, b.code as brand_code, b.name as brand_name,
-                   comp.id as company_id, comp.email as company_email, comp.name as company_email,
+                   comp.id as company_id, comp.email as company_email, comp.name as company_name,
                    sh.code as shipping_code, sh.name as shipping_name, sh.price as shipping_price
             FROM product p
             LEFT JOIN category c ON p.category_code = c.code
@@ -69,7 +70,7 @@ class DoctrineProductRepository implements ProductRepository
             new DateTimeImmutable($product['created_at']),
             isset($product['updated_at']) ? new DateTimeImmutable($product['updated_at']) : null,
             isset($product['shipping_code'])
-                ? new Shipping(new ShippingCode($product['shipping_code']), $product['shipping_name'], new ShippingPrice($product['shipping_price']))
+                ? new Shipping(new ShippingCode($product['shipping_code']), $product['shipping_name'], new ShippingPrice((float) $product['shipping_price']))
                 : null
         );
     }
@@ -88,28 +89,44 @@ class DoctrineProductRepository implements ProductRepository
 
     public function save(Product $product): void
     {
-        $save = [
-            'reference' => (string) $product->getReference(),
-            'code' => (string) $product->getCode(),
-            'company_id' => (string) $product->getCompany()->getId(),
-            'category_code' => (string) $product->getCategory()->getCode(),
-            'brand_code' => (string) $product->getBrand()->getCode(),
-            'name' => $product->getName(),
-            'stock' => $product->getStock()->getValue(),
-            'price' => $product->getPrice()->getValue(),
-            'original_price' => null !== $product->getOriginalPrice() ? $product->getOriginalPrice()->getValue() : null,
-            'status' => $product->getStatus()->getValue(),
-            'description' => $product->getDescription(),
-            'intro' => $product->getIntro(),
-            'created_at' => $product->getCreatedAt()->format('Y-m-d'),
-            'updated_at' => null !== $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d') : null,
-            'shipping_code' => null !== $product->getShipping() ? (string) $product->getShipping()->getCode() : null,
-        ];
-
-        $result = $this->connection->insert('product', $save);
+        $result = $this->connection->executeStatement(<<<SQL
+            INSERT IGNORE INTO product (reference, code, name, price, original_price, stock, status, intro, description,
+                                        created_at, updated_at, brand_code, category_code, company_id, shipping_code)
+            VALUE (:reference, :code, :name, :price, :original_price, :stock, :status, :intro, :description, :created_at,
+                   :updated_at, :brand_code, :category_code, :company_id, :shipping_code)
+        SQL,
+            [
+                ':reference' => (string) $product->getReference(),
+                ':code' => (string) $product->getCode(),
+                ':company_id' => (string) $product->getCompany()->getId(),
+                ':category_code' => (string) $product->getCategory()->getCode(),
+                ':brand_code' => (string) $product->getBrand()->getCode(),
+                ':name' => $product->getName(),
+                ':stock' => $product->getStock()->getValue(),
+                ':price' => $product->getPrice()->getValue(),
+                ':original_price' => null !== $product->getOriginalPrice() ? $product->getOriginalPrice()->getValue() : null,
+                ':status' => $product->getStatus()->getValue(),
+                ':description' => $product->getDescription(),
+                ':intro' => $product->getIntro(),
+                ':created_at' => $product->getCreatedAt()->format('Y-m-d'),
+                ':updated_at' => null !== $product->getUpdatedAt() ? $product->getUpdatedAt()->format('Y-m-d') : null,
+                ':shipping_code' => null !== $product->getShipping() ? (string) $product->getShipping()->getCode() : null,
+            ],
+        );
 
         if (0 === $result) {
             throw new ProductSaveFailedException((string) $product->getReference());
+        }
+
+        /** @var Tax $tax */
+        foreach ($product->getTaxes() as $tax) {
+            $this->connection->executeStatement(
+                "INSERT INTO product_tax (product_reference, tax_code) VALUE (:reference, :code)",
+                [
+                    ':reference' => (string) $product->getReference(),
+                    ':code' => (string) $tax->getCode(),
+                ]
+            );
         }
     }
 

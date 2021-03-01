@@ -25,3 +25,6 @@ services:
     # bus
     App\Shared\Domain\Bus\Command\CommandBus: '@App\Shared\Infrastructure\Bus\MessengerCommandBus'
     App\Shared\Domain\Bus\Event\EventBus: '@App\Shared\Infrastructure\Bus\MessengerEventBus'
+
+    # file storage
+    App\Shared\Domain\Storage\FileStorage: '@App\Shared\Infrastructure\Storage\LeagueFileSystemStorage'

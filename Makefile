@@ -7,7 +7,7 @@ database:
 	bin/console doctrine:migrations:migrate --no-interaction
 	bin/console app:create-search
 
-fixtures:
+fixtures: clear-file
 	bin/console doctrine:fixtures:load --no-interaction --purge-with-truncate --em=catalog
 
 test:
@@ -34,7 +34,10 @@ docker-up:
 	docker-compose up -d --force-recreate --remove-orphans
 
 dev: docker-up install database fixtures
-	sudo php -S localhost:666 -t public -d xdebug.remote_enable=1
+	sudo php -S localhost:666 -t public
+
+clear-file:
+	rm -r var/storage
 
 clean:
 	bin/console c:c

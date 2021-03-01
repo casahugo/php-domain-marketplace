@@ -9,7 +9,8 @@ final class Picture
     public function __construct(
         private Id $id,
         private string $path,
-        private string $title
+        private string $mimeType,
+        private ?string $title = null
     ) {
     }
 
@@ -23,7 +24,12 @@ final class Picture
         return $this->path;
     }
 
-    public function getTitle(): string
+    public function getMimeType(): string
+    {
+        return $this->mimeType;
+    }
+
+    public function getTitle(): ?string
     {
         return $this->title;
     }

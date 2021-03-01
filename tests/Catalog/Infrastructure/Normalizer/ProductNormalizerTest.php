@@ -11,9 +11,6 @@ use App\Catalog\{
     Domain\Category\Code as CategoryCode,
     Domain\Company\Company,
     Domain\Company\Id as CompanyId,
-    Domain\Document\Document,
-    Domain\Document\DocumentCollection,
-    Domain\Document\Id as DocumentId,
     Domain\Picture\Id as PictureId,
     Domain\Picture\Picture,
     Domain\Picture\PictureCollection,
@@ -30,7 +27,8 @@ use App\Catalog\{
     Domain\Tax\TaxCollection,
     Domain\Tax\TaxAmount,
     Infrastructure\Normalizer\ProductNormalizer,
-    Infrastructure\Normalizer\TaxNormalizer};
+    Infrastructure\Normalizer\TaxNormalizer
+};
 use App\Shared\{
     Domain\Email,
     Infrastructure\Symfony\Normalizer\CollectionNormalizer,
@@ -124,17 +122,11 @@ final class ProductNormalizerTest extends TestCase
               "code":"COMPUT",
               "name":"Computer"
            },
-           "documents":[
-              {
-                 "id":"01E439TP9XJZ9RPFH3T1PYBCR8",
-                 "path":"http:\/\/hosting.com\/document.pdf",
-                 "title":"Document title"
-              }
-           ],
            "gallery":[
               {
                  "id":"01E439TP9XJZ9RPFH3T1PYBCR8",
                  "path":"http:\/\/hosting.com\/image.jpeg",
+                 "mimeType":"image/jpeg",
                  "title":"Image title"
               }
            ],
@@ -190,13 +182,9 @@ final class ProductNormalizerTest extends TestCase
             (new PictureCollection())->add(new Picture(
                 new PictureId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
                 'http://hosting.com/image.jpeg',
+                'image/jpeg',
                 'Image title'
             )),
-            (new DocumentCollection())->add(new Document(
-                new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
-                'http://hosting.com/document.pdf',
-                'Document title'
-            ))
         );
     }
 }

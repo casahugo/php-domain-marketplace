@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Tests\Catalog\Application\Product\Create;
 
 use App\Tests\Catalog\Factory;
+use App\Tests\Mock\FakeUuidGenerator;
 use App\Tests\Mock\FrozenClock;
 use App\Catalog\Application\{
     Product\Create\CreateProductCommand,
@@ -19,9 +20,9 @@ use App\Catalog\Domain\{
     Tax\TaxCollection,
     Tax\TaxRepository};
 use App\Shared\{
+    Domain\Bus\Command\CommandBus,
     Domain\Bus\Event\EventBus,
-    Domain\Event\Product\ProductWasCreated,
-};
+    Domain\Event\Product\ProductWasCreated};
 use PHPUnit\Framework\TestCase;
 
 final class CreateProductHandlerTest extends TestCase
@@ -30,12 +31,14 @@ final class CreateProductHandlerTest extends TestCase
     {
         $handler = new CreateProductHandler(
             $eventBus = $this->createMock(EventBus::class),
+            $commandBus = $this->createMock(CommandBus::class),
             $productRepository = $this->createMock(ProductRepository::class),
             $categoryRepository = $this->createMock(CategoryRepository::class),
             $brandRepository = $this->createMock(BrandRepository::class),
-            $sellerRepository = $this->createMock(CompanyRepository::class),
+            $companyRepository = $this->createMock(CompanyRepository::class),
             $taxRepository = $this->createMock(TaxRepository::class),
             $shippingRepository = $this->createMock(ShippingRepository::class),
+            new FakeUuidGenerator('01E439TP9XJZ9RPFH3T1PYBCR8'),
             new FrozenClock(new \DateTimeImmutable("2020-01-01"))
         );
 
@@ -45,7 +48,7 @@ final class CreateProductHandlerTest extends TestCase
             ->with(Factory::getCategoryCode())
             ->willReturn(Factory::getCategory());
 
-        $sellerRepository
+        $companyRepository
             ->expects(self::once())
             ->method('get')
             ->with(Factory::getCompanyId())
@@ -59,7 +62,7 @@ final class CreateProductHandlerTest extends TestCase
 
         $taxRepository
             ->expects(self::once())
-            ->method('findByCode')
+            ->method('findByCodes')
             ->willReturn(new TaxCollection());
 
         $shippingRepository

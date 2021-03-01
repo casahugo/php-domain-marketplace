@@ -18,7 +18,7 @@ final class DoctrineTaxRepositoryTest extends TestCase
             $connection = $this->createMock(Connection::class)
         );
 
-        $taxes = $repository->findByCode(new Code('TVA_20'));
+        $taxes = $repository->findByCodes(new Code('TVA_20'));
 
         self::assertInstanceOf(TaxCollection::class, $taxes);
     }

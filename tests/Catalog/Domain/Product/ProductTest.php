@@ -79,13 +79,6 @@ final class ProductTest extends TestCase
         self::assertEquals('http://hosting.com/image.jpeg', $picture->getPath());
         self::assertEquals('Image title', $picture->getTitle());
 
-        self::assertCount(1, $product->getDocuments());
-        /** @var Document $document */
-        $document = $product->getDocuments()->first();
-        self::assertEquals('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $document->getId());
-        self::assertEquals('http://hosting.com/document.pdf', $document->getPath());
-        self::assertEquals('Document title', $document->getTitle());
-
         self::assertInstanceOf(Shipping::class, $product->getShipping());
         self::assertSame('COL', (string) $product->getShipping()->getCode());
         self::assertSame('Collissimo', $product->getShipping()->getName());
@@ -112,20 +105,6 @@ final class ProductTest extends TestCase
 
         self::assertCount(2, $product->getGallery());
         self::assertSame($picture, $product->getGallery()->findFirst(fn(Picture $excepted) => $excepted === $picture));
-    }
-
-    public function testAddPictureDocument(): void
-    {
-        $product = $this->getProduct();
-
-        $product->addDocuments($document = new Document(
-            new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
-            'http://hosting.com/document2.pdf',
-            'Second Document title'
-        ));
-
-        self::assertCount(2, $product->getDocuments());
-        self::assertSame($document, $product->getDocuments()->findFirst(fn(Document $excepted) => $excepted === $document));
     }
 
     public function testChangeStock(): void
@@ -183,13 +162,9 @@ final class ProductTest extends TestCase
             (new PictureCollection())->add(new Picture(
                 new PictureId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
                 'http://hosting.com/image.jpeg',
-                'Image title'
+                'image/jpeg',
+                'Image title',
             )),
-            (new DocumentCollection())->add(new Document(
-                new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
-                'http://hosting.com/document.pdf',
-                'Document title'
-            ))
         );
     }
 }

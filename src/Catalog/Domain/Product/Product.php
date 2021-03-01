@@ -13,8 +13,6 @@ use App\Shared\Domain\{
 use App\Catalog\Domain\{
     Brand\Brand,
     Category\Category,
-    Document\Document,
-    Document\DocumentCollection,
     Picture\Picture,
     Picture\PictureCollection,
     Company\Company,
@@ -38,7 +36,6 @@ final class Product extends Aggregate
     private Brand $brand;
     private Category $category;
     private Status $status;
-    private DocumentCollection $documents;
     private PictureCollection $gallery;
     private TaxCollection $taxes;
     private ?string $intro;
@@ -65,7 +62,6 @@ final class Product extends Aggregate
         ?string $description = null,
         ?ProductPrice $originalPrice = null,
         ?PictureCollection $pictures = null,
-        ?DocumentCollection $documents = null,
     ) {
         $this->reference = $reference;
         $this->code = $code;
@@ -84,7 +80,6 @@ final class Product extends Aggregate
         $this->updatedAt = $updatedAt;
         $this->shipping = $shipping;
         $this->gallery = $pictures ?? new PictureCollection();
-        $this->documents = $documents ?? new DocumentCollection();
     }
 
     public static function create(
@@ -100,6 +95,9 @@ final class Product extends Aggregate
         Status $status,
         \DateTimeImmutable $createdAt,
         ?Shipping $shipping = null,
+        ?string $intro = null,
+        ?string $description = null,
+        ?float $originalPrice = null,
     ): self {
         $self = new self(
             Reference::fromString($reference),
@@ -114,7 +112,10 @@ final class Product extends Aggregate
             $status,
             $createdAt,
             null,
-            $shipping
+            $shipping,
+            $intro,
+            $description,
+            isset($originalPrice) ? new ProductPrice($originalPrice) : null
         );
 
         $self->record(new ProductWasCreated($reference));
@@ -215,11 +216,6 @@ final class Product extends Aggregate
         return $this->category;
     }
 
-    public function getDocuments(): DocumentCollection
-    {
-        return $this->documents;
-    }
-
     public function getPicture(): ?Picture
     {
         return $this->gallery->first();
@@ -228,13 +224,6 @@ final class Product extends Aggregate
     public function getGallery(): PictureCollection
     {
         return $this->gallery;
-    }
-
-    public function addDocuments(Document ...$documents): self
-    {
-        $this->documents = $this->documents->add(...$documents);
-
-        return $this;
     }
 
     public function addGallery(Picture ...$pictures): self

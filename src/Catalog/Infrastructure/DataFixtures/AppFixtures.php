@@ -46,6 +46,12 @@ class AppFixtures extends Fixture
                     (string) $faker->randomElement($taxCodes),
                 ],
                 (string) $faker->randomElement($shippingCodes),
+                null,
+                null,
+                null,
+                [
+                    __DIR__.'/picture/Aorus-geforce-gtx-1660-super-6G.jpg',
+                ]
             ));
         }
     }

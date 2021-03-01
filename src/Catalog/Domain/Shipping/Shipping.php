@@ -8,7 +8,7 @@ final class Shipping
 {
     public function __construct(
         private Code $code,
-        private $name,
+        private string $name,
         private ShippingPrice $price
     ) {
     }
@@ -18,7 +18,7 @@ final class Shipping
         return $this->code;
     }
 
-    public function getName()
+    public function getName(): string
     {
         return $this->name;
     }

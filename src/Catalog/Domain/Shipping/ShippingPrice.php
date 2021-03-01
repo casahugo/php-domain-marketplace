@@ -8,5 +8,4 @@ use App\Shared\Domain\DataStructure\Decimal;
 
 final class ShippingPrice extends Decimal
 {
-
 }

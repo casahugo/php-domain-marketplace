@@ -27,3 +27,9 @@ catalog_product_search:
     methods: [GET]
     controller: App\Catalog\Infrastructure\Http\Product\SearchProductController
     stateless: true
+
+catalog_picture_stream:
+    path: /picture/{id}/stream
+    methods: [GET]
+    controller: App\Catalog\Infrastructure\Http\Picture\StreamPictureController
+    stateless: true

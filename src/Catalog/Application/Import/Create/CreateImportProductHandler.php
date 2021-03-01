@@ -10,11 +10,11 @@ use App\Catalog\{
     Domain\Import\Import,
     Domain\Import\ImportReader,
     Domain\Import\ImportRepository,
-    Domain\Import\ImportStorage
 };
 use App\Shared\{
     Domain\Bus\Command\CommandBus,
-    Domain\Bus\Command\CommandHandler
+    Domain\Bus\Command\CommandHandler,
+    Domain\Storage\FileStorage
 };
 
 final class CreateImportProductHandler implements CommandHandler
@@ -25,7 +25,7 @@ final class CreateImportProductHandler implements CommandHandler
         private CommandBus $commandBus,
         private ImportRepository $repository,
         private ImportReader $reader,
-        private ImportStorage $storage
+        private FileStorage $storage
     ) {
     }
 
@@ -34,7 +34,7 @@ final class CreateImportProductHandler implements CommandHandler
     {
         $import = Import::create($command->getImportId(), $command->getFilePath());
 
-        $this->storage->put($import->getFilePath());
+        $this->storage->copy($import->getFilePath(), 'product.csv');
 
         $this->repository->save($import);
 

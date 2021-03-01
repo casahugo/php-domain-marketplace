@@ -11,8 +11,8 @@ use App\Catalog\Domain\Import\BulkCollection;
 use App\Catalog\Domain\Import\Import;
 use App\Catalog\Domain\Import\ImportReader;
 use App\Catalog\Domain\Import\ImportRepository;
-use App\Catalog\Domain\Import\ImportStorage;
 use App\Shared\Domain\Bus\Command\CommandBus;
+use App\Shared\Domain\Storage\FileStorage;
 use PHPUnit\Framework\TestCase;
 
 final class CreateImportProductHandlerTest extends TestCase
@@ -23,15 +23,15 @@ final class CreateImportProductHandlerTest extends TestCase
             $commandBus = $this->createMock(CommandBus::class),
             $repository = $this->createMock(ImportRepository::class),
             $reader = $this->createMock(ImportReader::class),
-            $storage = $this->createMock(ImportStorage::class),
+            $storage = $this->createMock(FileStorage::class),
         );
 
         $products = $this->getProductLine();
 
         $storage
             ->expects(self::once())
-            ->method('put')
-            ->with('/tmp/product.csv');
+            ->method('copy')
+            ->with('/tmp/product.csv', 'product.csv');
 
         $repository
             ->expects(self::once())

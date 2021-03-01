@@ -8,7 +8,6 @@ use App\Catalog\Domain\{
     Brand\Brand,
     Category\Category,
     Company\Company,
-    Document\DocumentCollection,
     Picture\PictureCollection,
     Product\Code,
     Product\Product,
@@ -45,7 +44,6 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             "brand" => $this->normalizer->normalize($product->getBrand()),
             "stock" => $this->normalizer->normalize($product->getStock()),
             "category" => $this->normalizer->normalize($product->getCategory()),
-            "documents" => $this->normalizer->normalize($product->getDocuments()),
             "gallery" => $this->normalizer->normalize($product->getGallery()),
             "intro" => $product->getIntro(),
             "description" => $product->getDescription(),
@@ -83,7 +81,6 @@ final class ProductNormalizer implements NormalizerInterface, DenormalizerInterf
             $data['description'] ?? null,
             isset($data['originalPrice']) ? $this->denormalizer->denormalize($data['originalPrice'], ProductPrice::class) : null,
             $this->denormalizer->denormalize($data['gallery'], PictureCollection::class),
-            $this->denormalizer->denormalize($data['documents'], DocumentCollection::class)
         );
     }
 

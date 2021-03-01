@@ -17,7 +17,7 @@ final class DoctrineTaxRepository implements TaxRepository
     {
     }
 
-    public function findByCode(Code ...$codes): TaxCollection
+    public function findByCodes(Code ...$codes): TaxCollection
     {
         $taxes = $this->connection->fetchAllAssociative(
             "SELECT code, name, amount FROM tax WHERE code IN (:codes)",

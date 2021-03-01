@@ -15,6 +15,9 @@ use App\Catalog\Domain\{
     Exception\ProductDeleteFailedException,
     Exception\ProductNotFound,
     Exception\ProductSaveFailedException,
+    Picture\Id as PictureId,
+    Picture\Picture,
+    Picture\PictureCollection,
     Product\Code,
     Product\Product,
     Product\ProductCollection,
@@ -26,7 +29,9 @@ use App\Catalog\Domain\{
     Shipping\Code as ShippingCode,
     Shipping\Shipping,
     Shipping\ShippingPrice,
+    Tax\Code as TaxCode,
     Tax\Tax,
+    Tax\TaxAmount,
     Tax\TaxCollection};
 use DateTimeImmutable;
 use Doctrine\DBAL\Connection;
@@ -56,6 +61,20 @@ class DoctrineProductRepository implements ProductRepository
             throw new ProductNotFound((string) $reference);
         }
 
+        $pictures = $this->connection->fetchAllAssociative(
+            'SELECT id, name, path, mime_type FROM product_gallery WHERE product_reference = :reference',
+            [':reference' => (string) $reference]
+        );
+
+        $taxes = $this->connection->fetchAllAssociative(<<<SQL
+            SELECT t.code, t.name, t.amount
+            FROM product_tax pt
+            LEFT JOIN tax t ON pt.tax_code = t.code
+            WHERE pt.product_reference = :reference
+            SQL,
+            [':reference' => (string) $reference]
+        );
+
         return new Product(
             Reference::fromString($product['reference']),
             new Code($product['code']),
@@ -65,13 +84,23 @@ class DoctrineProductRepository implements ProductRepository
             new Brand(new BrandCode($product['brand_code']), $product['brand_name']),
             new Company(Id::fromString($product['company_id']), new Email($product['company_email']), $product['company_name']),
             new Category(new CategoryCode($product['category_code']), $product['category_name']),
-            new TaxCollection(),
+            (new TaxCollection())->add(...array_map(
+                static fn(array $item) => new Tax(new TaxCode($item['code']), $item['name'], new TaxAmount($item['amout'])),
+                $taxes
+            )),
             Status::of($product['status']),
             new DateTimeImmutable($product['created_at']),
             isset($product['updated_at']) ? new DateTimeImmutable($product['updated_at']) : null,
             isset($product['shipping_code'])
                 ? new Shipping(new ShippingCode($product['shipping_code']), $product['shipping_name'], new ShippingPrice((float) $product['shipping_price']))
-                : null
+                : null,
+            $product['intro'] ?? null,
+            $product['description'] ?? null,
+            isset($product['original_price']) ? new ProductPrice($product['original_price']) : null,
+            (new PictureCollection())->add(...array_map(
+                static fn(array $item): Picture => new Picture(PictureId::fromString($item['id']), $item['path'], $item['mime_type'], $item['name']),
+                $pictures
+            ))
         );
     }
 
@@ -125,6 +154,20 @@ class DoctrineProductRepository implements ProductRepository
                 [
                     ':reference' => (string) $product->getReference(),
                     ':code' => (string) $tax->getCode(),
+                ]
+            );
+        }
+
+        /** @var Picture $picture */
+        foreach ($product->getGallery() as $picture) {
+            $this->connection->executeStatement(
+                "INSERT INTO product_gallery (id, product_reference, name, path, mime_type) VALUE (:id, :reference, :name, :path, :mimeType)",
+                [
+                    ':id' => (string) $picture->getId(),
+                    ':reference' => (string) $product->getReference(),
+                    ':name' => $picture->getTitle(),
+                    ':path' => $picture->getPath(),
+                    ':mimeType' => $picture->getMimeType(),
                 ]
             );
         }

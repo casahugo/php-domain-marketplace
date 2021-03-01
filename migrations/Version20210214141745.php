@@ -60,7 +60,8 @@ final class Version20210214141745 extends AbstractMigration
                 id varchar(26) not null,
                 product_reference varchar(26) not null,
                 name varchar(250),
-                path varchar(250),
+                path varchar(250) not null,
+                mime_type varchar(50) not null,
                 constraint product_gallery_pk primary key (id)
             );
 

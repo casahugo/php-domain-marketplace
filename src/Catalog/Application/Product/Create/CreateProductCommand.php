@@ -22,6 +22,7 @@ final class CreateProductCommand implements DomainCommand
         private ?string $intro = null,
         private ?string $description = null,
         private ?float $originalPrice = null,
+        private array $pictures = []
     ) {
     }
 
@@ -88,5 +89,10 @@ final class CreateProductCommand implements DomainCommand
     public function getShippingCode(): ?string
     {
         return $this->shippingCode;
+    }
+
+    public function getPictures(): array
+    {
+        return $this->pictures;
     }
 }

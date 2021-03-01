@@ -19,6 +19,8 @@ framework:
             'App\Catalog\Application\Brand\Create\CreateBrandCommand': sync
             'App\Catalog\Application\Company\Create\CreateCompanyCommand': sync
             'App\Catalog\Application\Import\Create\CreateImportProductCommand': sync
+            'App\Catalog\Application\Tax\Create\CreateTaxCommand': sync
+            'App\Catalog\Application\Picture\Upload\UploadPictureCommand': sync
 
             'App\Shared\Domain\Event\Product\ProductWasCreated': sync
             'App\Shared\Domain\Event\Seller\SellerWasCreated': sync

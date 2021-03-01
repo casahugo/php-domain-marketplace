@@ -6,7 +6,7 @@ namespace App\Catalog\Domain\Tax;
 
 use App\Shared\Domain\DataStructure\Decimal;
 
-final class TaxValue extends Decimal
+final class TaxAmount extends Decimal
 {
     public function __construct(float|int $value)
     {

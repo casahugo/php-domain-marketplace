@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.0",
         "ext-json": "*",
+        "ext-fileinfo": "*",
         "doctrine/doctrine-bundle": "^2.2",
         "doctrine/orm": "^2.8",
         "doctrine/doctrine-migrations-bundle": "^3.0",
@@ -24,7 +25,8 @@
         "symfony/serializer": "^5.2",
         "symfony/property-access": "^5.2",
         "symfony/uid": "^5.2",
-        "typesense/typesense-php": "^4.4"
+        "typesense/typesense-php": "^4.4",
+        "league/flysystem-bundle": "^2.0"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.4",

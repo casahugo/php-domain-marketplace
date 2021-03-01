@@ -23,13 +23,14 @@ use App\Catalog\Domain\{
     Product\Stock,
     Company\Id as CompanyId,
     Company\Company,
+    Shipping\Code as ShippingCode,
     Shipping\Shipping,
     Shipping\ShippingCollection,
+    Shipping\ShippingPrice,
     Tax\Code as CodeTax,
     Tax\Tax,
     Tax\TaxCollection,
-    Tax\TaxValue
-};
+    Tax\TaxAmount};
 use App\Shared\{
     Domain\Email,
     Domain\Event\Product\ProductPriceHasChanged,
@@ -68,7 +69,7 @@ final class ProductTest extends TestCase
         /** @var Tax $tax */
         $tax = $product->getTaxes()->first();
         self::assertEquals('TVA_20', (string) $tax->getCode());
-        self::assertEquals(19.6, $tax->getTaxValue()->getValue());
+        self::assertEquals(19.6, $tax->getAmount()->getValue());
 
         self::assertSame($product->getPicture(), $product->getGallery()->first());
         self::assertCount(1, $product->getGallery());
@@ -78,14 +79,10 @@ final class ProductTest extends TestCase
         self::assertEquals('http://hosting.com/image.jpeg', $picture->getPath());
         self::assertEquals('Image title', $picture->getTitle());
 
-        self::assertCount(1, $product->getDocuments());
-        /** @var Document $document */
-        $document = $product->getDocuments()->first();
-        self::assertEquals('01E439TP9XJZ9RPFH3T1PYBCR8', (string) $document->getId());
-        self::assertEquals('http://hosting.com/document.pdf', $document->getPath());
-        self::assertEquals('Document title', $document->getTitle());
-
-        self::assertCount(1, $product->getShippings());
+        self::assertInstanceOf(Shipping::class, $product->getShipping());
+        self::assertSame('COL', (string) $product->getShipping()->getCode());
+        self::assertSame('Collissimo', $product->getShipping()->getName());
+        self::assertSame(12.2, $product->getShipping()->getPrice()->getValue());
 
         self::assertSame("TSB", (string) $product->getBrand()->getCode());
         self::assertSame('Toshiba', $product->getBrand()->getName());
@@ -108,20 +105,6 @@ final class ProductTest extends TestCase
 
         self::assertCount(2, $product->getGallery());
         self::assertSame($picture, $product->getGallery()->findFirst(fn(Picture $excepted) => $excepted === $picture));
-    }
-
-    public function testAddPictureDocument(): void
-    {
-        $product = $this->getProduct();
-
-        $product->addDocuments($document = new Document(
-            new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
-            'http://hosting.com/document2.pdf',
-            'Second Document title'
-        ));
-
-        self::assertCount(2, $product->getDocuments());
-        self::assertSame($document, $product->getDocuments()->findFirst(fn(Document $excepted) => $excepted === $document));
     }
 
     public function testChangeStock(): void
@@ -168,24 +151,20 @@ final class ProductTest extends TestCase
             new Brand(new BrandCode('TSB'), 'Toshiba'),
             new Company(CompanyId::fromString('01E439TP9XJZ9RPFH3T1PYBCR8'), new Email('company@tld.com'), 'Inc Corporation'),
             new Category(new CategoryCode('COMPUT'), 'Computer'),
-            (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), new TaxValue(19.6))),
+            (new TaxCollection())->add(new Tax(new CodeTax('TVA_20'), 'TVA 20%', new TaxAmount(19.6))),
             Status::WAIT_MODERATION(),
             new \DateTimeImmutable("2020-01-01"),
             new \DateTimeImmutable("2020-02-01"),
-            (new ShippingCollection())->add(new Shipping()),
+            new Shipping(new ShippingCode('COL'), 'Collissimo', new ShippingPrice(12.2)),
             'Presentation Laptop',
             'Description Laptop',
             new ProductPrice(14),
             (new PictureCollection())->add(new Picture(
                 new PictureId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
                 'http://hosting.com/image.jpeg',
-                'Image title'
+                'image/jpeg',
+                'Image title',
             )),
-            (new DocumentCollection())->add(new Document(
-                new DocumentId(new Uuid('01E439TP9XJZ9RPFH3T1PYBCR8')),
-                'http://hosting.com/document.pdf',
-                'Document title'
-            ))
         );
     }
 }

@@ -26,7 +26,7 @@ final class BulkProductHandler implements CommandHandler
     public function __invoke(BulkProductCommand $command): void
     {
         $products = $this->repository->findByCode(...array_map(
-            fn(string $code): Code => new Code($code),
+            static fn(string $code): Code => new Code($code),
             $command->getProductsCode()
         ));
 
@@ -46,7 +46,7 @@ final class BulkProductHandler implements CommandHandler
                         $productImport['categoryId'],
                         $command->getCompanyId(),
                         $productImport['taxes'],
-                        $productImport['shippings'] ?? null,
+                        $productImport['shipping'] ?? null,
                         $productImport['intro'] ?? null,
                         $productImport['description'] ?? null,
                         isset($productImport['originalPrice']) ? (float) $productImport['originalPrice'] : null,

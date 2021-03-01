@@ -4,13 +4,15 @@ declare(strict_types=1);
 
 namespace App\Catalog\Infrastructure\Doctrine;
 
-use App\Catalog\Domain\Exception\ProductDeleteFailedException;
-use App\Catalog\Domain\Exception\ProductSaveFailedException;
-use App\Catalog\Domain\Product\Code;
-use App\Catalog\Domain\Product\Product;
-use App\Catalog\Domain\Product\ProductCollection;
-use App\Catalog\Domain\Product\ProductRepository;
-use App\Catalog\Domain\Product\Reference;
+use App\Catalog\Domain\{
+    Exception\ProductDeleteFailedException,
+    Exception\ProductSaveFailedException,
+    Product\Code,
+    Product\Product,
+    Product\ProductCollection,
+    Product\ProductRepository,
+    Product\Reference
+};
 use Doctrine\DBAL\Connection;
 use Symfony\Component\Serializer\SerializerInterface;
 
